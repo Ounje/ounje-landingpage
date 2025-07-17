@@ -34,8 +34,8 @@ const Header = () => {
   }, [isMenuOpen]);
 
   return (
-    <header className="fixed w-full top-0 z-50">
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+    <header className="fixed w-full top-0 z-50 flex justify-center items-center">
+      <div className="w-full flex items-center justify-between md:justify-center md:gap-[126px] px-4 py-3">
         {/* Logo */}
         <a
           href="#"
@@ -80,7 +80,7 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="p-0.5 border rounded-[10px] border-grey backdrop-blur-lg bg-white/10">
+        <div className=" md:hidden p-0.5 border rounded-[10px] border-grey backdrop-blur-lg bg-white/10">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 text-white hover:text-yellow-400  "

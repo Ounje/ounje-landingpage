@@ -34,7 +34,7 @@ const Header = () => {
   }, [isMenuOpen]);
 
   return (
-    <header className="fixed w-full top-0 z-50 flex justify-center items-center">
+    <header className="fixed w-full top-0 z-50 md:flex justify-center items-center">
       <div className="w-full flex items-center justify-between md:justify-center md:gap-[126px] px-4 py-3">
         {/* Logo */}
         <a
@@ -112,7 +112,9 @@ const Header = () => {
               <Button variant="outline" size="sm">
                 Login
               </Button>
-              <Button size="sm">Sign Up</Button>
+              <Button size="sm" className="hover:text-yellow-400">
+                Sign Up
+              </Button>
             </div>
           </nav>
         </div>

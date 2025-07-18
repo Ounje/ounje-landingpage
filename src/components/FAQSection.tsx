@@ -38,13 +38,13 @@ const FAQSection = () => {
               className="bg-yellow-400 rounded-[20px] shadow py-[25px] "
             >
               <button
-                className="w-full text-center px-6 py-4 font-semibold text-white focus:outline-none flex justify-center items-center"
+                className="w-full text-center px-6 py-4 font-semibold text-black hover:text-white focus:outline-none flex justify-center items-center"
                 onClick={() => setOpen(open === i ? null : i)}
               >
                 {faq.q}
               </button>
               {open === i && (
-                <div className="px-6 pb-4 text-white text-center text-sm">
+                <div className="px-6 pb-4 text-black  text-center text-sm">
                   {faq.a}
                 </div>
               )}

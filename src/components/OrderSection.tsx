@@ -1,22 +1,26 @@
 import React from "react";
 
 const OrderSection = () => (
-  <section className="bg-[#466C3A] py-10 text-white text-center">
-    <h2 className="text-3xl font-bold mb-4">Place Order In Seconds</h2>
-    <p className="mb-8">And get good and quality food</p>
-    <div className="flex justify-center mb-6">
+  <section className="bg-[#2C5E2E] py-12 px-2 text-white text-center">
+    <h2 className="text-5xl font-extrabold mb-2 tracking-tight">
+      Place Order In Seconds
+    </h2>
+    <p className="mb-6 text-lg text-white">And get good and quality food</p>
+    <div className="flex justify-center mb-8">
       <img
-        src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=500&q=80"
+        src="/images/customer.png"
         alt="Order"
-        className="rounded-lg object-cover w-full max-w-md h-48"
+        className="rounded-xl object-contain w-full max-w-3xl h-[400px] "
       />
     </div>
-    <div className="flex justify-center gap-4">
-      <button className="bg-yellow-400 text-[#234a1f] font-semibold px-5 py-2 rounded hover:bg-yellow-300 transition">
-        Download on Google Play
+    <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4">
+      <button className="bg-yellow-400 text-black font-bold px-8 py-3 rounded-xl text-lg hover:bg-yellow-300 transition flex items-center justify-center gap-2 w-full sm:w-auto">
+        <img src="/icons/mage_playstore.png" alt="andriod icon" />
+        <span>Download on Google Play</span>
       </button>
-      <button className="bg-yellow-400 text-[#234a1f] font-semibold px-5 py-2 rounded hover:bg-yellow-300 transition">
-        Download on APP Store
+      <button className="bg-yellow-400 text-black font-bold px-8 py-3 rounded-xl text-lg hover:bg-yellow-300 transition flex items-center justify-center gap-2 w-full sm:w-auto">
+        <img src="/icons/apple-icon.png" alt="ios icon" />
+        <span>Download on APP Store</span>
       </button>
     </div>
   </section>

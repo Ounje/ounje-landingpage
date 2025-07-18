@@ -22,25 +22,35 @@ const faqs = [
 const FAQSection = () => {
   const [open, setOpen] = useState<number | null>(null);
   return (
-    <section className="bg-white py-10 text-center">
-      <h2 className="text-3xl font-bold mb-6 text-[#234a1f]">FAQs</h2>
-      <div className="max-w-2xl mx-auto flex flex-col gap-4">
-        {faqs.map((faq, i) => (
-          <div key={i} className="bg-yellow-400 rounded-lg shadow">
-            <button
-              className="w-full text-left px-6 py-4 font-semibold text-[#234a1f] focus:outline-none flex justify-between items-center"
-              onClick={() => setOpen(open === i ? null : i)}
+    <section
+      className="relative bg-cover bg-no-repeat py-10 text-center px-5 "
+      style={{
+        backgroundImage: `url(/images/FAQs-bg.png)`,
+      }}
+    >
+      <div className="absolute inset-0 bg-[#2C5E2E80]" />
+      <div className="relative">
+        <h2 className="text-3xl font-bold mb-6 text-white">FAQs</h2>
+        <div className="max-w-full mx-auto flex flex-col gap-4 px-10">
+          {faqs.map((faq, i) => (
+            <div
+              key={i}
+              className="bg-yellow-400 rounded-[20px] shadow py-[25px] "
             >
-              {faq.q}
-              <span>{open === i ? "-" : "+"}</span>
-            </button>
-            {open === i && (
-              <div className="px-6 pb-4 text-[#234a1f] text-left text-sm">
-                {faq.a}
-              </div>
-            )}
-          </div>
-        ))}
+              <button
+                className="w-full text-center px-6 py-4 font-semibold text-white focus:outline-none flex justify-center items-center"
+                onClick={() => setOpen(open === i ? null : i)}
+              >
+                {faq.q}
+              </button>
+              {open === i && (
+                <div className="px-6 pb-4 text-white text-center text-sm">
+                  {faq.a}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

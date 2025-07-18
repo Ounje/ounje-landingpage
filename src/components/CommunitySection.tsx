@@ -3,38 +3,46 @@ import React from "react";
 const community = [
   {
     title: "Become a Rider",
-    desc: "Enjoy flexibility, freedom, and earnings by becoming Ounje Rider.",
-    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
+    desc: "Enjoy flexibility, freedom and competitive earnings by delivering through Ounje.",
+    img: "/images/rider-img.png",
   },
   {
     title: "Become a Vendor",
-    desc: "Grow with Ounje! Our platform will help you get more sales.",
-    img: "https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80",
+    desc: "Grow with Ounje! Our platform will help you grow more sales and revenue.",
+    img: "/images/vendor-img.png",
   },
   {
     title: "Become a Customer",
-    desc: "Enjoy affordable meals with safe delivery and great food quality.",
-    img: "https://images.unsplash.com/photo-1523987355523-c7b5b0723c6a?auto=format&fit=crop&w=400&q=80",
+    desc: "Enjoy affordable meals with swift delivery and great food quality.",
+    img: "/images/customer-img.png",
   },
 ];
 
 const CommunitySection = () => (
-  <section className="bg-[#234a1f] py-10 text-white text-center">
-    <h2 className="text-3xl font-bold mb-6">Be a Part of Our Community</h2>
-    <div className="flex flex-wrap justify-center gap-6">
+  <section className="bg-[#2C5E2E] py-14 text-white text-center">
+    <h2 className="text-5xl font-extrabold mb-12 tracking-tight">
+      Be a Part of Our Community
+    </h2>
+    <div className="flex flex-wrap justify-center gap-10">
       {community.map((c, i) => (
         <div
           key={i}
-          className="bg-white text-[#234a1f] rounded-lg shadow p-6 w-72 flex flex-col items-center"
+          className=" rounded-2xl shadow-lg p-8 w-full max-w-xs flex flex-col items-center "
         >
           <img
             src={c.img}
             alt={c.title}
-            className="w-28 h-28 rounded-full mb-4 object-cover"
+            className="w-64 h-[472px] rounded-xl mb-6 object-cover"
           />
-          <div className="font-bold text-lg mb-1">{c.title}</div>
-          <div className="text-sm mb-2">{c.desc}</div>
-          <button className="bg-yellow-400 text-[#234a1f] font-semibold px-4 py-2 rounded hover:bg-yellow-300 transition">
+          <div className="h-[130px]">
+            <div className="font-semibold text-lg mb-2 text-white text-center">
+              {c.title}
+            </div>
+            <div className="text-sm mb-6 text-gray-200 text-center leading-snug ">
+              {c.desc}
+            </div>
+          </div>
+          <button className="bg-yellow-400 text-black font-bold px-8 py-3 rounded-xl text-lg hover:bg-yellow-300 transition w-full">
             Register Here
           </button>
         </div>

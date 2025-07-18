@@ -44,7 +44,7 @@ const Header = () => {
           <img
             src="/images/ounje-logo.png"
             alt="ounje logo"
-            className="w-[30px] h-[40px]"
+            className="w-[30px] h-[30px]"
           />
           <span className="text-[20px]">Ounje</span>
         </a>
@@ -65,11 +65,11 @@ const Header = () => {
         {/* Desktop Location Select */}
         <div className="hidden md:flex items-center gap-2">
           <Select defaultValue="lagos">
-            <SelectTrigger className="inline-flex items-center gap-2 rounded-[20px] px-4 py-2 bg-white text-black text-[20px]">
+            <SelectTrigger className="inline-flex items-center gap-2 rounded-[20px] px-4 py-1 bg-white text-black text-[20px]">
               <SelectValue placeholder="Select a city" />
               <ChevronDown />
             </SelectTrigger>
-            <SelectContent className="bg-white">
+            <SelectContent className="bg-white rounded-[20px]">
               {countries.map((country) => (
                 <SelectItem key={country.value} value={country.value}>
                   {country.label}

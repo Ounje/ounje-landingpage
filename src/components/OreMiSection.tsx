@@ -6,7 +6,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@radix-ui/react-select";
+} from "./ui/Select";
 import { ChevronDown } from "lucide-react";
 
 interface Client {
@@ -58,12 +58,12 @@ const OreMiSection = () => (
             <SelectValue />
             <ChevronDown className="h-4 w-4" />
           </SelectTrigger>
-          <SelectContent className="bg-white rounded-[20px]">
+          <SelectContent className="bg-[#2C5E2E] border-none rounded-[20px]">
             {Clients.map((client) => (
               <SelectItem
                 key={client.value}
                 value={client.value}
-                className="hover:bg-[#2C5E2E] hover:text-white"
+                className="hover:bg-[#FFCA3A] hover:text-white"
               >
                 {client.label}
               </SelectItem>

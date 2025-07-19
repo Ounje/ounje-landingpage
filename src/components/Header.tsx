@@ -17,7 +17,7 @@ const countries = [
   { label: "Enugu", value: "enugu" },
 ];
 
-const menuItems = ["Chew", "Company", "FAQs", "Contact Us"];
+const menuItems = ["Join Us", "About us", "FAQs", "Contact Us"];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

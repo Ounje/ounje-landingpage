@@ -9,7 +9,7 @@ const features = [
 ];
 
 const EnyimSection = () => (
-  <section className="bg-[#466C3A] py-10 text-white text-center">
+  <section className="bg-[#2C5E2E] py-10 text-white text-center">
     <h2 className="text-3xl font-bold mb-6">Enyim</h2>
     <p className="mb-8 text-white">Relax, make i show you why we too good.</p>
     <div className="flex flex-wrap justify-center gap-[60px]">

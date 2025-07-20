@@ -19,7 +19,7 @@ const community = [
 ];
 
 const CommunitySection = () => (
-  <section className="bg-[#2C5E2E] py-14 text-white text-center">
+  <section id="joinUs" className="bg-[#2C5E2E] py-14 text-white text-center">
     <h2 className="text-5xl font-extrabold mb-12 tracking-tight">
       Be a Part of Our Community
     </h2>

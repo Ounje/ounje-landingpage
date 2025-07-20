@@ -23,6 +23,7 @@ const FAQSection = () => {
   const [open, setOpen] = useState<number | null>(null);
   return (
     <section
+      id="FAQ"
       className="relative bg-cover bg-no-repeat py-10 text-center px-5 "
       style={{
         backgroundImage: `url(/images/FAQs-bg.png)`,

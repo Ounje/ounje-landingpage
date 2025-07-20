@@ -17,7 +17,12 @@ const countries = [
   { label: "Enugu", value: "enugu" },
 ];
 
-const menuItems = ["Join Us", "About us", "FAQs", "Contact Us"];
+const menuItems = [
+  { label: "Join Us", href: "#joinUs" },
+  { label: "About us", href: "aboutUs" },
+  { label: "FAQs", href: "#FAQ" },
+  { label: "Contact Us", href: "contactUs" },
+];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,11 +58,11 @@ const Header = () => {
         <nav className="hidden md:flex gap-8 text-[20px] bg-white rounded-[20px] px-4 py-1 ">
           {menuItems.map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+              key={item.label}
+              href={item.href}
               className="hover:text-yellow-400"
             >
-              {item}
+              {item.label}
             </a>
           ))}
         </nav>
@@ -100,12 +105,12 @@ const Header = () => {
           <nav className="flex flex-col space-y-4 px-4">
             {menuItems.map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.label}
+                href={item.href}
                 className="text-black-700 hover:text-yellow-400 font-medium transition-colors px-2 py-1"
                 onClick={() => setIsMenuOpen(false)}
               >
-                {item}
+                {item.label}
               </a>
             ))}
             <div className="flex flex-col space-y-2 pt-4 border-t border-gray-200">

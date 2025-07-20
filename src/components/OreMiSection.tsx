@@ -77,7 +77,7 @@ const OreMiSection = () => (
             <div className="text-5xl mb-4">
               <img src={step.Image} alt={step.icon} />
             </div>
-            <Button className="w-full bg-yellow-400 text-[#234a1f] font-semibold px-5 py-2 rounded-[10px] hover:bg-yellow-300 transition">
+            <Button className="w-full bg-yellow-400 text-black font-semibold px-5 py-2 rounded-[10px] hover:bg-yellow-300 transition">
               {step.label}
             </Button>
           </div>

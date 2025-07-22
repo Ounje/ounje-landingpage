@@ -4,7 +4,8 @@ interface TeamMember {
   id: string;
   name: string;
   position: string;
-  icon: string;
+  linkdln: string;
+  x: string;
   image: string;
 }
 
@@ -14,35 +15,40 @@ export default function TeamSection() {
       id: "1",
       name: "Madu South Okechukwu",
       position: "CEO, Co-Founder",
-      icon: "X 冊",
+      linkdln: "linkdn.com",
+      x: "x.com",
       image: "/images/madu.png",
     },
     {
       id: "2",
       name: "Dayan Perera",
       position: "CTO, Co-Founder",
-      icon: "X 冊",
+      linkdln: "linkdn.com",
+      x: "x.com",
       image: "/images/dayan.png",
     },
     {
       id: "3",
       name: "Ago Chukwubuikem",
       position: "Full-Stack Developer",
-      icon: "X 冊",
+      linkdln: "linkdn.com",
+      x: "x.com",
       image: "/images/ago.png",
     },
     {
       id: "4",
       name: "Samuel Kayode",
       position: "UI/UX Design Intern",
-      icon: "X 冊",
+      linkdln: "linkdn.com",
+      x: "x.com",
       image: "/images/samuel.png",
     },
     {
       id: "5",
       name: "Micheal Osaretin",
       position: "Graphic/Brand Designer",
-      icon: "X 冊",
+      linkdln: "linkdn.com",
+      x: "x.com",
       image: "/images/micheal.png",
     },
   ];
@@ -110,8 +116,13 @@ export default function TeamSection() {
                     {member.position}
                   </p>
                 </div>
-                <span className="text-white text-sm md:text-white">
-                  {member.icon}
+                <span className="text-white text-sm md:text-white flex gap-2">
+                  <a href={member.x}>
+                    <img src="/icons/linkdln-logo.png" alt="linkdln logo" />
+                  </a>
+                  <a href={member.linkdln}>
+                    <img src="/icons/x-logo.png" alt="x logo" />
+                  </a>
                 </span>
               </div>
             </div>

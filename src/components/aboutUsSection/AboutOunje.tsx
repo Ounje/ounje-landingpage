@@ -4,7 +4,7 @@ export default function AboutOunje() {
       <section className="h-[40vh] bg-[#2C5E2E] text-center text-white p-5">
         <div>
           <h2 className="text-4xl md:text-6xl lg:text-[96px]">Ounje</h2>
-          <p className="text-white mt-5 py-10 t-[20px]">
+          <p className="text-white mt-5 px-20 pt-[20px]">
             OUNJE connects you to your favorite local food vendors quickly,
             affordably, and the way you like it. Born from the need for
             generous, affordable meals, OUNJE lets you build your own plate just

@@ -1,27 +1,15 @@
-import React from "react";
-import Header from "./components/Header";
-import HeroSection from "./components/HeroSection";
-import EnyimSection from "./components/EnyimSection";
-import OreMiSection from "./components/OreMiSection";
-import AbokiNaSection from "./components/AbokiNaSection";
-import TestimonialsSection from "./components/TestimonialsSection";
-import CommunitySection from "./components/CommunitySection";
-import FAQSection from "./components/FAQSection";
-import OrderSection from "./components/OrderSection";
-import Footer from "./components/Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
 
 const App = () => (
   <>
-    <Header />
-    <HeroSection />
-    <EnyimSection />
-    <OreMiSection />
-    <AbokiNaSection />
-    <TestimonialsSection />
-    <CommunitySection />
-    <FAQSection />
-    <OrderSection />
-    <Footer />
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/aboutus" element={<AboutPage />} />
+      </Routes>
+    </Router>
   </>
 );
 

@@ -19,7 +19,7 @@ const countries = [
 
 const menuItems = [
   { label: "Join Us", href: "#joinUs" },
-  { label: "About us", href: "aboutUs" },
+  { label: "About us", href: "aboutus" },
   { label: "FAQs", href: "#FAQ" },
   { label: "Contact Us", href: "contactUs" },
 ];

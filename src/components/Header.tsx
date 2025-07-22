@@ -43,7 +43,7 @@ const Header = () => {
       <div className="w-full flex items-center justify-between md:justify-center md:gap-[126px] px-4 py-3">
         {/* Logo */}
         <a
-          href="#"
+          href="/"
           className="text-2xl text-black backdrop-blur-sm bg-white/5 p-2 rounded-[20px] shadow-xl md:bg-white px-4 py-1 rounded-[20px] flex items-center gap-2"
         >
           <img

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import {
   Select,
@@ -42,8 +43,8 @@ const Header = () => {
     <header className="fixed w-full top-0 z-50 md:flex justify-center items-center">
       <div className="w-full flex items-center justify-between md:justify-center md:gap-[126px] px-4 py-3">
         {/* Logo */}
-        <a
-          href="/"
+        <Link
+          to="/"
           className="text-2xl text-black backdrop-blur-sm bg-white/5 p-2 rounded-[20px] shadow-xl md:bg-white px-4 py-1 rounded-[20px] flex items-center gap-2"
         >
           <img
@@ -52,18 +53,18 @@ const Header = () => {
             className="w-[30px] h-[30px]"
           />
           <span className="text-[20px]">Ounje</span>
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-8 text-[20px] bg-white rounded-[20px] px-4 py-1 ">
           {menuItems.map((item) => (
-            <a
+            <Link
               key={item.label}
-              href={item.href}
+              to={`/${item.href}`}
               className="hover:text-yellow-400"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 

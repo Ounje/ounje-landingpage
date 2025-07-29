@@ -40,12 +40,12 @@ const Header = () => {
   }, [isMenuOpen]);
 
   return (
-    <header className="fixed w-full top-0 z-50 md:flex justify-center items-center">
+    <header className="fixed w-full top-0 z-30 md:flex justify-center items-center bg-transparent">
       <div className="w-full flex items-center justify-between md:justify-center md:gap-[126px] px-4 py-3">
         {/* Logo */}
         <Link
           to="/"
-          className="text-2xl text-black backdrop-blur-sm bg-white/5 p-2 rounded-[20px] shadow-xl md:bg-white px-4 py-1 rounded-[20px] flex items-center gap-2"
+          className="text-2xl text-black backdrop-blur-sm bg-white/5 p-2 rounded-[20px] shadow-xl md:bg-white px-4 py-1 rounded-[20px] flex items-center gap-2 border-2 border-black"
         >
           <img
             src="/images/ounje-logo.png"
@@ -56,7 +56,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-8 text-[20px] bg-white rounded-[20px] px-4 py-1 ">
+        <nav className="hidden md:flex gap-8 text-[20px] bg-white rounded-[20px] px-4 py-1 border-2 border-black">
           {menuItems.map((item) => (
             <Link
               key={item.label}
@@ -69,9 +69,9 @@ const Header = () => {
         </nav>
 
         {/* Desktop Location Select */}
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-2 ">
           <Select defaultValue="lagos">
-            <SelectTrigger className="inline-flex items-center gap-2 rounded-[20px] px-4 py-1 bg-white text-black text-[20px]">
+            <SelectTrigger className="inline-flex items-center gap-2 rounded-[20px] px-4 py-1 bg-white text-black text-[20px] border-2 border-black">
               <SelectValue placeholder="Select a city" />
               <ChevronDown />
             </SelectTrigger>
@@ -86,10 +86,10 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className=" md:hidden p-0.5 border rounded-[10px] border-grey backdrop-blur-lg bg-white/10">
+        <div className=" md:hidden p-0.5 z-50 border border-black rounded-[10px] border-grey backdrop-blur-lg bg-white/10">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-white hover:text-yellow-400  "
+            className="md:hidden p-2 text-black hover:text-yellow-400  "
           >
             {isMenuOpen ? (
               <X className="h-6 w-6" />
@@ -102,8 +102,8 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden backdrop-blur-lg bg-white/10 text-black border-none py-4">
-          <nav className="flex flex-col space-y-4 px-4">
+        <div className="md:hidden absolute top-0 backdrop-blur-lg bg-white/10 text-black border-none py-4 h-[100vh] w-full">
+          <nav className="flex flex-col space-y-4 px-4 justify-center mt-20">
             {menuItems.map((item) => (
               <a
                 key={item.label}

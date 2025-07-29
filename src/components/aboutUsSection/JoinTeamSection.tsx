@@ -10,7 +10,7 @@ export default function JoinTeamSection() {
             Together we can make a difference in serving the nation one plate at
             a time.
           </p>
-          <Button className="flex justify-center items-center gap-2 rounded-[12px] bg-[#2C5E2E]">
+          <Button className="flex justify-center items-center gap-2 rounded-[12px] bg-[#2C5E2E] hover:bg-[#2C5E2E]/50 ">
             <span>Click Here To Check For Open Roles</span>
             <img src="/icons/next.png" alt="next icon" />
           </Button>

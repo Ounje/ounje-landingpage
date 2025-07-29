@@ -11,17 +11,17 @@ import TestimonialsSection from "../components/TestimonialsSection";
 
 export default function HomePage() {
   return (
-    <>
+    <div className="bg-[#ECFFED]">
       <Header />
       <HeroSection />
       <EnyimSection />
       <OreMiSection />
       <AbokiNaSection />
       <TestimonialsSection />
-      <CommunitySection />
-      <FAQSection />
-      <OrderSection />
+      {/* <CommunitySection />
+      <FAQSection /> */}
+      {/* <OrderSection /> */}
       <Footer />
-    </>
+    </div>
   );
 }

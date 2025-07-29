@@ -7,13 +7,13 @@ import Header from "../components/Header";
 
 export default function AboutPage() {
   return (
-    <>
+    <div className="bg-[#ECFFED]">
       <Header />
       <Hero />
       <AboutOunje />
       <TeamSection />
       <JoinTeamSection />
       <Footer />
-    </>
+    </div>
   );
 }

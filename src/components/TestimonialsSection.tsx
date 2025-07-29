@@ -92,17 +92,17 @@ const TestimonialsSection = () => (
               <TabsContent key={category.id} value={category.id}>
                 <div>
                   {category.id == "1" && (
-                    <p className="text-center text-white text-semibold text-[20px]">
+                    <p className="text-center text-white text-semibold text-[15px]">
                       {category.desc}
                     </p>
                   )}
                   {category.id == "2" && (
-                    <p className="text-center text-white text-semibold text-[20px]">
+                    <p className="text-center text-white text-semibold text-[15px]">
                       {category.desc}
                     </p>
                   )}
                   {category.id == "3" && (
-                    <p className="text-center text-white text-semibold text-[20px]">
+                    <p className="text-center text-white text-semibold text-[15px]">
                       {category.desc}
                     </p>
                   )}
@@ -110,8 +110,8 @@ const TestimonialsSection = () => (
               </TabsContent>
             ))}
             <p className="text-center text-white text-semibold text-[20px]"></p>
-            <div className="md:flex gap-7 mt-5 text-[10px] md:text-[20px]">
-              <button className="bg-yellow-400 text-black flex justify-center items-center gap-2 px-3  rounded-[8px] md:rounded-[20px] hover:bg-yellow-300 transition py-2">
+            <div className="md:flex items-center gap-7 mt-5 text-[10px] md:text-[15px]">
+              <button className="bg-yellow-400 text-black flex justify-center items-center gap-2 px-7  rounded-[8px] md:rounded-[20px] hover:bg-yellow-300 transition py-2">
                 <img
                   src="/icons/mage_playstore.png"
                   alt="playstore icon"
@@ -119,11 +119,11 @@ const TestimonialsSection = () => (
                 />
                 <span>Download on Google Play</span>
               </button>
-              <button className="bg-yellow-400 text-black flex justify-center items-center gap-3 md:gap-2 px-3  rounded-[8px] md:rounded-[20px] hover:bg-yellow-300 transition py-2 ">
+              <button className="bg-yellow-400 text-black flex justify-center  mt-2 md:mt-0 items-center gap-3 md:gap-2 px-8  rounded-[8px] md:rounded-[20px] hover:bg-yellow-300 transition py-2 ">
                 <img
                   src="/icons/apple-icon.png"
                   alt="ios-icon"
-                  className="w-[22px] h-[22px] md:w-[33px] md:h-[33px]"
+                  className="w-[20px] h-[20px] md:w-[33px] md:h-[30px]"
                 />
                 <span>Download on APP Store</span>
               </button>

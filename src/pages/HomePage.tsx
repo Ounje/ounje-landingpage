@@ -1,20 +1,20 @@
-import AbokiNaSection from "../components/AbokiNaSection";
-import EnyimSection from "../components/EnyimSection";
+import AbokiNaSection from "../components/RiderSection";
+import EnyimSection from "../components/CustomerSection";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
-import OreMiSection from "../components/OreMiSection";
-import TestimonialsSection from "../components/TestimonialsSection";
+import OreMiSection from "../components/VendorSection";
+import TestimonialsSection from "../components/JoinUsSection";
 
 export default function HomePage() {
   return (
     <div className="bg-[#ECFFED]">
       <Header />
       <HeroSection />
-      <EnyimSection />
+      {/* <EnyimSection />
       <OreMiSection />
-      <AbokiNaSection />
-      <TestimonialsSection />
+      {/* <AbokiNaSection /> */}
+      {/* <TestimonialsSection />  */}
       <Footer />
     </div>
   );

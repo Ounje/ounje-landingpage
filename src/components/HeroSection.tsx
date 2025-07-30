@@ -1,5 +1,3 @@
-import React from "react";
-
 const HeroSection = () => (
   <section className="relative h-[420px] md:h-[1000px]">
     {/* Hero content */}

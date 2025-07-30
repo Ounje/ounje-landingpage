@@ -12,7 +12,7 @@ const Clients: Client[] = [
 {
   console.log(Clients[0].label);
 }
-const OreMiSection = () => (
+const VendorSection = () => (
   <section className="py-16 px-10 text-black flex justify-center items-center">
     <div>
       <div className="text-center p-10">
@@ -30,4 +30,4 @@ const OreMiSection = () => (
   </section>
 );
 
-export default OreMiSection;
+export default VendorSection;

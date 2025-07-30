@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const EnyimSection = () => (
+const CustomerSection = () => (
   <section className="bg-[#FFF3E8] min-h-[717px] py-16 px-4 text-black flex justify-center items-center">
     <div className="flex flex-col md:flex-row gap-10 max-w-6xl w-full items-center">
       {/* Text Content */}
@@ -95,4 +95,4 @@ const EnyimSection = () => (
   </section>
 );
 
-export default EnyimSection;
+export default CustomerSection;

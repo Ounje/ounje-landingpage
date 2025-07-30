@@ -26,7 +26,7 @@ const projectCategories: Category[] = [
 
 const firstTab = projectCategories[0].id;
 
-const TestimonialsSection = () => (
+const JoinUsSection = () => (
   <section className="py-16 px-10 text-black flex justify-center items-center">
     <div>
       {/* Section Text */}
@@ -134,4 +134,4 @@ const TestimonialsSection = () => (
   </section>
 );
 
-export default TestimonialsSection;
+export default JoinUsSection;

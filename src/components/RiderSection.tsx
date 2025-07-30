@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const AbokiNaSection = () => (
+const RiderSection = () => (
   <section className="bg-[#FFF3E8] min-h-[717px] py-16 px-4 text-black flex justify-center items-center">
     <div className="flex flex-col md:flex-row gap-10 max-w-6xl w-full items-center">
       <div className="flex flex-col gap-5">
@@ -52,4 +52,4 @@ const AbokiNaSection = () => (
   </section>
 );
 
-export default AbokiNaSection;
+export default RiderSection;

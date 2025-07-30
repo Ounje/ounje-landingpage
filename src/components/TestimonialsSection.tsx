@@ -40,12 +40,12 @@ const TestimonialsSection = () => (
 
       <div>
         <Tabs className="w-full" defaultValue={firstTab}>
-          <TabsList className="w-full bg-[#FFC727] rounded-[20px] mb-5 gap-10 ">
+          <TabsList className="w-full bg-[#FFC727] p-1 rounded-[20px] mb-5 gap-10 ">
             {projectCategories.map((category) => (
               <TabsTrigger
                 key={category.id}
                 value={category.id}
-                className="py-3 w-full rounded-[20px] data-[state=active]:bg-[#2C5E2E]"
+                className="py-3 w-full rounded-[30px] data-[state=active]:bg-[#2C5E2E]"
               >
                 <span>{category.title}</span>
               </TabsTrigger>

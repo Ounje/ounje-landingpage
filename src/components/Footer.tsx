@@ -5,7 +5,7 @@ const Footer = () => (
   <footer className="bg-black text-white py-8 w-full">
     <div className="max-w-6xl mx-auto px-4 flex flex-col justify-center items-start md:items-center gap-8 w-full">
       {/* Logo and copyright */}
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-2 min-w-[200px]">
+      <div className="flex items-center justify-start w-full gap-4 md:gap-2 min-w-[200px]">
         <img
           src="/images/ounje-logo.png"
           alt="Ounje Logo"
@@ -27,9 +27,11 @@ const Footer = () => (
       {/* Links */}
       <div className="flex flex-col md:flex-row gap-10 w-full justify-between">
         <div className="">
-          <div className="font-semibold mb-2">Be a part of us</div>
-          <ul className="text-sm space-y-1 text-grey ">
-            <li>
+          <div className="font-semibold mb-5 text-start md:text-center">
+            Be a part of us
+          </div>
+          <ul className="text-sm font-normal space-y-1 text-grey text-center">
+            <li className="">
               <a href="#" className="hover:underline">
                 Careers
               </a>
@@ -47,8 +49,10 @@ const Footer = () => (
           </ul>
         </div>
         <div className="">
-          <div className="font-semibold mb-2">Links of Interest</div>
-          <ul className="text-sm space-y-1">
+          <div className="font-semibold mb-5 text-start md:text-center">
+            Links of Interest
+          </div>
+          <ul className="text-sm font-normal space-y-1 text-grey text-center">
             <li>
               <a href="#" className="hover:underline">
                 About Us
@@ -67,8 +71,10 @@ const Footer = () => (
           </ul>
         </div>
         <div className="">
-          <div className="font-semibold mb-2">Privacy & Compliance</div>
-          <ul className="text-sm space-y-1">
+          <div className="font-semibold mb-5 text-start md:text-center">
+            Privacy & Compliance
+          </div>
+          <ul className="text-sm font-normal space-y-1 text-grey text-center">
             <li>
               <a href="#" className="hover:underline">
                 Terms & Conditions

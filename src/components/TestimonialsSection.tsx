@@ -45,7 +45,7 @@ const TestimonialsSection = () => (
               <TabsTrigger
                 key={category.id}
                 value={category.id}
-                className="py-3 w-full rounded-3xl data-[state=active]:bg-[#2C5E2E]"
+                className="py-3 w-full rounded-2xl data-[state=active]:bg-[#2C5E2E]"
               >
                 <span>{category.title}</span>
               </TabsTrigger>

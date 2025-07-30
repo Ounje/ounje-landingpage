@@ -1,34 +1,7 @@
-import React from "react";
-import { Button } from "./Button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/Select";
-import { ChevronDown } from "lucide-react";
-
 interface Client {
   label: string;
   value: string;
 }
-
-interface Step {
-  label: string;
-  icon: string;
-  Image: string;
-}
-
-const steps = [
-  { label: "Browse for Vendors", icon: "📱", Image: "/images/Phone.png" },
-  { label: "Place Order", icon: "🛒", Image: "/images/Phone.png" },
-  {
-    label: "Simple Rider Tracking Update",
-    icon: "🚴",
-    Image: "/images/Phone.png",
-  },
-];
 
 const Clients: Client[] = [
   { label: "Customer", value: "customer" },

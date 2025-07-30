@@ -1,12 +1,4 @@
-import { motion, reverseEasing } from "framer-motion";
-
-const features = [
-  { icon: "/icons/dish-icon.png", label: "Big Portion" },
-  { icon: "/icons/saving-icon.png", label: "Affordable Price" },
-  { icon: "/icons/store-icon.png", label: "Local Vendor Support" },
-  { icon: "/icons/delivery-icon.png", label: "Swift & Fast Delivary" },
-  { icon: "/icons/payment-icon.png", label: "Swift Payment & Support" },
-];
+import { motion } from "framer-motion";
 
 const EnyimSection = () => (
   <section className="bg-[#FFF3E8] min-h-[717px] py-16 px-4 text-black flex justify-center items-center">
@@ -69,7 +61,7 @@ const EnyimSection = () => (
             repeat: Infinity,
             repeatType: "reverse",
           }}
-          className="absolute w-20  md:w-40 z-10 left-[8%] md:left-[11%] top-[65%] md:top-[50%] origin-bottom-left"
+          className="absolute w-20  md:w-40 z-10 left-[7.5%] md:left-[10%] top-[65%] md:top-[50%] origin-bottom-left"
         />
 
         {/* Woman */}

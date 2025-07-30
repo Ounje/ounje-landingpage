@@ -43,46 +43,49 @@ const Header = () => {
     <header className="fixed w-full top-0 z-30 md:flex justify-center items-center bg-transparent">
       <div className="w-full flex items-center justify-between md:justify-center md:gap-[150px] px-4 py-3">
         {/* Logo */}
-        <Link
-          to="/"
-          className="text-2xl text-black backdrop-blur-sm bg-white/5 rounded-[20px] shadow-xl md:bg-white px-4 py-2 rounded-[20px] flex items-center gap-2 border-[1px] border-black"
-        >
-          <img
-            src="/images/ounje-logo.png"
-            alt="ounje logo"
-            className="w-[30px] h-[30px]"
-          />
-          <span className="text-[20px]">Ounje</span>
-        </Link>
+        <div className="w-full flex items-center justify-between md:justify-center md:gap-[50px] lg:gap-[170px] px-4 py-3">
+          {/* Logo */}
+          <Link
+            to="/"
+            className="text-2xl text-black backdrop-blur-sm bg-white/5 rounded-[20px] shadow-xl md:bg-white px-4 md:px-3 py-2 rounded-[20px] flex items-center gap-2 border-[1px] border-black"
+          >
+            <img
+              src="/images/ounje-logo.png"
+              alt="ounje logo"
+              className="w-[30px] h-[30px]"
+            />
+            <span className="text-[20px] md:text-[18px]">Ounje</span>
+          </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-10 text-[20px] bg-white rounded-[20px] px-8 py-2 border-[1px] border-black">
-          {menuItems.map((item) => (
-            <Link
-              key={item.label}
-              to={`/${item.href}`}
-              className="hover:text-yellow-400"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex gap-6 lg:gap-10 text-[18px] lg:text-[20px] bg-white rounded-[20px] px-6 lg:px-8 py-2.5 border-[1px] border-black">
+            {menuItems.map((item) => (
+              <Link
+                key={item.label}
+                to={`/${item.href}`}
+                className="hover:text-yellow-400"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-        {/* Desktop Location Select */}
-        <div className="hidden md:flex items-center gap-2 ">
-          <Select defaultValue="lagos">
-            <SelectTrigger className="inline-flex items-center gap-2 rounded-[20px] px-4 py-2 bg-white text-black text-[20px] border-[1px] border-black">
-              <SelectValue placeholder="Select a city" />
-              <ChevronDown />
-            </SelectTrigger>
-            <SelectContent className="bg-white rounded-[20px]">
-              {countries.map((country) => (
-                <SelectItem key={country.value} value={country.value}>
-                  {country.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          {/* Desktop Location Select */}
+          <div className="hidden md:flex items-center gap-2">
+            <Select defaultValue="lagos">
+              <SelectTrigger className="inline-flex items-center gap-2 rounded-[20px] px-4 py-2 bg-white text-black text-[18px] lg:text-[20px] border-[1px] border-black">
+                <SelectValue placeholder="Select a city" />
+                <ChevronDown />
+              </SelectTrigger>
+              <SelectContent className="bg-white rounded-[20px]">
+                {countries.map((country) => (
+                  <SelectItem key={country.value} value={country.value}>
+                    {country.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         {/* Mobile Menu Button */}

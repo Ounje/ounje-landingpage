@@ -22,7 +22,7 @@ const menuItems = [
   { label: "Join Us", href: "#joinUs" },
   { label: "About us", href: "aboutus" },
   { label: "FAQs", href: "#FAQ" },
-  { label: "Contact Us", href: "contactUs" },
+  { label: "Contact Us", href: "contactus" },
 ];
 
 const Header = () => {
@@ -65,7 +65,7 @@ const Header = () => {
               <Link
                 key={item.label}
                 to={`/${item.href}`}
-                className="hover:text-yellow-400"
+                className="hover:text-yellow-400 "
               >
                 {item.label}
               </Link>
@@ -79,7 +79,7 @@ const Header = () => {
                 <SelectValue placeholder="Select a city" />
                 <ChevronDown />
               </SelectTrigger>
-              <SelectContent className="bg-white rounded-[20px]">
+              <SelectContent className="bg-white border-[1px] border-black rounded-[20px]">
                 {countries.map((country) => (
                   <SelectItem key={country.value} value={country.value}>
                     {country.label}

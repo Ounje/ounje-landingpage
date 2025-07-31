@@ -110,14 +110,14 @@ const Header = () => {
         <div className="md:hidden absolute top-0 backdrop-blur-lg bg-white/10 text-black border-none py-4 h-[100vh] w-full">
           <nav className="flex flex-col space-y-4 px-4 justify-center mt-20">
             {menuItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href={item.href}
+                to={`/${item.href}`}
                 className="text-black-700 hover:text-yellow-400 font-medium transition-colors px-2 py-1"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
             <div className="flex flex-col space-y-2 pt-4 border-t border-gray-200">
               <Button variant="outline" size="sm">

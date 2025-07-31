@@ -29,7 +29,7 @@ const HeroSection = () => (
     </div>
 
     {/* Images positioned at bottom */}
-    <div className="absolute bottom-0 left-0 right-0 flex justify-between ">
+    <div className="absolute bottom-[-5%] left-0 right-0 flex justify-between ">
       <img
         src="/icons/Street Food-cuate.png"
         alt="Street Food-cuate"

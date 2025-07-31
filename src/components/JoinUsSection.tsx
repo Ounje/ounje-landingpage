@@ -40,12 +40,12 @@ const JoinUsSection = () => (
 
       <div>
         <Tabs className="w-full" defaultValue={firstTab}>
-          <TabsList className="w-full bg-[#FFC727] p-1 rounded-[20px] mb-5 gap-10 ">
+          <TabsList className="w-full bg-[#FFC727] p-1 rounded-[20px] mb-5 gap-3 md:gap-10 ">
             {projectCategories.map((category) => (
               <TabsTrigger
                 key={category.id}
                 value={category.id}
-                className="py-3 w-full rounded-2xl data-[state=active]:bg-[#2C5E2E]"
+                className="py-1 md:py-3 w-full rounded-2xl data-[state=active]:bg-[#2C5E2E]"
               >
                 <span>{category.title}</span>
               </TabsTrigger>

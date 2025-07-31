@@ -8,7 +8,7 @@ import VendorSection from "../components/VendorSection";
 
 export default function HomePage() {
   return (
-    <div className="bg-[#ECFFED]">
+    <div className="bg-[#ECFFED] overflow-x-hidden">
       <Header />
       <HeroSection />
       <CustomerSection />

@@ -7,7 +7,7 @@ import Header from "../components/Header";
 
 export default function AboutPage() {
   return (
-    <div className="bg-[#ECFFED]">
+    <div className="bg-[#ECFFED] overflow-x-hidden">
       <Header />
       <Hero />
       <AboutOunje />

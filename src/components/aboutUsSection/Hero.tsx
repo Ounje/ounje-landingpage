@@ -1,17 +1,20 @@
 export default function Hero() {
   return (
     <>
-      <section
-        className="relative top-0 h-[420px] md:h-[100vh] flex items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: `url(/images/AboutHero-img.png)` }}
-      >
-        {/* overlay */}
-        <div className="absolute inset-0 bg-[#0B3B0D80]" />
-
+      <section className="p-5 mb-20 h-[100vh] md:h-[120vh]">
         {/* content */}
-        <div className="relative inset-0 text-center">
-          <h1 className="font-bold text-white md:text-[128px]">About Us</h1>
-          <span className="text-white">Join us to meet the team</span>
+        <div className=" items-center text-center mt-10">
+          <h1 className="font-bold text-[#2C5E2E] md:text-[128px] mt-20">
+            About Us
+          </h1>
+          <p className="text-[#2C5E2E] mt-10">Join us to meet the team</p>
+          <div className="flex justify-center mt-10">
+            <img
+              src="/images/AboutHero-img.png"
+              alt="about us image"
+              className=" items-center w-[80vw] md:w-[60vw] h-[65vw] lg:h-[80vh]"
+            />
+          </div>
         </div>
       </section>
     </>

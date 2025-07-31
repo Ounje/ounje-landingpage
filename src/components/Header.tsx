@@ -41,20 +41,22 @@ const Header = () => {
 
   return (
     <header className="fixed w-full top-0 z-30 md:flex justify-center items-center bg-transparent">
-      <div className="w-full flex items-center justify-between md:justify-center md:gap-[150px] px-4 py-3">
+      <div className="w-full flex items-center justify-between md:justify-center md:gap-[150px] px-1 py-1 md:px-4 md:py-3">
         {/* Logo */}
-        <div className="w-full flex items-center justify-between md:justify-center md:gap-[50px] lg:gap-[170px] px-4 py-3">
+        <div className="w-full flex items-center justify-between md:justify-center md:gap-[50px] lg:gap-[170px] px-4 md:py-3">
           {/* Logo */}
           <Link
             to="/"
-            className="text-2xl text-black backdrop-blur-sm bg-white/5 rounded-[20px] shadow-xl md:bg-white px-4 md:px-3 py-2 rounded-[20px] flex items-center gap-2 border-[1px] border-black"
+            className="text-2xl text-black backdrop-blur-sm bg-white/5 rounded-[20px] shadow-xl md:bg-white px-4 md:px-3 py-2 md:rounded-[20px] flex items-center gap-2 md:border-[1px] md:border-black"
           >
             <img
               src="/images/ounje-logo.png"
               alt="ounje logo"
-              className="w-[30px] h-[30px]"
+              className="w-[20px] h-[20px] md:w-[30px] md:h-[30px]"
             />
-            <span className="text-[20px] md:text-[18px]">Ounje</span>
+            <span className="text-[15px] md:text-[18px] text-[#2C5E2E]">
+              Ounje
+            </span>
           </Link>
 
           {/* Desktop Nav */}
@@ -89,15 +91,15 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className=" md:hidden p-0.5 z-50 border border-black rounded-[10px] border-grey backdrop-blur-lg bg-white/10">
+        <div className=" md:hidden p-0.5 z-50 border border-black rounded-[10px] border-[#2C5E2E] backdrop-blur-lg bg-white/10">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-black hover:text-yellow-400  "
+            className="md:hidden p-1 text-[#2C5E2E] hover:text-yellow-400  "
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-5 w-5" />
             )}
           </button>
         </div>

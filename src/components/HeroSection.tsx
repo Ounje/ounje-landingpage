@@ -1,5 +1,5 @@
 const HeroSection = () => (
-  <section className="relative h-[420px] md:h-[1000px]">
+  <section id="home" className="relative h-[420px] md:h-[1000px]">
     {/* Hero content */}
     <div className="relative z-10 flex  flex-col items-center text-center text-black pt-5 px-3 h-full">
       <h1 className="text-6xl md:text-[200px] lg:text-[350px] font-bold mb-2 mt-20 md:mt-20 text-[#2C5E2E]">

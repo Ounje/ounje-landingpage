@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import {
   Select,
@@ -18,15 +18,18 @@ const countries = [
   { label: "Enugu", value: "enugu" },
 ];
 
+// Ensure all paths are consistently formatted
 const menuItems = [
-  { label: "Join Us", href: "#joinUs" },
-  { label: "About us", href: "aboutus" },
-  { label: "FAQs", href: "#FAQ" },
-  { label: "Contact Us", href: "contactus" },
+  { label: "Join Us", href: "/#joinUs" }, // On current page
+  { label: "About us", href: "/aboutus" }, // Absolute path
+  { label: "FAQs", href: "/contactus#FAQ" }, // Absolute path with hash
+  { label: "Contact Us", href: "/contactus" }, // Absolute path
 ];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -39,12 +42,28 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+  const scrollToSection = (hash: string) => {
+    const sectionId = hash.replace("#", "");
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  useEffect(() => {
+    if (location.hash) {
+      const timer = setTimeout(() => {
+        scrollToSection(location.hash);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location.hash]);
+
   return (
     <header className="fixed w-full top-0 z-30 md:flex justify-center items-center bg-transparent">
       <div className="w-full flex items-center justify-between md:justify-center md:gap-[150px] px-1 py-1 md:px-4 md:py-3">
-        {/* Logo */}
+        {/* Logo and Desktop Navigation */}
         <div className="w-full flex items-center justify-between md:justify-center md:gap-[50px] lg:gap-[170px] px-4 md:py-3">
-          {/* Logo */}
           <Link
             to="/"
             className="text-2xl text-black backdrop-blur-sm bg-white/5 rounded-[20px] shadow-xl md:bg-white px-4 md:px-3 py-2 md:rounded-[20px] flex items-center gap-2 md:border-[1px] md:border-black"
@@ -61,15 +80,36 @@ const Header = () => {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex gap-6 lg:gap-10 text-[18px] lg:text-[20px] bg-white rounded-[20px] px-6 lg:px-8 py-2.5 border-[1px] border-black">
-            {menuItems.map((item) => (
-              <Link
-                key={item.label}
-                to={`/${item.href}`}
-                className="hover:text-yellow-400 "
-              >
-                {item.label}
-              </Link>
-            ))}
+            {menuItems.map((item) => {
+              const [path, hash] = item.href.includes("#")
+                ? item.href.split("#")
+                : [item.href, null];
+
+              const isCurrentPage = location.pathname === path;
+
+              return (
+                <Link
+                  key={item.label}
+                  to={item.href.includes("#") ? path : item.href}
+                  onClick={(e) => {
+                    if (hash) {
+                      e.preventDefault();
+                      if (isCurrentPage) {
+                        scrollToSection(`#${hash}`);
+                      } else {
+                        navigate(`${path}#${hash}`);
+                      }
+                    } else if (isCurrentPage) {
+                      e.preventDefault();
+                    }
+                    setIsMenuOpen(false);
+                  }}
+                  className="hover:text-yellow-400"
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Desktop Location Select */}
@@ -91,10 +131,10 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className=" md:hidden p-0.5 z-50 border border-black rounded-[10px] border-[#2C5E2E] backdrop-blur-lg bg-white/10">
+        <div className="md:hidden p-0.5 z-50 border border-black rounded-[10px] border-[#2C5E2E] backdrop-blur-lg bg-white/10">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-1 text-[#2C5E2E] hover:text-yellow-400  "
+            className="md:hidden p-1 text-[#2C5E2E] hover:text-yellow-400"
           >
             {isMenuOpen ? (
               <X className="h-5 w-5" />
@@ -109,24 +149,49 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden absolute top-0 backdrop-blur-lg bg-white/10 text-black border-none py-4 h-[100vh] w-full">
           <nav className="flex flex-col space-y-4 px-4 justify-center mt-20">
-            {menuItems.map((item) => (
-              <Link
-                key={item.label}
-                to={`/${item.href}`}
-                className="text-black-700 hover:text-yellow-400 font-medium transition-colors px-2 py-1"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="flex flex-col space-y-2 pt-4 border-t border-gray-200">
-              <Button variant="outline" size="sm">
-                Login
-              </Button>
-              <Button size="sm" className="hover:text-yellow-400">
-                Sign Up
-              </Button>
-            </div>
+            {menuItems.map((item) => {
+              const [path, hash] = item.href.includes("#")
+                ? item.href.split("#")
+                : [item.href, null];
+
+              const isCurrentPage = location.pathname === path;
+
+              return (
+                <Link
+                  key={item.label}
+                  to={item.href.includes("#") ? path : item.href}
+                  onClick={(e) => {
+                    if (hash) {
+                      e.preventDefault();
+                      if (isCurrentPage) {
+                        scrollToSection(`#${hash}`);
+                      } else {
+                        navigate(`${path}#${hash}`);
+                      }
+                    } else if (isCurrentPage) {
+                      e.preventDefault();
+                    }
+                    setIsMenuOpen(false);
+                  }}
+                  className="text-black-700 flex flex-col justify-center items-center hover:text-yellow-400 font-medium transition-colors px-2 py-1"
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+            <Select defaultValue="lagos">
+              <SelectTrigger className="inline-flex justify-center ms-2  gap-2  text-black-700 text-md hover:text-yellow-400 font-medium transition-colors ">
+                <SelectValue placeholder="Select a city" />
+                <ChevronDown />
+              </SelectTrigger>
+              <SelectContent className="border-none text-start shadow-none">
+                {countries.map((country) => (
+                  <SelectItem key={country.value} value={country.value}>
+                    {country.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </nav>
         </div>
       )}

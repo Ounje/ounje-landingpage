@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import { Button } from "./Button";
 
 const Footer = () => (
-  <footer className="bg-black text-white py-8 w-full">
+  <footer className="absolute bg-black text-white py-8 w-full">
     <div className="max-w-6xl mx-auto px-4 flex flex-col justify-center items-start md:items-center gap-8 w-full">
       {/* Logo and copyright */}
       <div className="flex items-center justify-start w-full gap-4 md:gap-2 min-w-[200px]">
@@ -17,9 +18,9 @@ const Footer = () => (
         <input
           type="text"
           placeholder="Enter email, Subscribe to our newsletter "
-          className="flex-1 outline-none text-gray-700 placeholder-gray-400 text-[12px] md:text-[20px] px-2 py-5"
+          className="flex-1 outline-none text-gray-700 placeholder-gray-400 text-[12px] md:text-[20px] px-2 py-2 md:px-2 md:py-5"
         />
-        <div className="bg-[#FFCA3A] py-3 px-7 text-[12px]">
+        <div className="bg-[#FFCA3A] py-1 px-3 md:py-3 md:px-7 text-[12px]">
           <Button>Subscribe</Button>
         </div>
       </div>
@@ -53,9 +54,9 @@ const Footer = () => (
           </div>
           <ul className="text-sm font-normal space-y-1 text-grey text-center">
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="#aboutus" className="hover:underline">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#FAQ" className="hover:underline">
@@ -63,9 +64,9 @@ const Footer = () => (
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="#contactus" className="hover:underline">
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

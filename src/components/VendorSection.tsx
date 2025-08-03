@@ -15,9 +15,9 @@ const Clients: Client[] = [
 const VendorSection = () => (
   <section className="py-16 px-10 text-black flex justify-center items-center">
     <div>
-      <div className="text-center p-10">
+      <div className="text-center p-1 lg:p-10">
         <h2 className="mb-5">We Bring The Orders To You</h2>
-        <p className="px-5 lg:w-[1196px]">
+        <p className="px-1 lg:w-[1196px]">
           No need for a big shop or fancy tech. With OUNJE, customers find you,
           place their orders, and we handle the rest from pickup to delivery.
           You just focus on cooking. We bring the orders right to your phone.

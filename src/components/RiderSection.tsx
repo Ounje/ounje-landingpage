@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const RiderSection = () => (
   <section className="bg-[#FFF3E8] min-h-[717px] py-16 px-4 text-black flex justify-center items-center">
-    <div className="flex flex-col md:flex-row gap-10 max-w-6xl w-full items-center">
+    <div className="flex flex-col md:flex-row gap-2 lg:gap-10 max-w-6xl w-full items-center">
       <div className="flex flex-col gap-5">
         <h2>
           Join The Ounje Force!!{" "}
@@ -13,7 +13,7 @@ const RiderSection = () => (
         </p>
       </div>
 
-      <div className="md:w-1/2 relative h-[400px] md:h-[500px] w-full">
+      <div className="md:w-1/2 relative h-[260px] md:h-[500px] w-full">
         <img
           src="/images/device-map.png"
           alt="phone"
@@ -45,7 +45,7 @@ const RiderSection = () => (
           }}
           src="/icons/location-icon.png"
           alt="icon"
-          className="absolute z-10 left-[110%]"
+          className="hidden md:block absolute z-10 left-[60%] lg:left-[110%] w-[50px] h-[50px] lg:w-[80px] lg:h-[100px]"
         />
       </div>
     </div>

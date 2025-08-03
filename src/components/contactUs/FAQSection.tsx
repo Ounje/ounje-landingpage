@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const faqs = [
   {
@@ -41,7 +41,7 @@ export default function FAQSection() {
   };
 
   return (
-    <section>
+    <section id="FAQ">
       <div className="w-full my-3 py-2 bg-[#1A3F1C] text-white text-center">
         {" "}
         <h2>FAQs</h2>{" "}

@@ -27,7 +27,10 @@ const projectCategories: Category[] = [
 const firstTab = projectCategories[0].id;
 
 const JoinUsSection = () => (
-  <section className="py-16 px-10 text-black flex justify-center items-center">
+  <section
+    id="joinUs"
+    className="py-16 px-10 text-black flex justify-center items-center"
+  >
     <div>
       {/* Section Text */}
       <div className="text-center">
@@ -110,11 +113,11 @@ const JoinUsSection = () => (
             ))}
             <p className="text-center text-white text-semibold text-[20px]"></p>
             <div className="md:flex items-center gap-7 mt-5 text-[10px] md:text-[15px]">
-              <button className="bg-yellow-400 text-black flex justify-center items-center gap-2 px-7  rounded-[8px] md:rounded-[20px] hover:bg-yellow-300 transition py-2">
+              <button className="bg-yellow-400 text-black flex justify-center items-center gap-2 px-7  rounded-[8px] md:rounded-[20px] hover:bg-yellow-300 transition py-2 ">
                 <img
                   src="/icons/mage_playstore.png"
                   alt="playstore icon"
-                  className="w-[20px] h-[20px] md:w-[30px] md:h-[30px]"
+                  className="w-[23px] h-[20px] md:w-[30px] md:h-[30px]"
                 />
                 <span>Download on Google Play</span>
               </button>

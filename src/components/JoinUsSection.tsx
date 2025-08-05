@@ -1,4 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { motion } from "framer-motion";
 
 interface Category {
   id: string;
@@ -48,9 +49,13 @@ const JoinUsSection = () => (
               <TabsTrigger
                 key={category.id}
                 value={category.id}
-                className="py-1 md:py-3 w-full rounded-2xl data-[state=active]:bg-[#2C5E2E]"
+                className="py-1 md:py-3 w-full rounded-2xl data-[state=active]:bg-[#2C5E2E] transition-all duration-300 ease-in-out"
               >
                 <span>{category.title}</span>
+                <div
+                  className="absolute bottom-0 left-0 h-0.5 bg-[#2C5E2E] transition-all duration-300 
+                  transform origin-left scale-x-0 data-[state=active]:scale-x-100 w-full"
+                />
               </TabsTrigger>
             ))}
           </TabsList>
@@ -59,31 +64,49 @@ const JoinUsSection = () => (
             <TabsContent key={category.id} value={category.id}>
               <div className="flex justify-center">
                 {category.id === "1" && (
-                  <div>
+                  <motion.div
+                    initial={{ x: 50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: -50, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex justify-center"
+                  >
                     <img
                       src="/images/egbon-screen.png"
                       alt="egbon screen"
                       className="h-[80vh]"
                     />
-                  </div>
+                  </motion.div>
                 )}
                 {category.id === "2" && (
-                  <div>
+                  <motion.div
+                    initial={{ x: 50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: -50, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex justify-center"
+                  >
                     <img
                       src="/images/vendor-screen.png"
                       alt="egbon screen"
                       className="h-[80vh]"
                     />
-                  </div>
+                  </motion.div>
                 )}
                 {category.id === "3" && (
-                  <div>
+                  <motion.div
+                    initial={{ x: 50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: -50, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex justify-center"
+                  >
                     <img
                       src="/images/rider-screen.png"
                       alt="egbon screen"
                       className="h-[80vh]"
                     />
-                  </div>
+                  </motion.div>
                 )}
               </div>
             </TabsContent>

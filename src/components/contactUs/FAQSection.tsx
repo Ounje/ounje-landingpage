@@ -66,9 +66,6 @@ export default function FAQSection() {
     setActiveIndex((prev) => (prev - 1 + faqs.length) % faqs.length);
   };
 
-  const [activeQestion, setActiveQuestion] = useState(faqs[0].question);
-  const [activeAnswer, setActiveAnswer] = useState(faqs[0].answer);
-
   return (
     <section id="FAQ">
       <div className="w-full my-3 py-2 bg-[#1A3F1C] text-white text-center">
@@ -127,7 +124,11 @@ export default function FAQSection() {
               className="bg-yellow-400 rounded-xl items-center p-6 text-center shadow cursor-pointer transition-all min-h-[375px]"
               onClick={() => toggleAnswer(index)}
             >
-              <p className="text-sm text-gray-600 mb-2">Tap to view</p>
+              {openIndex !== index ? (
+                <p className="text-sm text-gray-600 mb-2">Tap to view</p>
+              ) : (
+                <p className="text-sm text-gray-600 mb-2">Tap to Close</p>
+              )}
               <div className=" h-full flex justify-center items-center">
                 {openIndex !== index ? (
                   <>

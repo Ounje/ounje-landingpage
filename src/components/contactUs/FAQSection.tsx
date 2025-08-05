@@ -1,44 +1,73 @@
 import { useEffect, useState } from "react";
 
-const faqs = [
+interface FAQ {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+const faqs: FAQ[] = [
   {
+    id: "1",
     question: "What is Ounje?",
     answer:
       "Ounje is a platform that connects you to your favorite local food vendors for fast and affordable food delivery within your neighborhood.",
   },
   {
+    id: "2",
     question: "How Do I Place an Order?",
     answer:
-      "To place an order, simply browse the menu of your preferred vendor, add items to your cart, and proceed to checkout. You can pay online or choose cash on delivery.",
+      "Simply sign up on the app, browse vendors or build your own plate, place your order, and track your delivery in real time.",
   },
   {
+    id: "3",
     question: "Is Ounje Available In My Area?",
     answer:
-      "Ounje is currently available in select areas. Enter your location on the homepage to check if we deliver to your area.",
+      "We currently operate in select areas across Lagos. You can check availability by entering your delivery address in the app.",
   },
   {
+    id: "4",
     question: "Can I pay On Delivery?",
     answer:
-      "Yes, Ounje supports multiple payment methods, including secure online payment and cash on delivery where available.",
+      "No. All payments are made securely online through our integrated Paystack system to ensure smooth transactions.",
   },
   {
+    id: "5",
     question: "Do I Need To Pay To Join Ounje?",
     answer:
-      "No, joining Ounje as a customer is completely free. You only pay when you place an order.",
+      "No. Signing up on Ounje is completely free for customers, vendors, and riders.",
   },
   {
+    id: "6",
     question: "How Do I Become A Vendor Or Rider On Ounje?",
     answer:
-      "You can become a vendor or rider by filling out the application form on our 'Join Us' page. Our team will review your submission and contact you shortly.",
+      "Just head to our website or app, click on “Join Us,” and choose whether you want to sign up as a vendor or rider. It’s quick and easy.",
   },
 ];
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeFAQ = faqs[activeIndex];
 
   const toggleAnswer = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
+
+  const toggleAnswerMobile = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  const nextQuestion = () => {
+    setActiveIndex((prev) => (prev + 1) % faqs.length);
+  };
+
+  const prevQuestion = () => {
+    setActiveIndex((prev) => (prev - 1 + faqs.length) % faqs.length);
+  };
+
+  const [activeQestion, setActiveQuestion] = useState(faqs[0].question);
+  const [activeAnswer, setActiveAnswer] = useState(faqs[0].answer);
 
   return (
     <section id="FAQ">
@@ -52,21 +81,63 @@ export default function FAQSection() {
       </div>
 
       <div className="my-20">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {/* mobile screen faqs */}
+        <div className="md:hidden">
+          <div className="relative flex justify-center mb-6">
+            {/* faq box */}
+            <div
+              className="my-20 bg-yellow-400 rounded-xl items-center p-6 text-center shadow cursor-pointer transition-all min-h-[375px] w-[300px]"
+              onClick={() => toggleAnswerMobile(activeIndex)}
+            >
+              <p className="text-sm text-gray-600 mb-2">Tap to view</p>
+              <div className=" h-full flex justify-center items-center">
+                {openIndex !== activeIndex ? (
+                  <>
+                    <h3 className="text-sm text-black-300 leading-snug">
+                      {activeFAQ.question}
+                    </h3>
+                  </>
+                ) : (
+                  <p className="text-black text-sm transform-easein">
+                    {activeFAQ.answer}
+                  </p>
+                )}
+              </div>
+            </div>
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevQuestion}
+              className="absolute left-4 top-1/2 -translate-y-1/2 py-2 px-3 rounded-[50%] border border-[#2C5E2E] text-[#2C5E2E]  hover:bg-gray-100"
+            >
+              ❮
+            </button>
+            <button
+              onClick={nextQuestion}
+              className="absolute right-4 top-1/2 -translate-y-1/2 py-2 px-3 rounded-[50%] border border-[#2C5E2E]  text-[#2C5E2E] hover:bg-gray-100"
+            >
+              ❯
+            </button>
+          </div>
+        </div>
+        {/* desktop screen faqs */}
+        <div className="hidden md:grid max-w-6xl mx-auto  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-yellow-400 rounded-xl items-center p-6 text-center shadow cursor-pointer transition-all min-h-[330px]"
+              className="bg-yellow-400 rounded-xl items-center p-6 text-center shadow cursor-pointer transition-all min-h-[375px]"
               onClick={() => toggleAnswer(index)}
             >
               <p className="text-sm text-gray-600 mb-2">Tap to view</p>
-              <div className=" h-full">
-                <h3 className="text-lg font-semibold text-black leading-snug mb-2">
-                  {faq.question}
-                </h3>
-                {openIndex === index && (
-                  <p className="text-black text-sm flex justify-center items-center ">
-                    <div>{faq.answer}</div>
+              <div className=" h-full flex justify-center items-center">
+                {openIndex !== index ? (
+                  <>
+                    <h3 className="text-lg text-black-300 leading-snug">
+                      {faq.question}
+                    </h3>
+                  </>
+                ) : (
+                  <p className="text-black text-sm transform-easein">
+                    {faq.answer}
                   </p>
                 )}
               </div>

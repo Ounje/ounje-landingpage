@@ -52,7 +52,7 @@ export default function ComingSoonModal({ isOpen, onClose }: Props) {
             <input
               type="email"
               placeholder="Enter your email"
-              className="h-full w-full px-4 py-2 mb-4 border rounded-[20px] lg:rounded-none  focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="h-full w-full px-4 py-2 mb-4 border rounded-[20px] lg:rounded-none  focus:outline-none focus:ring-2 focus:ring-yellow-500 text-[18px]"
               required
             />
             <button

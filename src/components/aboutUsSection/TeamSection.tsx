@@ -79,7 +79,7 @@ export default function TeamSection() {
         </h1>
       </div>
       {/* Mobile: Image above the list */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <div className="relative flex justify-center mb-6">
           {/* Image Container */}
           <div className="w-[300px] h-[300px] rounded-[20px] shadow-lg">
@@ -124,7 +124,7 @@ export default function TeamSection() {
         </div>
       </div>
 
-      <div className="hidden md:flex flex-col  gap-6 md:gap-8 justify-center items-center">
+      <div className="hidden lg:flex flex-col  gap-6 md:gap-8 justify-center items-center">
         {/* Desktop: Image to the left */}
         <div className="hidden md:block sticky top-6 h-fit">
           <div className="w-[300px] h-[300px] shadow-lg">

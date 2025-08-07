@@ -64,17 +64,17 @@ const Header = () => {
 
   return (
     <header className="fixed w-full top-0 z-30 md:flex justify-center items-center bg-transparent">
-      <div className="w-full flex items-center justify-between md:justify-center md:gap-[150px] py-1 md:px-4 md:py-3">
+      <div className="w-full flex items-center justify-between md:justify-center md:gap-[150px] px-1 py-1 lg:px-4 lg:py-3">
         {/* Logo and Desktop Navigation */}
         <div className="w-full flex items-center justify-between md:justify-center md:gap-[50px] lg:gap-[170px] px-4 md:py-3">
           <Link
             to="/"
-            className="text-2xl text-black backdrop-blur-sm bg-white/5 rounded-[20px] shadow-xl md:bg-white px-4 md:px-3 py-1 md:rounded-[20px] flex items-center gap-2 md:border-[1px] md:border-black"
+            className="text-2xl text-black backdrop-blur-sm bg-white/5 rounded-[20px] shadow-xl md:bg-white px-4 lg:px-3 py-1 md:rounded-[20px] flex items-center gap-2 md:border-[1px] md:border-black"
           >
             <img
               src="/images/ounje-logo.png"
               alt="ounje logo"
-              className="w-[20px] h-[20px] md:w-[30px] md:h-[30px]"
+              className="w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]"
             />
             <span className="text-[15px] md:text-[18px] text-[#2C5E2E]">
               Ounje
@@ -82,7 +82,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex gap-6 lg:gap-10 w-[535px] text-[15px] lg:text-[20px] bg-white rounded-[20px] px-6 lg:px-8 py-1 border-[1px] border-black">
+          <nav className="hidden lg:flex justify-center gap-6 lg:gap-10 w-[635px] md:text-[15px] lg:text-[18px] bg-white rounded-[20px] lg:py- lg:px-8 py-1.5 border-[1px] border-black">
             {menuItems.map((item) => {
               const [path, hash] = item.href.includes("#")
                 ? item.href.split("#")
@@ -116,7 +116,7 @@ const Header = () => {
           </nav>
 
           {/* Desktop Location Select */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-2">
             <Select
               onOpenChange={(open) => setIsOpen(open)}
               defaultValue="lagos"
@@ -149,7 +149,7 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden p-0.5 z-50 border border-black rounded-[10px] border-[#2C5E2E] backdrop-blur-lg bg-white/10">
+        <div className="lg:hidden p-0.5 z-50 border border-black rounded-[10px] border-[#2C5E2E] backdrop-blur-lg bg-white/10">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-1 text-[#2C5E2E] hover:text-yellow-400"
@@ -174,7 +174,7 @@ const Header = () => {
             damping: 25,
             stiffness: 300,
           }}
-          className="md:hidden absolute top-0 backdrop-blur-lg bg-white/10 text-black border-none py-4 h-[100vh] w-full"
+          className="lg:hidden absolute top-0 backdrop-blur-lg bg-white/10 text-black border-none py-4 h-[100vh] w-full"
         >
           <nav className="flex flex-col space-y-4 px-4 justify-center mt-20">
             {menuItems.map((item) => {

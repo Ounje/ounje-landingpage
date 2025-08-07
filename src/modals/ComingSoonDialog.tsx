@@ -22,7 +22,7 @@ export default function ComingSoonModal({ isOpen, onClose }: Props) {
       <div className="bg-[#2C5E2E] w-[343px] h-[363px] lg:w-[1245px] lg:h-[414px]  p-6 rounded-[20px] shadow-lg relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-600 hover:text-black"
+          className="absolute top-4 right-4 text-white hover:text-black"
         >
           &times;
         </button>

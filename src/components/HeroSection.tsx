@@ -13,7 +13,7 @@ const HeroSection = () => {
         </h1>
         <div className="flex flex-col items-center md:flex-row gap-2 md:gap-7 mt-5 md:mt-20 text-[12px] md:text-[14px] lg:text-[20px]">
           <button
-            className="bg-yellow-400 text-black flex justify-center items-center gap-2 md:font-semibold w-[200px] h-[39px] md:w-[275px] md:h-[45px] lg:w-[359px] lg:h-[66px] rounded-[8px] md:rounded-[20px] hover:bg-yellow-300 transition "
+            className="bg-yellow-400 text-black flex justify-center items-center gap-2 md:font-semibold w-[250px] h-[39px] md:w-[275px] md:h-[45px] lg:w-[359px] lg:h-[66px] rounded-[8px] md:rounded-[20px] hover:bg-yellow-300 transition "
             onClick={() => setIsModalOpen(true)}
           >
             <img
@@ -25,7 +25,7 @@ const HeroSection = () => {
           </button>
 
           <button
-            className="bg-yellow-400 text-black flex justify-center items-center gap-2 md:font-semibold w-[200px] h-[39px] lg:w-[359px] lg:h-[66px]  rounded-[8px] md:rounded-[20px] hover:bg-yellow-300 transition"
+            className="bg-yellow-400 text-black flex justify-center items-center gap-2 md:font-semibold w-[250px] h-[39px] lg:w-[359px] lg:h-[66px]  rounded-[8px] md:rounded-[20px] hover:bg-yellow-300 transition"
             onClick={() => setIsModalOpen(true)}
           >
             <img

@@ -9,7 +9,7 @@ export default function ComingSoonModal({ isOpen, onClose }: Props) {
   // Prevent scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = "";
     } else {
       document.body.style.overflow = "";
     }
@@ -57,7 +57,7 @@ export default function ComingSoonModal({ isOpen, onClose }: Props) {
             />
             <button
               type="submit"
-              className="h-full py-3 bg-[#FFCA3A] text-grey-400 rounded-[20px] lg:rounded-none hover:bg-[#FFCA3A]/50 hover:text-white transition lg:w-[332px]"
+              className="h-full w-full py-3 bg-[#FFCA3A] text-grey-400 rounded-[20px] lg:rounded-none hover:bg-[#FFCA3A]/50 hover:text-white transition lg:w-[332px]"
             >
               Get Notified
             </button>

@@ -19,22 +19,22 @@ export default function ComingSoonModal({ isOpen, onClose }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-[#2C5E2E] w-[343px] h-[363px] lg:w-[1245px] lg:h-[414px]  p-6 rounded-[20px] shadow-lg relative">
+      <div className="bg-[#2C5E2E] w-[343px] h-[363px] lg:w-[1245px] lg:h-[414px] py-2 px-6 rounded-[20px] shadow-lg relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-white hover:text-black"
+          className="absolute top-2 lg:text-[20px] right-4 text-white hover:text-black"
         >
           &times;
         </button>
-        <div className="text-2xl flex items-center gap-2 lg:gap-4 font-bold text-start mb-2">
+        <div className="text-2xl flex items-center gap-2 lg:gap-4 font-bold text-start mb-10">
           <img
             src="/logo/ounje.png"
             className="w-[16px] h-[19px] lg:w-[34px] lg:h-[39px]"
           />
-          <span className="text-[14px] text-[24px] text-white">OUNJE</span>
+          <span className="text-[14px] lg:text-[24px] text-white">OUNJE</span>
         </div>
         <div className="flex flex-col items-center justify-center text-[12px] mt-2">
-          <h2 className="text-center mb-6 text-white text-[24px] lg:text-[64px]">
+          <h2 className="text-center mb-6 text-white text-[24px] lg:text-[64px] mb-10">
             Coming Soon!!
           </h2>
           <p className="text-center mb-4 text-white lg:text-[24px] lg:px-20">

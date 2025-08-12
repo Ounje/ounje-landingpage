@@ -59,7 +59,7 @@ export default function ComingSoonModal({ isOpen, onClose }: Props) {
               type="submit"
               className="h-full w-full py-3 bg-[#FFCA3A] text-grey-400 rounded-[20px] lg:rounded-none hover:bg-[#FFCA3A]/50 hover:text-white transition lg:w-[332px]"
             >
-              Get Notified
+              Get Notifie
             </button>
           </form>
         </div>

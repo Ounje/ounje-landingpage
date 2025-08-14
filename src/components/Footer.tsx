@@ -37,7 +37,7 @@ const Footer = () => {
                   disabled={status === "sending" || status === "success"}
                   type="text"
                   placeholder="Enter email, Subscribe to our newsletter "
-                  className="flex-1 outline-none text-gray-700 placeholder-gray-400 text-[12px] md:text-[20px] px-2 py-2 md:px-2 md:py-5"
+                  className="flex-1 outline-none text-gray-700 placeholder-gray-400 text-[16px] md:text-[20px] px-2 py-2 md:px-2 md:py-5"
                 />
                 <div className="bg-[#FFCA3A] py-1 px-3 md:py-3 md:px-7 text-[12px]">
                   <Button

@@ -10,7 +10,7 @@ import {
   SelectContent,
   SelectItem,
 } from "./ui/Select";
-import { Button } from "./Button";
+
 import { motion } from "framer-motion";
 
 const countries = [
@@ -21,10 +21,10 @@ const countries = [
 
 // Ensure all paths are consistently formatted
 const menuItems = [
-  { label: "Join Us", href: "/#joinUs" }, // On current page
-  { label: "About us", href: "/aboutus" }, // Absolute path
-  { label: "FAQs", href: "/contactus#FAQ" }, // Absolute path with hash
-  { label: "Contact Us", href: "/contactus" }, // Absolute path
+  { label: "Join Us", href: "/#joinUs" },
+  { label: "About us", href: "/aboutus" },
+  { label: "FAQs", href: "/contactus#FAQ" },
+  { label: "Contact Us", href: "/contactus" },
 ];
 
 const Header = () => {

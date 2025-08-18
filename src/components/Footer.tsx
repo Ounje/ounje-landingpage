@@ -96,7 +96,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#FAQ" className="hover:underline">
+                <a href="/contactus#FAQ" className="hover:underline">
                   FAQ
                 </a>
               </li>
@@ -113,24 +113,24 @@ const Footer = () => {
             </div>
             <ul className="text-sm font-normal space-y-1 text-grey text-center">
               <li>
-                <a href="#" className="hover:underline">
+                <Link to="/privacyandcompliance" className="hover:underline">
                   Terms & Conditions
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <Link to="/privacyandcompliance" className="hover:underline">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <Link to="/privacyandcompliance" className="hover:underline">
                   Cookies Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <Link to="/privacyandcompliance" className="hover:underline">
                   Compliance
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

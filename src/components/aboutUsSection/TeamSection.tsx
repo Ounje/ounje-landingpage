@@ -19,24 +19,17 @@ export default function TeamSection() {
       x: "x.com",
       image: "/images/madu.png",
     },
+
     {
       id: "2",
-      name: "Dayan Perera",
-      position: "CTO, Co-Founder",
-      linkdln: "linkdn.com",
-      x: "x.com",
-      image: "/images/dayan.png",
-    },
-    {
-      id: "3",
       name: "Ago Chukwubuikem",
-      position: "Full-Stack Developer",
+      position: "IT Lead/Full-Stack Software Engineer",
       linkdln: "linkdn.com",
       x: "x.com",
       image: "/images/ago.png",
     },
     {
-      id: "4",
+      id: "3",
       name: "Samuel Kayode",
       position: "UI/UX Design Intern",
       linkdln: "linkdn.com",
@@ -44,7 +37,7 @@ export default function TeamSection() {
       image: "/images/samuel.png",
     },
     {
-      id: "5",
+      id: "4",
       name: "Micheal Osaretin",
       position: "Graphic/Brand Designer",
       linkdln: "linkdn.com",

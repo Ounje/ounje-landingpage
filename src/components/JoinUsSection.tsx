@@ -53,7 +53,7 @@ const JoinUsSection = () => {
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
-                  className="py-1 md:py-3 w-full rounded-2xl data-[state=active]:bg-[#2C5E2E] transition-all duration-300 ease-in-out"
+                  className="py-1 md:py-3 w-full rounded-2xl data-[state=active]:bg-[#2C5E2E] data-[state=active]:text-white transition-all duration-300 ease-in-out"
                 >
                   <span>{category.title}</span>
                   <div

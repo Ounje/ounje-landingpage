@@ -23,10 +23,10 @@ export default function TeamSection() {
     {
       id: "2",
       name: "Ago Chukwubuikem",
-      position: "IT Lead/Full-Stack Software Engineer",
+      position: "IT Lead",
       linkdln: "linkdn.com",
       x: "x.com",
-      image: "/images/ago.png",
+      image: "/images/ago.JPG",
     },
     {
       id: "3",
@@ -117,8 +117,8 @@ export default function TeamSection() {
         </div>
       </div>
 
-      <div className="hidden lg:flex flex-col  gap-6 md:gap-8 justify-center items-center">
-        {/* Desktop: Image to the left */}
+      <div className="hidden relative lg:flex flex-col  gap-6 md:gap-8 justify-center items-center">
+        {/* Desktop Image */}
         <div className="hidden md:block sticky top-6 h-fit">
           <div className="w-[300px] h-[300px] shadow-lg">
             <img

@@ -1,34 +1,48 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
+import ComingSoonModal from "../modals/ComingSoonDialog";
 
-const CustomerSection = () => (
-  <section className="bg-[#FFF3E8] min-h-[717px] py-16 px-4 text-black flex justify-center items-center">
-    <div className="flex flex-col md:flex-row gap-10 max-w-6xl w-full items-center">
-      {/* Text Content */}
-      <div className="md:w-1/2 space-y-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-[#2C5E2E]">
-          Order Fast With <span className="text-[#FFA500]">Ounje!</span>
-        </h2>
-        <p className="text-lg md:text-xl text-gray-700">
-          Stressed to cook? Have a lot of work at hand? Don't want to break your
-          bank? Download Ounje and place order fast.
-        </p>
-        <div className="flex gap-4">
-          <button className="flex items-center gap-2 bg-[#2C5E2E] text-white px-2 py-2 rounded-[8px] hover:bg-[#1E4120] transition">
-            <img
-              src="/icons/andriod-white.png"
-              alt="Android"
-              className="w-6 h-6 rounded-[8px]"
-            />
-          </button>
-          <button className="flex items-center gap-2 bg-[#2C5E2E] text-white px-2 py-2 rounded-[8px] hover:bg-[#1E4120] transition">
-            <img
-              src="/icons/apple-white.png"
-              alt="Apple"
-              className="w-6 h-6 "
-            />
-          </button>
+const CustomerSection = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <section id="customer" className="bg-[#FFF3E8] min-h-[717px] py-16 px-4 text-black flex justify-center items-center">
+      <div className="flex flex-col md:flex-row gap-10 max-w-6xl w-full items-center">
+        {/* Text Content */}
+        <div className="md:w-1/2 space-y-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#000000]">
+            Order Fast With <span className="text-[#000000]">OunjeFood!!</span>
+          </h2>
+          <p className="text-lg md:text-xl text-gray-700 leading-snug">
+            Stressed to cook? Have a lot of work at hand? <br />
+            Don't want to break your bank? Download <br /> Ounje food app
+            and place order fast.
+          </p>
+
+          {/* Join Waitlist Button */}
+          <motion.button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-[#FFC727] text-[#1A3F1C] flex justify-center items-center gap-2 md:font-semibold 
+                       w-[200px] h-[39px] md:w-[275px] md:h-[45px] lg:w-[359px] lg:h-[66px]
+                       rounded-[8px] md:rounded-[20px] hover:bg-[#ffda55] transition"
+          >
+            <span>Join the waitlist</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="w-[18px] h-[18px]"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 12h14m-7-7 7 7-7 7"
+              />
+            </svg>
+          </motion.button>
         </div>
-      </div>
 
       {/* Animation Container */}
       <div className="md:w-1/2 relative h-[400px] md:h-[500px] w-full">
@@ -91,8 +105,15 @@ const CustomerSection = () => (
           className="absolute w-[60px] md:w-[100px] z-10 right-[148px] md:right-[170px] bottom-[158px] md:bottom-[205px]"
         />
       </div>
+
+      {/* Modal */}
+      <ComingSoonModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   </section>
-);
+  );
+};
 
 export default CustomerSection;

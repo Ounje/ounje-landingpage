@@ -13,7 +13,7 @@ const projectCategories: Category[] = [
   {
     id: "1",
     title: "Egbon",
-    desc: "Be a part of our amazing community. Let's show you how Ounje realy works",
+    desc: "Be a part of our amazing community. Let's show you how Ounje really works.",
   },
   {
     id: "2",
@@ -31,24 +31,26 @@ const firstTab = projectCategories[0].id;
 
 const JoinUsSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section
       id="joinUs"
-      className="py-16 px-10 text-black flex justify-center items-center"
+      className="py-16 px-6 text-black flex justify-center items-center"
     >
       <div>
-        {/* Section Text */}
+        {/* Header */}
         <div className="text-center">
           <h2>Be a Part of Us</h2>
           <p className="my-5 max-w-[460px] mx-auto">
-            Be a part of our amazing community. Let’s show you how Ounje works
+            Be a part of our amazing community. Let’s show <br /> you how Ounje works
           </p>
         </div>
-        {/* image and tabs */}
 
+        {/* Tabs */}
         <div>
           <Tabs className="w-full" defaultValue={firstTab}>
-            <TabsList className="w-full bg-[#FFC727] p-1 rounded-[20px] mb-5 gap-3 md:gap-10 ">
+            {/* Tab buttons */}
+            <TabsList className="w-full bg-[#FFC727] p-1 rounded-[20px] mb-5 gap-3 md:gap-10">
               {projectCategories.map((category) => (
                 <TabsTrigger
                   key={category.id}
@@ -64,110 +66,82 @@ const JoinUsSection = () => {
               ))}
             </TabsList>
 
+            {/* Tab Content */}
             {projectCategories.map((category) => (
               <TabsContent key={category.id} value={category.id}>
                 <div className="flex justify-center">
-                  {category.id === "1" && (
-                    <motion.div
-                      initial={{ x: 50, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      exit={{ x: -50, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="flex justify-center"
-                    >
+                  <motion.div
+                    initial={{ x: 50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: -50, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex justify-center"
+                  >
+                    {category.id === "1" && (
                       <img
                         src="/images/egbon-screen.png"
-                        alt="egbon screen"
+                        alt="Egbon screen"
                         className="h-[80vh]"
                       />
-                    </motion.div>
-                  )}
-                  {category.id === "2" && (
-                    <motion.div
-                      initial={{ x: 50, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      exit={{ x: -50, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="flex justify-center"
-                    >
+                    )}
+                    {category.id === "2" && (
                       <img
                         src="/images/vendor-screen.png"
-                        alt="egbon screen"
+                        alt="Vendor screen"
                         className="h-[80vh]"
                       />
-                    </motion.div>
-                  )}
-                  {category.id === "3" && (
-                    <motion.div
-                      initial={{ x: 50, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      exit={{ x: -50, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="flex justify-center"
-                    >
+                    )}
+                    {category.id === "3" && (
                       <img
                         src="/images/rider-screen.png"
-                        alt="egbon screen"
+                        alt="Rider screen"
                         className="h-[80vh]"
                       />
-                    </motion.div>
-                  )}
+                    )}
+                  </motion.div>
                 </div>
               </TabsContent>
             ))}
 
-            <div className="md:w-[55vw] bg-[#2C5E2E] py-5 px-10 rounded-[20px] flex flex-col justify-center items-center gap-1 mt-8">
+            {/* Join Button Area */}
+            <div className="md:w-[55vw] bg-[#2C5E2E] py-5 px-10 rounded-[20px] flex flex-col justify-center items-center gap-3 mt-8">
               {projectCategories.map((category) => (
                 <TabsContent key={category.id} value={category.id}>
-                  <div>
-                    {category.id == "1" && (
-                      <p className="text-center text-white text-semibold text-[15px]">
-                        {category.desc}
-                      </p>
-                    )}
-                    {category.id == "2" && (
-                      <p className="text-center text-white text-semibold text-[15px]">
-                        {category.desc}
-                      </p>
-                    )}
-                    {category.id == "3" && (
-                      <p className="text-center text-white text-semibold text-[15px]">
-                        {category.desc}
-                      </p>
-                    )}
-                  </div>
+                  <p className="text-center text-white font-semibold text-[15px]">
+                    {category.desc}
+                  </p>
                 </TabsContent>
               ))}
-              <p className="text-center text-white text-semibold text-[20px]"></p>
-              <div className="md:flex items-center gap-7 mt-5 text-[10px] md:text-[15px]">
-                <button
-                  className="bg-yellow-400 text-black flex justify-center items-center gap-2 px-7  rounded-[8px] md:rounded-[20px] hover:bg-yellow-300 transition py-2 "
-                  onClick={() => setIsModalOpen(true)}
+
+              {/* Join the Waitlist Button */}
+              <motion.button
+                onClick={() => setIsModalOpen(true)}
+                className="bg-[#FFC727] text-[#1A3F1C] flex justify-center items-center gap-2 md:font-semibold 
+                           w-[200px] h-[39px] md:w-[275px] md:h-[45px] lg:w-[359px] lg:h-[66px]
+                           rounded-[8px] md:rounded-[20px] hover:bg-[#ffda55] transition mt-3"
+              >
+                <span>Join the waitlist</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  className="w-[18px] h-[18px]"
                 >
-                  <img
-                    src="/icons/mage_playstore.png"
-                    alt="playstore icon"
-                    className="w-[23px] h-[20px] md:w-[30px] md:h-[30px]"
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5 12h14m-7-7 7 7-7 7"
                   />
-                  <span>Download on Google Play</span>
-                </button>
-                <button
-                  className="bg-yellow-400 text-black flex justify-center  mt-2 md:mt-0 items-center gap-3 md:gap-2 px-8  rounded-[8px] md:rounded-[20px] hover:bg-yellow-300 transition py-2 "
-                  onClick={() => setIsModalOpen(true)}
-                >
-                  <img
-                    src="/icons/apple-icon.png"
-                    alt="ios-icon"
-                    className="w-[20px] h-[20px] md:w-[33px] md:h-[30px]"
-                  />
-                  <span>Download on APP Store</span>
-                </button>
-              </div>
+                </svg>
+              </motion.button>
             </div>
           </Tabs>
         </div>
       </div>
-      {/* Modal */}
+
+      {/* Coming Soon Modal */}
       <ComingSoonModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

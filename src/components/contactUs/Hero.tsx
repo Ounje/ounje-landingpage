@@ -35,16 +35,16 @@ export default function Hero() {
 
   return (
     <>
-      <section className="p-5 mb-20 h-[100vh] md:h-[120vh]">
+      <section id="contactHero" className="px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16 min-h-[80vh] md:min-h-[90vh] flex items-center justify-center">
         {/* content */}
-        <div className=" items-center text-center mt-20">
+        <div className="w-full max-w-6xl mx-auto flex flex-col items-center text-center">
           <AnimatePresence mode="wait">
             <motion.h1
               key={currentPhraseIndex}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="font-bold text-[#2C5E2E] text-4xl md:text-6xl mt-20 pt-10"
+              className="font-bold text-[#2C5E2E] text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 md:mb-6"
             >
               {displayText}
               <motion.span
@@ -56,15 +56,15 @@ export default function Hero() {
               </motion.span>
             </motion.h1>
           </AnimatePresence>
-          <p className="text-[#2C5E2E] mt-10">
+          <p className="text-[#2C5E2E] text-sm md:text-base lg:text-lg mb-6 md:mb-8 max-w-2xl px-4">
             Feel free to reach out to us with any question, feedback or
             inquiries.
           </p>
-          <div className="flex justify-center mt-10">
+          <div className="flex justify-center mt-4 md:mt-6">
             <img
               src="/images/contactUsHero-img.png"
               alt="ounje masscot image"
-              className=" items-center w-[246px] h-[286px] lg:w-[470px] lg:h-[545px]"
+              className="w-[200px] h-[232px] sm:w-[246px] sm:h-[286px] md:w-[350px] md:h-[407px] lg:w-[470px] lg:h-[545px] object-contain"
             />
           </div>
         </div>

@@ -12,15 +12,25 @@ export default function ContactUsPage() {
     if (location.hash) {
       // More aggressive scroll handling for direct page loads
       const attemptScroll = () => {
-        const section = document.getElementById(location.hash.substring(1));
+        const sectionId = location.hash.substring(1);
+        const section = document.getElementById(sectionId);
         if (section) {
-          section.scrollIntoView({ behavior: "smooth" });
+          // Account for fixed header height (approximately 80px)
+          const headerOffset = 80;
+          const elementPosition = section.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
         } else {
           // Retry if content isn't loaded yet
           setTimeout(attemptScroll, 50);
         }
       };
-      attemptScroll();
+      // Small delay to ensure DOM is ready
+      setTimeout(attemptScroll, 100);
     }
   }, [location.hash]);
   return (

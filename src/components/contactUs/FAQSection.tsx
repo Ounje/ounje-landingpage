@@ -67,35 +67,38 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="FAQ">
-      <div className="w-full my-3 py-2 bg-[#1A3F1C] text-white text-center">
-        {" "}
-        <h2>FAQs</h2>{" "}
+    <section id="FAQ" className="pb-8 md:pb-12 lg:pb-16">
+      <div className="w-full py-4 md:py-5 bg-[#1A3F1C] text-white text-center mb-6 md:mb-8">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">FAQs</h2>
       </div>
 
-      <div className="flex justify-center items-center mt-10">
-        <img src="/images/FAQs-cuate.png" alt="FAQs image" />
+      <div className="flex justify-center items-center px-4 mb-8 md:mb-12">
+        <img
+          src="/images/FAQs-cuate.png"
+          alt="FAQs image"
+          className="w-[200px] h-auto sm:w-[280px] md:w-[350px] lg:w-[400px] object-contain"
+        />
       </div>
 
-      <div className="my-20">
+      <div className="px-4 md:px-6 lg:px-8">
         {/* mobile screen faqs */}
-        <div className="md:hidden">
-          <div className="relative flex justify-center mb-6">
+        <div className="md:hidden mb-8">
+          <div className="relative flex justify-center">
             {/* faq box */}
             <div
-              className="my-20 bg-yellow-400 rounded-xl items-center p-6 text-center shadow cursor-pointer transition-all min-h-[375px] w-[300px]"
+              className="bg-[#FFC727] rounded-xl items-center p-5 md:p-6 text-center shadow-lg cursor-pointer transition-all min-h-[280px] max-h-[400px] w-full max-w-[320px] flex flex-col justify-center"
               onClick={() => toggleAnswerMobile(activeIndex)}
             >
-              <p className="text-sm text-gray-600 mb-2">Tap to view</p>
-              <div className=" h-full flex justify-center items-center">
+              <p className="text-xs md:text-sm text-gray-700 mb-3 font-medium">
+                {openIndex !== activeIndex ? "Tap to view" : "Tap to close"}
+              </p>
+              <div className="h-full flex justify-center items-center px-2">
                 {openIndex !== activeIndex ? (
-                  <>
-                    <h3 className="text-sm text-black-300 leading-snug">
-                      {activeFAQ.question}
-                    </h3>
-                  </>
+                  <h3 className="text-sm md:text-base text-[#1A3F1C] leading-snug font-semibold">
+                    {activeFAQ.question}
+                  </h3>
                 ) : (
-                  <p className="text-black text-sm transform-easein">
+                  <p className="text-[#1A3F1C] text-sm md:text-base leading-relaxed">
                     {activeFAQ.answer}
                   </p>
                 )}
@@ -103,41 +106,45 @@ export default function FAQSection() {
             </div>
             {/* Navigation Arrows */}
             <button
-              onClick={prevQuestion}
-              className="absolute left-4 top-1/2 -translate-y-1/2 py-2 px-3 rounded-[50%] border border-[#2C5E2E] text-[#2C5E2E]  hover:bg-gray-100"
+              onClick={(e) => {
+                e.stopPropagation();
+                prevQuestion();
+              }}
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 py-2 px-3 rounded-full border-2 border-[#2C5E2E] bg-white text-[#2C5E2E] hover:bg-[#2C5E2E] hover:text-white transition shadow-md"
+              aria-label="Previous question"
             >
               ❮
             </button>
             <button
-              onClick={nextQuestion}
-              className="absolute right-4 top-1/2 -translate-y-1/2 py-2 px-3 rounded-[50%] border border-[#2C5E2E]  text-[#2C5E2E] hover:bg-gray-100"
+              onClick={(e) => {
+                e.stopPropagation();
+                nextQuestion();
+              }}
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 py-2 px-3 rounded-full border-2 border-[#2C5E2E] bg-white text-[#2C5E2E] hover:bg-[#2C5E2E] hover:text-white transition shadow-md"
+              aria-label="Next question"
             >
               ❯
             </button>
           </div>
         </div>
         {/* desktop screen faqs */}
-        <div className="hidden md:grid max-w-6xl mx-auto  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="hidden md:grid max-w-6xl mx-auto grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-yellow-400 rounded-xl items-center p-6 text-center shadow cursor-pointer transition-all min-h-[375px]"
+              className="bg-[#FFC727] rounded-xl p-6 lg:p-8 text-center shadow-lg cursor-pointer transition-all hover:shadow-xl hover:scale-105 min-h-[320px] flex flex-col justify-center"
               onClick={() => toggleAnswer(index)}
             >
-              {openIndex !== index ? (
-                <p className="text-sm text-gray-600 mb-2">Tap to view</p>
-              ) : (
-                <p className="text-sm text-gray-600 mb-2">Tap to Close</p>
-              )}
-              <div className=" h-full flex justify-center items-center">
+              <p className="text-xs md:text-sm text-gray-700 mb-4 font-medium">
+                {openIndex !== index ? "Tap to view" : "Tap to close"}
+              </p>
+              <div className="h-full flex justify-center items-center">
                 {openIndex !== index ? (
-                  <>
-                    <h3 className="text-lg text-black-300 leading-snug">
-                      {faq.question}
-                    </h3>
-                  </>
+                  <h3 className="text-base lg:text-lg text-[#1A3F1C] leading-snug font-semibold">
+                    {faq.question}
+                  </h3>
                 ) : (
-                  <p className="text-black text-sm transform-easein">
+                  <p className="text-[#1A3F1C] text-sm md:text-base leading-relaxed">
                     {faq.answer}
                   </p>
                 )}

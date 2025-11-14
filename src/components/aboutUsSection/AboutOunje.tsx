@@ -3,13 +3,13 @@ export default function AboutOunje() {
     <>
       <section className="md:h-[40vh] text-center text-[#2C5E2E] p-3 md:p-5">
         <div>
-          <h2 className="text-4xl md:text-6xl lg:text-[96px]">Ounje</h2>
+          <h2 className="text-4xl md:text-6xl lg:text-[96px]">Ounjefood</h2>
           <div className="text-[#2C5E2E] lg:mt-5 lg:px-40 md:px-20 px-[10px] pt-[20px]">
-            <p>
+            <p className="text-[#1A3F1C]">
               OUNJE connects you to your favorite local food vendors quickly,
               affordably, and the way you like it. belleful you.
             </p>
-            <p>
+            <p className="text-[#1A3F1C]">
               Born from the need for generous, affordable meals, OUNJE lets you
               build your own plate just like at your favorite buka from wraps of
               amala to extra meat and eggs. We work with trusted home chefs and

@@ -48,7 +48,7 @@ const RiderSection = () => {
               scale: { duration: 0.6, delay: 0.1 },
               y: { duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.8 },
             }}
-            className="relative z-10 h-[320px] md:h-[490px] lg:h-[540px] w-auto object-contain drop-shadow-2xl"
+            className="relative z-10 h-[370px] md:h-[540px] lg:h-[600px] w-auto object-contain drop-shadow-2xl"
           />
 
           {/* Delivery guy — slides across over the screen */}

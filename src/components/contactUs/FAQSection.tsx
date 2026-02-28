@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus } from "lucide-react";
 
 interface FAQ {
   id: string;
@@ -11,7 +13,7 @@ const faqs: FAQ[] = [
     id: "1",
     question: "What is Ounje?",
     answer:
-      "Ounje is a platform that connects you to your favorite local food vendors for fast and affordable food delivery within your neighborhood.",
+      "Ounje is a platform that connects you to your favourite local food vendors for fast and affordable food delivery within your neighbourhood.",
   },
   {
     id: "2",
@@ -27,7 +29,7 @@ const faqs: FAQ[] = [
   },
   {
     id: "4",
-    question: "Can I pay On Delivery?",
+    question: "Can I Pay On Delivery?",
     answer:
       "No. All payments are made securely online through our integrated Paystack system to ensure smooth transactions.",
   },
@@ -41,117 +43,81 @@ const faqs: FAQ[] = [
     id: "6",
     question: "How Do I Become A Vendor Or Rider On Ounje?",
     answer:
-      "Just head to our website or app, click on “Join Us,” and choose whether you want to sign up as a vendor or rider. It’s quick and easy.",
+      'Just head to our website or app, click on "Join Us," and choose whether you want to sign up as a vendor or rider. It\'s quick and easy.',
   },
 ];
 
 export default function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const activeFAQ = faqs[activeIndex];
+  const [openId, setOpenId] = useState<string | null>(null);
 
-  const toggleAnswer = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  const toggleAnswerMobile = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  const nextQuestion = () => {
-    setActiveIndex((prev) => (prev + 1) % faqs.length);
-  };
-
-  const prevQuestion = () => {
-    setActiveIndex((prev) => (prev - 1 + faqs.length) % faqs.length);
-  };
+  const toggle = (id: string) => setOpenId(openId === id ? null : id);
 
   return (
-    <section id="FAQ" className="pb-8 md:pb-12 lg:pb-16">
-      <div className="w-full py-4 md:py-5 bg-[#1A3F1C] text-white text-center mb-6 md:mb-8">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">FAQs</h2>
-      </div>
+    <section id="FAQ" className="py-16 md:py-24 bg-[#ECFFED]">
+      {/* Header banner */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="w-full bg-[#1A3F1C] py-10 flex flex-col items-center gap-2 mb-12"
+      >
+        <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-xs font-semibold text-white/80 mb-2">
+          ❓ Got Questions?
+        </span>
+        <h2 className="text-white text-2xl md:text-4xl font-extrabold">Frequently Asked Questions</h2>
+        <p className="text-white/60 text-xs md:text-sm font-medium">Everything you need to know about OunjeFood</p>
+      </motion.div>
 
-      <div className="flex justify-center items-center px-4 mb-8 md:mb-12">
-        <img
-          src="/images/FAQs-cuate.png"
-          alt="FAQs image"
-          className="w-[200px] h-auto sm:w-[280px] md:w-[350px] lg:w-[400px] object-contain"
-        />
-      </div>
+      {/* Accordion */}
+      <div className="max-w-3xl mx-auto px-4 md:px-8 space-y-3">
+        {faqs.map((faq, i) => (
+          <motion.div
+            key={faq.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.07 }}
+            className="bg-white rounded-2xl overflow-hidden shadow-sm border border-[#2C5E2E]/10 hover:shadow-md transition-shadow"
+          >
+            <button
+              onClick={() => toggle(faq.id)}
+              className="w-full flex items-center justify-between px-5 py-4 md:px-6 md:py-5 text-left font-semibold text-[#1A3F1C] text-sm md:text-base hover:bg-gray-50/60 transition"
+            >
+              <span className="flex items-center gap-3">
+                <span className="w-7 h-7 flex-shrink-0 bg-[#ECFFED] rounded-full flex items-center justify-center text-xs font-bold text-[#2C5E2E]">
+                  {i + 1}
+                </span>
+                {faq.question}
+              </span>
+              <motion.div
+                animate={{ rotate: openId === faq.id ? 45 : 0 }}
+                transition={{ duration: 0.2 }}
+                className={`flex-shrink-0 ml-3 w-7 h-7 rounded-full flex items-center justify-center transition-colors ${
+                  openId === faq.id ? "bg-[#2C5E2E] text-white" : "bg-[#FFC727]/30 text-[#2C5E2E]"
+                }`}
+              >
+                <Plus className="w-4 h-4" />
+              </motion.div>
+            </button>
 
-      <div className="px-4 md:px-6 lg:px-8">
-        {/* mobile screen faqs */}
-        <div className="md:hidden mb-8">
-          <div className="relative flex justify-center">
-            {/* faq box */}
-            <div
-              className="bg-[#FFC727] rounded-xl items-center p-5 md:p-6 text-center shadow-lg cursor-pointer transition-all min-h-[280px] max-h-[400px] w-full max-w-[320px] flex flex-col justify-center"
-              onClick={() => toggleAnswerMobile(activeIndex)}
-            >
-              <p className="text-xs md:text-sm text-gray-700 mb-3 font-medium">
-                {openIndex !== activeIndex ? "Tap to view" : "Tap to close"}
-              </p>
-              <div className="h-full flex justify-center items-center px-2">
-                {openIndex !== activeIndex ? (
-                  <h3 className="text-sm md:text-base text-[#1A3F1C] leading-snug font-semibold">
-                    {activeFAQ.question}
-                  </h3>
-                ) : (
-                  <p className="text-[#1A3F1C] text-sm md:text-base leading-relaxed">
-                    {activeFAQ.answer}
-                  </p>
-                )}
-              </div>
-            </div>
-            {/* Navigation Arrows */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                prevQuestion();
-              }}
-              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 py-2 px-3 rounded-full border-2 border-[#2C5E2E] bg-white text-[#2C5E2E] hover:bg-[#2C5E2E] hover:text-white transition shadow-md"
-              aria-label="Previous question"
-            >
-              ❮
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                nextQuestion();
-              }}
-              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 py-2 px-3 rounded-full border-2 border-[#2C5E2E] bg-white text-[#2C5E2E] hover:bg-[#2C5E2E] hover:text-white transition shadow-md"
-              aria-label="Next question"
-            >
-              ❯
-            </button>
-          </div>
-        </div>
-        {/* desktop screen faqs */}
-        <div className="hidden md:grid max-w-6xl mx-auto grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="bg-[#FFC727] rounded-xl p-6 lg:p-8 text-center shadow-lg cursor-pointer transition-all hover:shadow-xl hover:scale-105 min-h-[320px] flex flex-col justify-center"
-              onClick={() => toggleAnswer(index)}
-            >
-              <p className="text-xs md:text-sm text-gray-700 mb-4 font-medium">
-                {openIndex !== index ? "Tap to view" : "Tap to close"}
-              </p>
-              <div className="h-full flex justify-center items-center">
-                {openIndex !== index ? (
-                  <h3 className="text-base lg:text-lg text-[#1A3F1C] leading-snug font-semibold">
-                    {faq.question}
-                  </h3>
-                ) : (
-                  <p className="text-[#1A3F1C] text-sm md:text-base leading-relaxed">
+            <AnimatePresence>
+              {openId === faq.id && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <p className="px-5 pb-5 md:px-6 md:pb-6 text-gray-600 text-sm md:text-base leading-relaxed border-t border-gray-100 pt-3 pl-16">
                     {faq.answer}
                   </p>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

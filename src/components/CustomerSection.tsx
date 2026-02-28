@@ -123,7 +123,7 @@ const CustomerSection = () => {
               repeatDelay: 0,
             }}
             className="absolute z-20 w-16 md:w-28 lg:w-32 object-contain"
-            style={{ left: "32%", bottom: "18%" }}
+            style={{ left: "35%", bottom: "16%" }}
           />
 
           {/* Woman */}

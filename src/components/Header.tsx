@@ -270,34 +270,29 @@ const Header = () => {
                   })}
                 </nav>
 
-                {/* Bottom: Location only */}
-                <div className="px-4 pt-4 border-t border-white/10" style={{ paddingBottom: "max(1.75rem, env(safe-area-inset-bottom))" }}>
-                  <p className="text-white/40 text-[10px] uppercase tracking-widest font-semibold mb-2 px-1">Delivery Location</p>
-                  <div className="flex items-center gap-3 bg-white/8 border border-white/12 rounded-2xl px-4 py-3.5">
-                    <div className="w-8 h-8 bg-[#FFC727]/15 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-4 h-4 text-[#FFC727]" />
-                    </div>
-                    <Select defaultValue="">
-                      <SelectTrigger className="flex-1 bg-transparent border-none shadow-none text-white text-sm font-semibold focus:ring-0 p-0">
-                        <SelectValue placeholder="Select your city" />
-                      </SelectTrigger>
-                      <SelectContent
-                        className="bg-[#1A3F1C] border border-white/20 rounded-2xl shadow-xl"
-                        side="top"
-                        align="start"
-                      >
-                        {cities.map((city) => (
-                          <SelectItem
-                            key={city.value}
-                            value={city.value}
-                            className="text-white/80 hover:text-white hover:bg-white/10 text-sm font-medium cursor-pointer"
-                          >
-                            {city.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
+                {/* Bottom: Location */}
+                <div className="px-4 pb-4 pt-3 border-t border-white/10">
+                  <Select defaultValue="">
+                    <SelectTrigger className="w-full bg-[#FFC727] border-none rounded-2xl px-4 py-3 flex items-center gap-2 shadow-lg focus:ring-0">
+                      <MapPin className="w-4 h-4 text-[#1A3F1C] flex-shrink-0" />
+                      <SelectValue placeholder={<span className="text-[#1A3F1C] font-bold text-sm">Pick your city</span>} />
+                    </SelectTrigger>
+                    <SelectContent
+                      className="bg-[#1A3F1C] border border-white/20 rounded-2xl shadow-xl"
+                      side="top"
+                      align="start"
+                    >
+                      {cities.map((city) => (
+                        <SelectItem
+                          key={city.value}
+                          value={city.value}
+                          className="text-white/80 hover:text-white hover:bg-white/10 text-sm font-medium cursor-pointer"
+                        >
+                          {city.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </motion.div>
             </>

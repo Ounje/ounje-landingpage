@@ -90,7 +90,7 @@ const Header = () => {
             <Link to="/" className="flex items-center gap-2.5" onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}>
               <div className="w-8 h-8 md:w-9 md:h-9 bg-[#2C5E2E] rounded-xl flex items-center justify-center shadow-sm">
                 <img
-                  src="/public/images/ounje-logo.png"
+                  src="/images/ounje-logo.png"
                   alt="Ounje logo"
                   className="w-5 h-5 md:w-6 md:h-6 object-contain"
                 />
@@ -222,7 +222,7 @@ const Header = () => {
                   >
                     <div className="w-8 h-8 bg-white/15 rounded-xl flex items-center justify-center">
                       <img
-                        src="/public/images/ounje-logo.png"
+                        src="/images/ounje-logo.png"
                         alt="Ounje"
                         className="w-5 h-5 object-contain"
                       />

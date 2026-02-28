@@ -35,7 +35,7 @@ const RiderSection = () => {
 
           {/* Phone screen — main hero visual */}
           <motion.img
-            src="/public/images/rider-screen.png"
+            src="/images/rider-screen.png"
             alt="Rider app screen"
             initial={{ opacity: 0, scale: 0.88, y: 20 }}
             animate={isInView ? {
@@ -53,7 +53,7 @@ const RiderSection = () => {
 
           {/* Delivery guy — slides across over the screen */}
           <motion.img
-            src="/public/images/delivery-guy.png"
+            src="/images/delivery-guy.png"
             alt="Delivery rider"
             initial={{ x: -40, opacity: 0 }}
             animate={isInView ? {

@@ -56,7 +56,7 @@ const Footer = () => {
           className="hidden lg:flex absolute -top-7 right-16 bg-[#25D366] text-white font-bold gap-2 items-center px-5 py-3.5 rounded-2xl shadow-2xl hover:bg-[#1fb855] transition z-10"
         >
           <motion.img
-            src="/public/icons/whatsapp-icon.png"
+            src="/icons/whatsapp-icon.png"
             alt="WhatsApp"
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -75,7 +75,7 @@ const Footer = () => {
           {/* Logo + Newsletter */}
           <motion.div variants={item} className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/10 pb-10 mb-10">
             <div className="flex items-center gap-2">
-              <img src="/public/images/ounje-logo.png" alt="Ounje logo" className="w-8 h-8" />
+              <img src="/images/ounje-logo.png" alt="Ounje logo" className="w-8 h-8" />
               <h2 className="text-xl font-bold uppercase">
                 <span className="text-white">OUNJE</span>
                 <span className="text-[#FFC727]">FOOD</span>
@@ -168,21 +168,21 @@ const Footer = () => {
                 whileHover={{ scale: 1.15, y: -2 }}
                 className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#25D366] transition"
               >
-                <img src="/public/icons/whatsapp-logo.png" alt="WhatsApp" className="w-5 h-5" />
+                <img src="/icons/whatsapp-logo.png" alt="WhatsApp" className="w-5 h-5" />
               </motion.a>
               <motion.a
                 href="#"
                 whileHover={{ scale: 1.15, y: -2 }}
                 className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#1DA1F2] transition"
               >
-                <img src="/public/icons/x-logo.png" alt="X/Twitter" className="w-4 h-4" />
+                <img src="/icons/x-logo.png" alt="X/Twitter" className="w-4 h-4" />
               </motion.a>
               <motion.a
                 href="#"
                 whileHover={{ scale: 1.15, y: -2 }}
                 className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#0077b5] transition"
               >
-                <img src="/public/icons/linkdln-logo.png" alt="LinkedIn" className="w-4 h-4" />
+                <img src="/icons/linkdln-logo.png" alt="LinkedIn" className="w-4 h-4" />
               </motion.a>
             </div>
           </motion.div>

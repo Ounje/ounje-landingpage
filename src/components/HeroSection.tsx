@@ -142,12 +142,12 @@ const HeroSection = () => {
         className="absolute bottom-0 left-0 right-0 flex justify-around items-end pointer-events-none px-2 sm:px-8 z-10"
       >
         <img
-          src="/public/icons/Street Food-cuate.png"
+          src="/icons/Street Food-cuate.png"
           alt="Street Food"
           className="w-[140px] h-auto md:w-[280px] lg:w-[420px] object-contain drop-shadow-xl"
         />
         <img
-          src="/public/icons/Take Away-cuate.png"
+          src="/icons/Take Away-cuate.png"
           alt="Take Away"
           className="w-[140px] h-auto md:w-[280px] lg:w-[420px] object-contain drop-shadow-xl"
         />

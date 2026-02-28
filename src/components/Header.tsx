@@ -286,7 +286,7 @@ const Header = () => {
                       <SelectValue placeholder={<span className="text-[#1A3F1C] font-bold text-sm">Pick your city</span>} />
                     </SelectTrigger>
                     <SelectContent
-                      className="bg-[#1A3F1C] border border-white/20 rounded-2xl shadow-xl"
+                      className="bg-[#1A3F1C] border border-white/20 rounded-2xl shadow-xl z-[70]"
                       side="bottom"
                       align="start"
                     >

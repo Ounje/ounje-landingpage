@@ -52,7 +52,7 @@ export default function FormSection() {
   };
 
   return (
-    <section id="contact" className="py-16 md:py-20 px-4 md:px-8 bg-white">
+    <section id="contact" className="py-2 md:py-10 px-4 md:px-8 bg-white">
       <div className="max-w-2xl mx-auto">
         {/* Section heading */}
         <motion.div

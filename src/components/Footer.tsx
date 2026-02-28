@@ -38,7 +38,7 @@ const Footer = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOrderOpen(true)}
-        className="fixed bottom-6 right-5 lg:hidden z-50 bg-[#25D366] text-white font-bold px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2 text-sm"
+        className="fixed bottom-6 right-5 lg:hidden z-[40] bg-[#25D366] text-white font-bold px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2 text-sm"
       >
         <MessageCircle className="w-5 h-5" />
         Order Now

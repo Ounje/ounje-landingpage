@@ -71,10 +71,10 @@ const HeroSection = () => {
               key={words[currentWordIndex]}
               className="font-extrabold text-[#2C5E2E] leading-none select-none absolute"
               style={{ fontSize: "clamp(72px, 16vw, 280px)" }}
-              initial={{ opacity: 0, y: 50, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -50, scale: 1.05 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
             >
               {words[currentWordIndex]}
             </motion.h1>

@@ -199,7 +199,7 @@ const Header = () => {
             <>
               {/* Backdrop */}
               <motion.div
-                className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[55]"
+                className="fixed inset-0 bg-black/60 z-[55]" style={{ backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -241,7 +241,7 @@ const Header = () => {
                 </div>
 
                 {/* Nav links */}
-                <nav className="flex-1 px-5 py-8 space-y-1.5 overflow-y-auto">
+                <nav className="flex-1 px-5 py-5 space-y-1.5 overflow-y-auto">
                   {menuItems.map((item, i) => {
                     const path = item.href.split("#")[0] || "/";
                     const isActive = location.pathname === path && path !== "/";

@@ -109,7 +109,7 @@ const Header = () => {
               const path = itemPath || "/";
               const isActive = itemHash
                 ? location.pathname === path && location.hash === "#" + itemHash
-                : location.pathname === path && path !== "/";
+                : location.pathname === path && path !== "/" && !location.hash;
               return (
                 <Link
                   key={item.label}
@@ -251,7 +251,7 @@ const Header = () => {
                   const path = itemPath || "/";
                   const isActive = itemHash
                     ? location.pathname === path && location.hash === "#" + itemHash
-                    : location.pathname === path && path !== "/";
+                    : location.pathname === path && path !== "/" && !location.hash;
                   return (
                     <motion.div
                       key={item.label}

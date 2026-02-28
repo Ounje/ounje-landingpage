@@ -239,7 +239,7 @@ const Header = () => {
                 </div>
 
                 {/* Nav links */}
-                <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+                <nav className="px-4 py-6 space-y-1 overflow-y-auto">
                   {menuItems.map((item, i) => {
                     const path = item.href.split("#")[0] || "/";
                     const isActive = location.pathname === path && path !== "/";
@@ -259,7 +259,7 @@ const Header = () => {
                           className={`flex items-center justify-between w-full px-4 py-4 rounded-2xl text-[15px] font-semibold transition-all ${
                             isActive
                               ? "bg-[#FFC727]/15 text-[#FFC727] border border-[#FFC727]/20"
-                              : "text-white/75 hover:bg-white/8 hover:text-white"
+                              : "text-white/75 hover:bg-white/[0.08] hover:text-white"
                           }`}
                         >
                           <span>{item.label}</span>
@@ -268,32 +268,38 @@ const Header = () => {
                       </motion.div>
                     );
                   })}
-                </nav>
 
-                {/* Bottom: Location */}
-                <div className="px-4 pb-4 pt-3 border-t border-white/10">
-                  <Select defaultValue="">
-                    <SelectTrigger className="w-full bg-[#FFC727] border-none rounded-2xl px-4 py-3 flex items-center gap-2 shadow-lg focus:ring-0">
-                      <MapPin className="w-4 h-4 text-[#1A3F1C] flex-shrink-0" />
-                      <SelectValue placeholder={<span className="text-[#1A3F1C] font-bold text-sm">Pick your city</span>} />
-                    </SelectTrigger>
-                    <SelectContent
-                      className="bg-[#1A3F1C] border border-white/20 rounded-2xl shadow-xl"
-                      side="top"
-                      align="start"
-                    >
-                      {cities.map((city) => (
-                        <SelectItem
-                          key={city.value}
-                          value={city.value}
-                          className="text-white/80 hover:text-white hover:bg-white/10 text-sm font-medium cursor-pointer"
-                        >
-                          {city.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                  {/* Location picker — sits right below nav items */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.22, delay: 0.05 * menuItems.length }}
+                    className="pt-3 mt-1 border-t border-white/10"
+                  >
+                    <p className="text-white/40 text-[10px] font-semibold uppercase tracking-widest px-1 mb-2">Select City</p>
+                    <Select defaultValue="">
+                      <SelectTrigger className="w-full bg-[#FFC727] border-none rounded-2xl px-4 py-3 flex items-center gap-2 shadow-lg focus:ring-0">
+                        <MapPin className="w-4 h-4 text-[#1A3F1C] flex-shrink-0" />
+                        <SelectValue placeholder={<span className="text-[#1A3F1C] font-bold text-sm">Pick your city</span>} />
+                      </SelectTrigger>
+                      <SelectContent
+                        className="bg-[#1A3F1C] border border-white/20 rounded-2xl shadow-xl"
+                        side="bottom"
+                        align="start"
+                      >
+                        {cities.map((city) => (
+                          <SelectItem
+                            key={city.value}
+                            value={city.value}
+                            className="text-white/80 hover:text-white hover:bg-white/10 text-sm font-medium cursor-pointer"
+                          >
+                            {city.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </motion.div>
+                </nav>
               </motion.div>
             </>
           )}

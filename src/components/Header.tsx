@@ -211,46 +211,44 @@ const Header = () => {
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
-                transition={{ type: "spring", damping: 26, stiffness: 280 }}
-                className="fixed top-0 right-0 h-screen w-[78%] sm:w-[60%] z-[60] flex flex-col bg-[#1A3F1C] shadow-2xl"
+                transition={{ type: "spring", damping: 28, stiffness: 300 }}
+                className="fixed top-0 right-0 h-screen w-[80%] sm:w-[58%] z-[60] flex flex-col bg-[#1A3F1C] shadow-2xl"
+                style={{ paddingTop: "env(safe-area-inset-top)" }}
               >
                 {/* Drawer header */}
-                <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
+                <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
                   <Link
                     to="/"
                     onClick={() => { setIsMenuOpen(false); window.scrollTo({ top: 0, behavior: "instant" }); }}
                     className="flex items-center gap-2.5"
                   >
-                    <div className="w-8 h-8 bg-white/15 rounded-xl flex items-center justify-center">
-                      <img
-                        src="/images/ounje-logo.png"
-                        alt="Ounje"
-                        className="w-5 h-5 object-contain"
-                      />
+                    <div className="w-9 h-9 bg-[#FFC727]/20 rounded-xl flex items-center justify-center border border-[#FFC727]/30">
+                      <img src="/images/ounje-logo.png" alt="Ounje" className="w-5 h-5 object-contain" />
                     </div>
-                    <span className="text-white font-extrabold text-base uppercase tracking-wide">
-                      OunjeFood
-                    </span>
+                    <div>
+                      <p className="text-white font-extrabold text-sm uppercase tracking-widest leading-none">OunjeFood</p>
+                      <p className="text-white/40 text-[10px] mt-0.5">Order Fast. Eat Fresh.</p>
+                    </div>
                   </Link>
                   <button
                     onClick={() => setIsMenuOpen(false)}
                     className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition"
                   >
-                    <X className="w-5 h-5 text-white" />
+                    <X className="w-4 h-4 text-white" />
                   </button>
                 </div>
 
                 {/* Nav links */}
-                <nav className="flex-1 px-5 py-5 space-y-1.5 overflow-y-auto">
+                <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
                   {menuItems.map((item, i) => {
                     const path = item.href.split("#")[0] || "/";
                     const isActive = location.pathname === path && path !== "/";
                     return (
                       <motion.div
                         key={item.label}
-                        initial={{ opacity: 0, x: 30 }}
+                        initial={{ opacity: 0, x: 24 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.25, delay: 0.06 * i }}
+                        transition={{ duration: 0.22, delay: 0.05 * i }}
                       >
                         <Link
                           to={item.href}
@@ -258,30 +256,30 @@ const Header = () => {
                             handleNavClick(e, item);
                             setIsMenuOpen(false);
                           }}
-                          className={`flex items-center justify-between w-full px-4 py-3.5 rounded-2xl text-base font-semibold transition ${
+                          className={`flex items-center justify-between w-full px-4 py-4 rounded-2xl text-[15px] font-semibold transition-all ${
                             isActive
-                              ? "bg-white/15 text-[#FFC727]"
-                              : "text-white/80 hover:bg-white/10 hover:text-white"
+                              ? "bg-[#FFC727]/15 text-[#FFC727] border border-[#FFC727]/20"
+                              : "text-white/75 hover:bg-white/8 hover:text-white"
                           }`}
                         >
-                          {item.label}
-                          {isActive && (
-                            <span className="w-2 h-2 bg-[#FFC727] rounded-full" />
-                          )}
+                          <span>{item.label}</span>
+                          <ChevronDown className={`w-4 h-4 -rotate-90 transition ${isActive ? "text-[#FFC727]" : "text-white/30"}`} />
                         </Link>
                       </motion.div>
                     );
                   })}
                 </nav>
 
-                {/* Bottom: Location + Order CTA */}
-                <div className="px-5 pt-5 space-y-3 border-t border-white/10" style={{ paddingBottom: "max(2rem, env(safe-area-inset-bottom))" }}>
-                  {/* Location row */}
-                  <div className="flex items-center gap-2 bg-white/10 rounded-2xl px-4 py-3">
-                    <MapPin className="w-4 h-4 text-[#FFC727] flex-shrink-0" />
+                {/* Bottom: Location only */}
+                <div className="px-4 pt-4 border-t border-white/10" style={{ paddingBottom: "max(1.75rem, env(safe-area-inset-bottom))" }}>
+                  <p className="text-white/40 text-[10px] uppercase tracking-widest font-semibold mb-2 px-1">Delivery Location</p>
+                  <div className="flex items-center gap-3 bg-white/8 border border-white/12 rounded-2xl px-4 py-3.5">
+                    <div className="w-8 h-8 bg-[#FFC727]/15 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-4 h-4 text-[#FFC727]" />
+                    </div>
                     <Select defaultValue="">
                       <SelectTrigger className="flex-1 bg-transparent border-none shadow-none text-white text-sm font-semibold focus:ring-0 p-0">
-                        <SelectValue placeholder="Select Location" />
+                        <SelectValue placeholder="Select your city" />
                       </SelectTrigger>
                       <SelectContent
                         className="bg-[#1A3F1C] border border-white/20 rounded-2xl shadow-xl"
@@ -300,19 +298,6 @@ const Header = () => {
                       </SelectContent>
                     </Select>
                   </div>
-
-                  {/* Order CTA */}
-                  <motion.button
-                    whileTap={{ scale: 0.97 }}
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      setIsOrderOpen(true);
-                    }}
-                    className="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold py-3.5 rounded-2xl text-sm shadow-lg hover:bg-[#1fb855] transition"
-                  >
-                    <ShoppingBag className="w-4 h-4" />
-                    Order Now via WhatsApp
-                  </motion.button>
                 </div>
               </motion.div>
             </>

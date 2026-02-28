@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { CheckCircle2 } from "lucide-react";
 
 interface SuccessModalProps {
   isOpen: boolean;
@@ -10,86 +11,82 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          onClick={onClose}
         >
-          {/* MODAL BOX */}
           <motion.div
             initial={{ scale: 0.85, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.85, opacity: 0, y: 20 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="bg-[#A7F3A4] rounded-[20px] w-[90%] max-w-[600px] p-8 text-center shadow-xl"
+            className="bg-white rounded-3xl w-full max-w-md p-8 text-center shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* LOGO + OUNJEFOOD */}
+            {/* Logo */}
             <motion.div
               initial={{ opacity: 0, y: -15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15, duration: 0.35 }}
-              className="flex items-center justify-center gap-3 mb-4"
+              transition={{ delay: 0.1, duration: 0.35 }}
+              className="flex items-center justify-center gap-2 mb-6"
             >
-              <img
-                src="/logo/ounje.png"
-                alt="Ounje Logo"
-                className="w-[34px] h-[39px] md:w-[40px] md:h-[44px]"
-              />
-              <span className="text-[#1A3F1C] font-bold text-xl md:text-2xl">
-                OUNJEFOOD
-              </span>
+              <img src="/public/images/ounje-logo.png" alt="Ounje Logo" className="w-7 h-7" />
+              <span className="text-[#1A3F1C] font-extrabold text-lg">OUNJEFOOD</span>
             </motion.div>
 
-            {/* TITLE */}
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.25, duration: 0.35 }}
-              className="text-[#1A3F1C] font-extrabold text-2xl md:text-4xl leading-snug mb-4"
+            {/* Success icon */}
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+              className="w-16 h-16 bg-[#ECFFED] rounded-full flex items-center justify-center mx-auto mb-4"
             >
-              Thank you for <br /> joining our waitlist!
-            </motion.h2>
+              <CheckCircle2 className="w-9 h-9 text-[#2C5E2E]" />
+            </motion.div>
 
-            {/* SUCCESS POT IMAGE WITH ANIMATIONS */}
+            {/* Success pot */}
             <motion.img
-              src="/icons/success-pot.png"
+              src="/public/icons/success-pot.png"
               alt="Success Icon"
-              className="w-[150px] md:w-[200px] mx-auto mb-4"
+              className="w-[120px] md:w-[150px] mx-auto mb-4"
               initial={{ opacity: 0, scale: 0.6 }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                y: [0, -8, 0], // floating animation
-              }}
+              animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
               transition={{
-                opacity: { duration: 0.4, delay: 0.35 },
-                scale: { duration: 0.4, delay: 0.35 },
-                y: {
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                },
+                opacity: { duration: 0.4, delay: 0.3 },
+                scale: { duration: 0.4, delay: 0.3 },
+                y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
               }}
             />
 
-            {/* SUBTEXT */}
+            {/* Title */}
+            <motion.h2
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.35 }}
+              className="text-[#1A3F1C] font-extrabold text-xl md:text-2xl leading-snug mb-2"
+            >
+              You're on the list! 🎉
+            </motion.h2>
+
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45, duration: 0.35 }}
-              className="text-[#1A3F1C] text-sm md:text-base mb-6"
+              transition={{ delay: 0.4, duration: 0.35 }}
+              className="text-gray-500 text-sm md:text-base mb-6"
             >
-              You’ll be notified once the app is live!!!
+              Thank you for joining our waitlist. We'll notify you the moment the app goes live!
             </motion.p>
 
-            {/* OKAY BUTTON */}
+            {/* Button */}
             <motion.button
               onClick={onClose}
-              className="w-full bg-[#1A3F1C] text-white py-3 rounded-[12px] text-lg font-semibold hover:bg-[#224e23] transition"
+              className="w-full bg-[#2C5E2E] text-white py-3.5 rounded-2xl text-base font-bold hover:bg-[#1a3f1c] transition shadow-md"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              Okay
+              Awesome, got it!
             </motion.button>
           </motion.div>
         </motion.div>

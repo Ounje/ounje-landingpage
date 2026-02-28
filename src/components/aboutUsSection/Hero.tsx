@@ -48,7 +48,7 @@ export default function Hero() {
         >
           <div className="absolute -inset-4 bg-[#2C5E2E]/5 rounded-3xl blur-xl" />
           <img
-            src="/images/AboutHero-img.png"
+            src="/public/images/AboutHero-img.png"
             alt="Ounje team and story"
             className="relative z-10 w-full h-auto object-cover rounded-3xl shadow-2xl"
           />

@@ -27,7 +27,7 @@ const RiderSection = () => {
           initial={{ opacity: 0, x: -40 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="md:w-1/2 relative h-[380px] md:h-[560px] w-full order-2 md:order-1 flex items-end justify-center"
+          className="md:w-1/2 relative h-[320px] md:h-[500px] w-full order-2 md:order-1 flex items-end justify-center"
         >
           {/* Background blobs */}
           <div className="absolute inset-0 bg-[#2C5E2E]/15 rounded-full blur-3xl scale-75 pointer-events-none" />
@@ -35,7 +35,7 @@ const RiderSection = () => {
 
           {/* Phone screen — main hero visual */}
           <motion.img
-            src="/images/rider-screen.png"
+            src="/public/images/rider-screen.png"
             alt="Rider app screen"
             initial={{ opacity: 0, scale: 0.88, y: 20 }}
             animate={isInView ? {
@@ -48,12 +48,12 @@ const RiderSection = () => {
               scale: { duration: 0.6, delay: 0.1 },
               y: { duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.8 },
             }}
-            className="relative z-10 h-[370px] md:h-[540px] lg:h-[600px] w-auto object-contain drop-shadow-2xl"
+            className="relative z-10 h-[260px] md:h-[420px] lg:h-[470px] w-auto object-contain drop-shadow-2xl"
           />
 
           {/* Delivery guy — slides across over the screen */}
           <motion.img
-            src="/images/delivery-guy.png"
+            src="/public/images/delivery-guy.png"
             alt="Delivery rider"
             initial={{ x: -40, opacity: 0 }}
             animate={isInView ? {
@@ -89,6 +89,22 @@ const RiderSection = () => {
             <span className="text-xs font-bold text-[#1A3F1C]">Fast Delivery</span>
           </motion.div>
 
+          {/* Animated route dots */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.7 }}
+            className="absolute bottom-[50%] left-[30%] z-30 flex gap-1.5 items-center"
+          >
+            {[0, 1, 2, 3].map((i) => (
+              <motion.div
+                key={i}
+                animate={{ opacity: [0.25, 1, 0.25] }}
+                transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.25 }}
+                className={`rounded-full bg-[#2C5E2E] ${i === 0 || i === 3 ? "w-2 h-2" : "w-1.5 h-1.5"}`}
+              />
+            ))}
+          </motion.div>
         </motion.div>
 
         {/* Text */}

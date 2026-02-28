@@ -101,34 +101,34 @@ const CustomerSection = () => {
 
           {/* Monitor — behind the arm */}
           <img
-            src="/icons/monitor.png"
+            src="/public/icons/monitor.png"
             alt="Monitor"
             className="absolute bottom-0 left-[5%] z-10 w-48 md:w-72 lg:w-80 object-contain"
           />
 
           {/* Arm — slides out from monitor screen horizontally, holds, slides back in */}
           <motion.img
-            src="/icons/arm.png"
+            src="/public/icons/arm.png"
             alt="Arm with box"
             initial={{ x: -100, opacity: 0 }}
             animate={isInView ? {
-              x: [-100, 0, 0, 0],
+              x: [-100, 0, 0, -100],
               opacity: [0, 1, 1, 0],
             } : { x: -100, opacity: 0 }}
             transition={{
-              duration: 6,
+              duration: 1,
               repeat: Infinity,
               ease: "easeInOut",
               times: [0],
-              repeatDelay: 0,
+              repeatDelay: 1,
             }}
             className="absolute z-20 w-16 md:w-28 lg:w-32 object-contain"
-            style={{ left: "35%", bottom: "16%" }}
+            style={{ left: "32%", bottom: "18%" }}
           />
 
           {/* Woman */}
           <motion.img
-            src="/icons/woman.png"
+            src="/public/icons/woman.png"
             alt="Woman ordering"
             initial={{ opacity: 0, x: 20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -138,7 +138,7 @@ const CustomerSection = () => {
 
           {/* Speech bubble */}
           <motion.img
-            src="/icons/bubble.png"
+            src="/public/icons/bubble.png"
             alt="Order bubble"
             animate={{ scale: [1, 1.05, 1], y: [0, -4, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}

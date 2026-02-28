@@ -1,94 +1,131 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+const teamMembers = [
+  { img: "/images/team/south-madu.png", name: "South Madu" },
+  { img: "/images/team/ego-chukwuebuka.png", name: "Ego Chukwuebuka" },
+  { img: "/images/team/dandy-chukwudi.png", name: "Dandy Chukwudi" },
+  { img: "/images/team/charles-chukudi.png", name: "Charles Chukwudi" },
+  { img: "/images/team/osarhe-micheal.png", name: "Osarhe Michael" },
+  { img: "/images/team/samuel-nyado.png", name: "Samuel Nyado" },
+];
 
 export default function TeamSection() {
-  const teamImages = [
-    "/images/team/south-madu.png",
-    "/images/team/ego-chukwuebuka.png",
-    "/images/team/dandy-chukwudi.png",
-    "/images/team/micheal.png",
-    "/images/team/charles-chukudi.png",
-    "/images/team/osarhe-micheal.png",
-    "/images/team/samuel-nyado.png",
-    "/images/team/josh-josuakim.png",
-  ];
-
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const next = () =>
-    setActiveIndex((prev) => (prev + 1) % teamImages.length);
+  const prev = () => setActiveIndex((i) => (i - 1 + teamMembers.length) % teamMembers.length);
+  const next = () => setActiveIndex((i) => (i + 1) % teamMembers.length);
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0 },
-  };
-
-  /* ✅ AUTO-SLIDE EVERY 5 SECONDS (SLOWER) */
   useEffect(() => {
-    const interval = setInterval(() => {
-      next();
-    }, 5000); // ⏳ now slower — 5 seconds per slide
-
+    const interval = setInterval(next, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="py-12 px-6 md:px-10">
+    <section className="py-16 md:py-20 bg-white overflow-hidden">
+      {/* Title banner */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="w-full bg-[#1A3F1C] py-10 flex flex-col items-center gap-2 mb-8 md:mb-12"
+      >
+        <h2 className="text-white text-2xl md:text-4xl font-extrabold">Meet The Team</h2>
+        <p className="text-white/60 text-xs md:text-sm font-medium">The people making Ounje happen</p>
+      </motion.div>
 
-      {/* TITLE BANNER */}
-      <div className="w-full bg-[#1A3F1C] py-10 flex justify-center">
-        <h1 className="text-white text-3xl md:text-4xl font-extrabold">
-          Meet The Team
-        </h1>
-      </div>
-
-      {/* SUBTEXT */}
-      <p className="text-center text-[#1A3F1C] px-6 md:px-24 mt-4 text-sm md:text-base leading-relaxed mb-10">
-        Meet the team that has been working behind the screens making sure you get
-        the best experience. We have all faced the problems you have encountered
-        and that’s why we are here to serve you better.
+      {/* Subtext */}
+      <p className="text-center text-[#1A3F1C]/70 px-6 md:px-24 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
+        Meet the team that has been working behind the screens making sure you get the best
+        experience. We have all faced the problems you have encountered and that's why we are
+        here to serve you better.
       </p>
 
-      {/* 📱 MOBILE — SINGLE IMAGE CAROUSEL */}
-      <div className="md:hidden flex flex-col items-center">
-        <motion.div
-          key={activeIndex}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }} /* Slightly smoother */
-          className="rounded-2xl shadow-lg overflow-hidden border bg-white ml-4"
-          style={{ width: "259px", height: "337px" }}
+      {/* Mobile — Carousel */}
+      <div className="md:hidden flex flex-col items-center px-6">
+        <div className="relative w-full max-w-[300px] flex items-center justify-center">
+          {/* Prev button */}
+          <button
+            onClick={prev}
+            className="absolute -left-4 z-10 bg-white border border-[#2C5E2E]/20 shadow-md rounded-full p-2 text-[#2C5E2E] hover:bg-[#ECFFED] transition"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.35 }}
+              className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white w-full aspect-[3/4]"
+            >
+              <img
+                src={teamMembers[activeIndex].img}
+                alt={teamMembers[activeIndex].name}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Next button */}
+          <button
+            onClick={next}
+            className="absolute -right-4 z-10 bg-white border border-[#2C5E2E]/20 shadow-md rounded-full p-2 text-[#2C5E2E] hover:bg-[#ECFFED] transition"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Name */}
+        <motion.p
+          key={`name-${activeIndex}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mt-4 font-semibold text-[#1A3F1C] text-sm"
         >
-          <img
-            src={teamImages[activeIndex]}
-            alt="team member"
-            className="w-full h-full object-cover"
-          />
-        </motion.div>
+          {teamMembers[activeIndex].name}
+        </motion.p>
+
+        {/* Dots */}
+        <div className="flex gap-1.5 mt-3">
+          {teamMembers.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveIndex(i)}
+              className={`w-2 h-2 rounded-full transition-all ${i === activeIndex ? "bg-[#2C5E2E] w-4" : "bg-[#2C5E2E]/30"}`}
+            />
+          ))}
+        </div>
       </div>
 
-      {/* 🖥 DESKTOP — GRID OF CARDS */}
-      <div className="hidden md:grid grid-cols-4 gap-8 justify-center ml-14">
-        {teamImages.map((img, index) => (
+      {/* Desktop — Responsive Grid */}
+      <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6 px-8 lg:px-24 max-w-5xl mx-auto">
+        {teamMembers.map((member, i) => (
           <motion.div
-            key={img}
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            key={member.img}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-2xl overflow-hidden shadow-lg border bg-white flex justify-center"
-            style={{ width: "259px", height: "337px" }}
+            transition={{ duration: 0.5, delay: i * 0.08 }}
+            whileHover={{ y: -6, transition: { duration: 0.2 } }}
+            className="group rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-white aspect-[3/4] relative"
           >
             <img
-              src={img}
-              alt="team card"
-              className="w-full h-full object-cover"
+              src={member.img}
+              alt={member.name}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
+            {/* Name overlay on hover */}
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+              <p className="text-white font-semibold text-sm">{member.name}</p>
+            </div>
           </motion.div>
         ))}
       </div>
-
     </section>
   );
 }

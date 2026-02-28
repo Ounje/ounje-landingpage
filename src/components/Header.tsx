@@ -105,8 +105,11 @@ const Header = () => {
           {/* ─── Desktop Nav pill ─── */}
           <nav className="hidden md:flex items-center gap-1 bg-white rounded-2xl px-2 py-1.5 border border-[#2C5E2E]/15 shadow-sm">
             {menuItems.map((item) => {
-              const path = item.href.split("#")[0] || "/";
-              const isActive = !item.href.includes("#") && location.pathname === path && path !== "/";
+              const [itemPath, itemHash] = item.href.split("#");
+              const path = itemPath || "/";
+              const isActive = itemHash
+                ? location.pathname === path && location.hash === "#" + itemHash
+                : location.pathname === path && path !== "/";
               return (
                 <Link
                   key={item.label}
@@ -244,8 +247,11 @@ const Header = () => {
               {/* Nav links */}
               <nav className="px-4 py-6 space-y-1 overflow-y-auto">
                 {menuItems.map((item, i) => {
-                  const path = item.href.split("#")[0] || "/";
-                  const isActive = !item.href.includes("#") && location.pathname === path && path !== "/";
+                  const [itemPath, itemHash] = item.href.split("#");
+                  const path = itemPath || "/";
+                  const isActive = itemHash
+                    ? location.pathname === path && location.hash === "#" + itemHash
+                    : location.pathname === path && path !== "/";
                   return (
                     <motion.div
                       key={item.label}

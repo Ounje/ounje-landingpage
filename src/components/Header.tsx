@@ -77,6 +77,7 @@ const Header = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
+        style={{ paddingTop: "env(safe-area-inset-top)" }}
         className={`fixed w-full top-0 z-50 transition-all duration-300 ${
           isScrolled
             ? "bg-white/80 backdrop-blur-xl shadow-sm border-b border-[#2C5E2E]/10"
@@ -198,7 +199,7 @@ const Header = () => {
             <>
               {/* Backdrop */}
               <motion.div
-                className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+                className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[55]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -211,7 +212,7 @@ const Header = () => {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "spring", damping: 26, stiffness: 280 }}
-                className="fixed top-0 right-0 h-screen w-[78%] sm:w-[60%] z-50 flex flex-col bg-[#1A3F1C] shadow-2xl"
+                className="fixed top-0 right-0 h-screen w-[78%] sm:w-[60%] z-[60] flex flex-col bg-[#1A3F1C] shadow-2xl"
               >
                 {/* Drawer header */}
                 <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
@@ -274,7 +275,7 @@ const Header = () => {
                 </nav>
 
                 {/* Bottom: Location + Order CTA */}
-                <div className="px-5 pb-8 pt-5 space-y-3 border-t border-white/10">
+                <div className="px-5 pt-5 space-y-3 border-t border-white/10" style={{ paddingBottom: "max(2rem, env(safe-area-inset-bottom))" }}>
                   {/* Location row */}
                   <div className="flex items-center gap-2 bg-white/10 rounded-2xl px-4 py-3">
                     <MapPin className="w-4 h-4 text-[#FFC727] flex-shrink-0" />

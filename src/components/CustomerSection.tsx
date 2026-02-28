@@ -112,15 +112,15 @@ const CustomerSection = () => {
             alt="Arm with box"
             initial={{ x: -100, opacity: 0 }}
             animate={isInView ? {
-              x: [-100, 0, 0, -100],
+              x: [-100, 0, 0, 0],
               opacity: [0, 1, 1, 0],
             } : { x: -100, opacity: 0 }}
             transition={{
-              duration: 1,
+              duration: 6,
               repeat: Infinity,
               ease: "easeInOut",
               times: [0],
-              repeatDelay: 1,
+              repeatDelay: 0,
             }}
             className="absolute z-20 w-16 md:w-28 lg:w-32 object-contain"
             style={{ left: "32%", bottom: "18%" }}

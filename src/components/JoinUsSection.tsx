@@ -1,151 +1,129 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
 import ComingSoonModal from "../modals/ComingSoonDialog";
+import { ArrowRight } from "lucide-react";
 
-interface Category {
-  id: string;
-  title: string;
-  desc: string;
-}
-
-const projectCategories: Category[] = [
+const categories = [
   {
     id: "1",
     title: "Egbon",
+    emoji: "👤",
     desc: "Be a part of our amazing community. Let's show you how Ounje really works.",
+    image: "/public/images/egbon-screen.png",
+    color: "from-[#2C5E2E]",
   },
   {
     id: "2",
     title: "Vendor",
+    emoji: "🏪",
     desc: "Reach more hungry customers and grow your business — OUNJE connects your kitchen to the streets, campuses, and communities that love your food.",
+    image: "/public/images/vendor-screen.png",
+    color: "from-[#1A3F1C]",
   },
   {
     id: "3",
     title: "Rider",
+    emoji: "🛵",
     desc: "Turn your hustle into steady income, deliver meals, earn on your own terms, and become a trusted part of the OUNJE network.",
+    image: "/public/images/rider-screen.png",
+    color: "from-[#0d2e0e]",
   },
 ];
 
-const firstTab = projectCategories[0].id;
-
 const JoinUsSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section
-      id="joinUs"
-      className="py-16 px-6 text-black flex justify-center items-center"
-    >
-      <div>
+    <section id="joinUs" className="py-16 md:py-24 px-4 md:px-8 bg-[#ECFFED] overflow-hidden">
+      <div ref={ref} className="max-w-4xl mx-auto">
+
         {/* Header */}
-        <div className="text-center">
-          <h2>Be a Part of Us</h2>
-          <p className="my-5 max-w-[460px] mx-auto">
-            Be a part of our amazing community. Let’s show <br /> you how Ounje works
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-10"
+        >
+          <span className="inline-flex items-center gap-2 bg-[#2C5E2E]/10 border border-[#2C5E2E]/20 rounded-full px-4 py-1.5 text-xs font-semibold text-[#2C5E2E] mb-4">
+            🤝 Community
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-black leading-tight mb-4">
+            Be a Part of Us
+          </h2>
+          <p className="text-base md:text-lg text-gray-600 max-w-md mx-auto">
+            Be a part of our amazing community. Let's show you how Ounje works.
           </p>
-        </div>
+        </motion.div>
 
         {/* Tabs */}
-        <div>
-          <Tabs className="w-full" defaultValue={firstTab}>
-            {/* Tab buttons */}
-            <TabsList className="w-full bg-[#FFC727] p-1 rounded-[20px] mb-5 gap-3 md:gap-10">
-              {projectCategories.map((category) => (
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          <Tabs className="w-full" defaultValue="1">
+            <TabsList className="w-full bg-[#FFC727] p-1.5 rounded-2xl mb-8 gap-2">
+              {categories.map((cat) => (
                 <TabsTrigger
-                  key={category.id}
-                  value={category.id}
-                  className="py-1 md:py-3 font-bold w-full rounded-2xl data-[state=active]:bg-[#2C5E2E] data-[state=active]:text-white transition-all duration-300 ease-in-out"
+                  key={cat.id}
+                  value={cat.id}
+                  className="py-2.5 md:py-3 font-bold w-full rounded-xl text-sm md:text-base
+                    data-[state=active]:bg-[#2C5E2E] data-[state=active]:text-white
+                    data-[state=inactive]:text-[#1A3F1C]
+                    transition-all duration-300 flex items-center justify-center gap-1.5"
                 >
-                  <span>{category.title}</span>
-                  <div
-                    className="absolute bottom-0 left-0 h-0.5 bg-[#2C5E2E] transition-all duration-300 
-                  transform origin-left scale-x-0 data-[state=active]:scale-x-100 w-full"
-                  />
+                  <span className="hidden sm:inline">{cat.emoji}</span>
+                  <span>{cat.title}</span>
                 </TabsTrigger>
               ))}
             </TabsList>
 
-            {/* Tab Content */}
-            {projectCategories.map((category) => (
-              <TabsContent key={category.id} value={category.id}>
-                <div className="flex justify-center">
-                  <motion.div
-                    initial={{ x: 50, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    exit={{ x: -50, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="flex justify-center"
-                  >
-                    {category.id === "1" && (
-                      <img
-                        src="/images/egbon-screen.png"
-                        alt="Egbon screen"
-                        className="h-[80vh]"
-                      />
-                    )}
-                    {category.id === "2" && (
-                      <img
-                        src="/images/vendor-screen.png"
-                        alt="Vendor screen"
-                        className="h-[80vh]"
-                      />
-                    )}
-                    {category.id === "3" && (
-                      <img
-                        src="/images/rider-screen.png"
-                        alt="Rider screen"
-                        className="h-[80vh]"
-                      />
-                    )}
-                  </motion.div>
-                </div>
+            {categories.map((cat) => (
+              <TabsContent key={cat.id} value={cat.id}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {/* Screen image with decorative bg */}
+                  <div className="flex justify-center mb-8 relative">
+                    <div className="absolute inset-0 bg-[#2C5E2E]/5 rounded-3xl blur-2xl" />
+                    <motion.img
+                      src={cat.image}
+                      alt={`${cat.title} screen`}
+                      className="relative z-10 h-[50vh] md:h-[60vh] w-auto object-contain drop-shadow-2xl rounded-2xl"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </div>
+
+                  {/* CTA Card */}
+                  <div className="bg-[#2C5E2E] rounded-3xl py-8 px-6 md:px-12 flex flex-col items-center gap-5 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFC727]/10 rounded-full blur-2xl" />
+                    <p className="text-center text-white font-semibold text-sm md:text-base max-w-xl leading-relaxed relative z-10">
+                      {cat.desc}
+                    </p>
+                    <motion.button
+                      onClick={() => setIsModalOpen(true)}
+                      whileHover={{ scale: 1.04 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="relative z-10 bg-[#FFC727] text-[#1A3F1C] font-bold px-8 py-3.5 rounded-2xl hover:bg-[#ffda55] transition flex items-center gap-2 text-sm md:text-base shadow-lg"
+                    >
+                      Join the Waitlist
+                      <ArrowRight className="w-4 h-4" />
+                    </motion.button>
+                  </div>
+                </motion.div>
               </TabsContent>
             ))}
-
-            {/* Join Button Area */}
-            <div className="md:w-[55vw] bg-[#2C5E2E] py-5 px-10 rounded-[20px] flex flex-col justify-center items-center gap-3 mt-8">
-              {projectCategories.map((category) => (
-                <TabsContent key={category.id} value={category.id}>
-                  <p className="text-center text-white font-semibold text-[15px]">
-                    {category.desc}
-                  </p>
-                </TabsContent>
-              ))}
-
-              {/* Join the Waitlist Button */}
-              <motion.button
-                onClick={() => setIsModalOpen(true)}
-                className="bg-[#FFC727] text-[#1A3F1C] flex justify-center items-center gap-2 md:font-semibold 
-                           w-[200px] h-[39px] md:w-[275px] md:h-[45px] lg:w-[359px] lg:h-[66px]
-                           rounded-[8px] md:rounded-[20px] hover:bg-[#ffda55] transition mt-3"
-              >
-                <span>Join the waitlist</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="w-[18px] h-[18px]"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M5 12h14m-7-7 7 7-7 7"
-                  />
-                </svg>
-              </motion.button>
-            </div>
           </Tabs>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Coming Soon Modal */}
-      <ComingSoonModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+      <ComingSoonModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 };

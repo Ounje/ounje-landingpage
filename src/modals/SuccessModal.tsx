@@ -32,7 +32,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
               transition={{ delay: 0.1, duration: 0.35 }}
               className="flex items-center justify-center gap-2 mb-6"
             >
-              <img src="/images/ounje-logo.png" alt="Ounje Logo" className="w-7 h-7" />
+              <img src="/public/images/ounje-logo.png" alt="Ounje Logo" className="w-7 h-7" />
               <span className="text-[#1A3F1C] font-extrabold text-lg">OUNJEFOOD</span>
             </motion.div>
 
@@ -48,7 +48,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
 
             {/* Success pot */}
             <motion.img
-              src="/icons/success-pot.png"
+              src="/public/icons/success-pot.png"
               alt="Success Icon"
               className="w-[120px] md:w-[150px] mx-auto mb-4"
               initial={{ opacity: 0, scale: 0.6 }}

@@ -10,7 +10,7 @@ const categories = [
     title: "Egbon",
     emoji: "👤",
     desc: "Be a part of our amazing community. Let's show you how Ounje really works.",
-    image: "/images/egbon-screen.png",
+    image: "/public/images/egbon-screen.png",
     color: "from-[#2C5E2E]",
   },
   {
@@ -18,7 +18,7 @@ const categories = [
     title: "Vendor",
     emoji: "🏪",
     desc: "Reach more hungry customers and grow your business — OUNJE connects your kitchen to the streets, campuses, and communities that love your food.",
-    image: "/images/vendor-screen.png",
+    image: "/public/images/vendor-screen.png",
     color: "from-[#1A3F1C]",
   },
   {
@@ -26,7 +26,7 @@ const categories = [
     title: "Rider",
     emoji: "🛵",
     desc: "Turn your hustle into steady income, deliver meals, earn on your own terms, and become a trusted part of the OUNJE network.",
-    image: "/images/rider-screen.png",
+    image: "/public/images/rider-screen.png",
     color: "from-[#0d2e0e]",
   },
 ];

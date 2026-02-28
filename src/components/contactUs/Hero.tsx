@@ -92,7 +92,7 @@ export default function Hero() {
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           >
             <img
-              src="/public/images/contactUsHero-img.png"
+              src="/images/contactUsHero-img.png"
               alt="Ounje mascot"
               className="w-[180px] sm:w-[220px] md:w-[300px] lg:w-[380px] h-auto object-contain drop-shadow-xl"
             />

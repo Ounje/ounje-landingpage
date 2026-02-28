@@ -23,7 +23,7 @@ const menuItems = [
   { label: "Join Us", href: "/#joinUs" },
   { label: "About Us", href: "/aboutus" },
   { label: "FAQs", href: "/contactus#FAQ" },
-  { label: "Contact Us", href: "/contactus#contact" },
+  { label: "Contact Us", href: "/contactus" },
 ];
 
 const Header = () => {
@@ -90,7 +90,7 @@ const Header = () => {
             <Link to="/" className="flex items-center gap-2.5" onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}>
               <div className="w-8 h-8 md:w-9 md:h-9 bg-[#2C5E2E] rounded-xl flex items-center justify-center shadow-sm">
                 <img
-                  src="/public/images/ounje-logo.png"
+                  src="/images/ounje-logo.png"
                   alt="Ounje logo"
                   className="w-5 h-5 md:w-6 md:h-6 object-contain"
                 />
@@ -104,8 +104,11 @@ const Header = () => {
           {/* ─── Desktop Nav pill ─── */}
           <nav className="hidden md:flex items-center gap-1 bg-white rounded-2xl px-2 py-1.5 border border-[#2C5E2E]/15 shadow-sm">
             {menuItems.map((item) => {
-              const path = item.href.split("#")[0] || "/";
-              const isActive = location.pathname === path && path !== "/";
+              const [itemPath, itemHash] = item.href.split("#");
+              const path = itemPath || "/";
+              const isActive = itemHash
+                ? location.pathname === path && location.hash === "#" + itemHash
+                : location.pathname === path && path !== "/" && !location.hash;
               return (
                 <Link
                   key={item.label}
@@ -222,7 +225,7 @@ const Header = () => {
                   >
                     <div className="w-8 h-8 bg-white/15 rounded-xl flex items-center justify-center">
                       <img
-                        src="/public/images/ounje-logo.png"
+                        src="/images/ounje-logo.png"
                         alt="Ounje"
                         className="w-5 h-5 object-contain"
                       />
@@ -242,8 +245,11 @@ const Header = () => {
                 {/* Nav links */}
                 <nav className="flex-1 px-5 py-8 space-y-1.5 overflow-y-auto">
                   {menuItems.map((item, i) => {
-                    const path = item.href.split("#")[0] || "/";
-                    const isActive = location.pathname === path && path !== "/";
+                    const [itemPath, itemHash] = item.href.split("#");
+                    const path = itemPath || "/";
+                    const isActive = itemHash
+                      ? location.pathname === path && location.hash === "#" + itemHash
+                      : location.pathname === path && path !== "/" && !location.hash;
                     return (
                       <motion.div
                         key={item.label}
@@ -283,7 +289,7 @@ const Header = () => {
                         <SelectValue placeholder="Select Location" />
                       </SelectTrigger>
                       <SelectContent
-                        className="bg-[#1A3F1C] border border-white/20 rounded-2xl shadow-xl"
+                        className="bg-[#1A3F1C] border border-white/20 rounded-2xl shadow-xl z-[70]"
                         side="top"
                         align="start"
                       >

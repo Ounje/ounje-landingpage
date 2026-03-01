@@ -59,14 +59,24 @@ const Header = () => {
   };
 
   const handleNavClick = (e: React.MouseEvent, item: (typeof menuItems)[0]) => {
-    if (!item.href.includes("#")) return;
-    e.preventDefault();
-    const [path, hash] = item.href.split("#");
-    const isCurrentPage = location.pathname === (path || "/");
-    if (isCurrentPage) {
-      scrollToSection("#" + hash);
+    if (item.href.includes("#")) {
+      e.preventDefault();
+      const [path, hash] = item.href.split("#");
+      const isCurrentPage = location.pathname === (path || "/");
+      if (isCurrentPage) {
+        navigate(path + "#" + hash, { replace: true });
+        scrollToSection("#" + hash);
+      } else {
+        navigate(path + "#" + hash);
+      }
     } else {
-      navigate(path + "#" + hash);
+      // No hash — if same page with a hash active, clear it and scroll to top
+      const isCurrentPage = location.pathname === item.href;
+      if (isCurrentPage && location.hash) {
+        e.preventDefault();
+        navigate(item.href, { replace: true });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     }
     setIsMenuOpen(false);
   };
@@ -77,7 +87,9 @@ const Header = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`fixed w-full top-0 z-50 transition-all duration-300 ${
+        className={`fixed w-full top-0 transition-all duration-300 ${
+          isMenuOpen ? "z-30" : "z-50"
+        } ${
           isScrolled
             ? "bg-white/80 backdrop-blur-xl shadow-sm border-b border-[#2C5E2E]/10"
             : "bg-transparent"
@@ -195,135 +207,125 @@ const Header = () => {
           </motion.button>
         </div>
 
-        {/* ─── Mobile Drawer ─── */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <>
-              {/* Backdrop */}
-              <motion.div
-                className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setIsMenuOpen(false)}
-              />
-
-              {/* Panel */}
-              <motion.div
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "100%" }}
-                transition={{ type: "spring", damping: 26, stiffness: 280 }}
-                className="fixed top-0 right-0 h-screen w-[78%] sm:w-[60%] z-50 flex flex-col bg-[#1A3F1C] shadow-2xl"
-              >
-                {/* Drawer header */}
-                <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
-                  <Link
-                    to="/"
-                    onClick={() => { setIsMenuOpen(false); window.scrollTo({ top: 0, behavior: "instant" }); }}
-                    className="flex items-center gap-2.5"
-                  >
-                    <div className="w-8 h-8 bg-white/15 rounded-xl flex items-center justify-center">
-                      <img
-                        src="/images/ounje-logo.png"
-                        alt="Ounje"
-                        className="w-5 h-5 object-contain"
-                      />
-                    </div>
-                    <span className="text-white font-extrabold text-base uppercase tracking-wide">
-                      OunjeFood
-                    </span>
-                  </Link>
-                  <button
-                    onClick={() => setIsMenuOpen(false)}
-                    className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition"
-                  >
-                    <X className="w-5 h-5 text-white" />
-                  </button>
-                </div>
-
-                {/* Nav links */}
-                <nav className="flex-1 px-5 py-8 space-y-1.5 overflow-y-auto">
-                  {menuItems.map((item, i) => {
-                    const [itemPath, itemHash] = item.href.split("#");
-                    const path = itemPath || "/";
-                    const isActive = itemHash
-                      ? location.pathname === path && location.hash === "#" + itemHash
-                      : location.pathname === path && path !== "/" && !location.hash;
-                    return (
-                      <motion.div
-                        key={item.label}
-                        initial={{ opacity: 0, x: 30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.25, delay: 0.06 * i }}
-                      >
-                        <Link
-                          to={item.href}
-                          onClick={(e) => {
-                            handleNavClick(e, item);
-                            setIsMenuOpen(false);
-                          }}
-                          className={`flex items-center justify-between w-full px-4 py-3.5 rounded-2xl text-base font-semibold transition ${
-                            isActive
-                              ? "bg-white/15 text-[#FFC727]"
-                              : "text-white/80 hover:bg-white/10 hover:text-white"
-                          }`}
-                        >
-                          {item.label}
-                          {isActive && (
-                            <span className="w-2 h-2 bg-[#FFC727] rounded-full" />
-                          )}
-                        </Link>
-                      </motion.div>
-                    );
-                  })}
-                </nav>
-
-                {/* Bottom: Location + Order CTA */}
-                <div className="px-5 pb-8 pt-5 space-y-3 border-t border-white/10">
-                  {/* Location row */}
-                  <div className="flex items-center gap-2 bg-white/10 rounded-2xl px-4 py-3">
-                    <MapPin className="w-4 h-4 text-[#FFC727] flex-shrink-0" />
-                    <Select defaultValue="">
-                      <SelectTrigger className="flex-1 bg-transparent border-none shadow-none text-white text-sm font-semibold focus:ring-0 p-0">
-                        <SelectValue placeholder="Select Location" />
-                      </SelectTrigger>
-                      <SelectContent
-                        className="bg-[#1A3F1C] border border-white/20 rounded-2xl shadow-xl z-[70]"
-                        side="top"
-                        align="start"
-                      >
-                        {cities.map((city) => (
-                          <SelectItem
-                            key={city.value}
-                            value={city.value}
-                            className="text-white/80 hover:text-white hover:bg-white/10 text-sm font-medium cursor-pointer"
-                          >
-                            {city.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  {/* Order CTA */}
-                  <motion.button
-                    whileTap={{ scale: 0.97 }}
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      setIsOrderOpen(true);
-                    }}
-                    className="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold py-3.5 rounded-2xl text-sm shadow-lg hover:bg-[#1fb855] transition"
-                  >
-                    <ShoppingBag className="w-4 h-4" />
-                    Order Now via WhatsApp
-                  </motion.button>
-                </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
       </motion.header>
+
+      {/* ─── Mobile Drawer (outside motion.header to avoid compositing layer trapping backdrop-filter) ─── */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+            />
+
+            {/* Panel */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 26, stiffness: 280 }}
+              className="fixed top-0 right-0 h-screen w-[78%] sm:w-[60%] z-50 flex flex-col bg-[#1A3F1C] shadow-2xl"
+            >
+              {/* Drawer header */}
+              <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
+                <Link
+                  to="/"
+                  onClick={() => { setIsMenuOpen(false); window.scrollTo({ top: 0, behavior: "instant" }); }}
+                  className="flex items-center gap-2.5"
+                >
+                  <div className="w-8 h-8 bg-white/15 rounded-xl flex items-center justify-center">
+                    <img
+                      src="/images/ounje-logo.png"
+                      alt="Ounje"
+                      className="w-5 h-5 object-contain"
+                    />
+                  </div>
+                  <span className="text-white font-extrabold text-base uppercase tracking-wide">
+                    OunjeFood
+                  </span>
+                </Link>
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition"
+                >
+                  <X className="w-5 h-5 text-white" />
+                </button>
+              </div>
+
+              {/* Nav links */}
+              <nav className="flex-1 px-5 py-8 space-y-1.5 overflow-y-auto">
+                {menuItems.map((item, i) => {
+                  const [itemPath, itemHash] = item.href.split("#");
+                  const path = itemPath || "/";
+                  const isActive = itemHash
+                    ? location.pathname === path && location.hash === "#" + itemHash
+                    : location.pathname === path && path !== "/" && !location.hash;
+                  return (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, x: 30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.25, delay: 0.06 * i }}
+                    >
+                      <Link
+                        to={item.href}
+                        onClick={(e) => {
+                          handleNavClick(e, item);
+                          setIsMenuOpen(false);
+                        }}
+                        className={`flex items-center justify-between w-full px-4 py-3.5 rounded-2xl text-base font-semibold transition ${
+                          isActive
+                            ? "bg-white/15 text-[#FFC727]"
+                            : "text-white/80 hover:bg-white/10 hover:text-white"
+                        }`}
+                      >
+                        {item.label}
+                        {isActive && (
+                          <span className="w-2 h-2 bg-[#FFC727] rounded-full" />
+                        )}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+
+                {/* Location picker */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.25, delay: 0.06 * menuItems.length }}
+                  className="flex items-center gap-2 bg-white/10 rounded-2xl px-4 py-3 mt-2"
+                >
+                  <MapPin className="w-4 h-4 text-[#FFC727] flex-shrink-0" />
+                  <Select defaultValue="">
+                    <SelectTrigger className="flex-1 bg-transparent border-none shadow-none text-white text-sm font-semibold focus:ring-0 p-0">
+                      <SelectValue placeholder="Select Location" />
+                    </SelectTrigger>
+                    <SelectContent
+                      className="bg-[#1A3F1C] border border-white/20 rounded-2xl shadow-xl z-[70]"
+                      side="bottom"
+                      align="start"
+                    >
+                      {cities.map((city) => (
+                        <SelectItem
+                          key={city.value}
+                          value={city.value}
+                          className="text-white/80 hover:text-white hover:bg-white/10 text-sm font-medium cursor-pointer"
+                        >
+                          {city.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </motion.div>
+              </nav>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       <WhatsAppOrderModal isOpen={isOrderOpen} onClose={() => setIsOrderOpen(false)} />
     </>

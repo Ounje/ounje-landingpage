@@ -131,7 +131,7 @@ export default function ComingSoonModal({ isOpen, onClose }: ComingSoonModalProp
                 transition={{ duration: 0.4, delay: 0.1 }}
                 className="flex items-center gap-2 mb-6 relative z-10"
               >
-                <img src="/public/logo/ounje.png" alt="Ounje Logo" className="w-8 h-9 md:w-10 md:h-11" />
+                <img src="/logo/ounje.png" alt="Ounje Logo" className="w-8 h-9 md:w-10 md:h-11" />
                 <span className="text-white font-extrabold text-lg md:text-xl">OUNJEFOOD</span>
               </motion.div>
 

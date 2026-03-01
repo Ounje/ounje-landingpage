@@ -74,7 +74,7 @@ const VendorSection = () => {
           <div className="relative w-full md:max-w-2xl">
             <div className="absolute -inset-4 bg-[#FFC727]/10 rounded-3xl blur-xl" />
             <img
-              src="/public/frames/Frame 204.png"
+              src="/frames/Frame 204.png"
               alt="Vendor using OunjeFood"
               className="relative z-10 rounded-3xl shadow-xl max-w-full w-full"
             />

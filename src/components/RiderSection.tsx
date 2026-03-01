@@ -27,33 +27,25 @@ const RiderSection = () => {
           initial={{ opacity: 0, x: -40 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="md:w-1/2 relative h-[320px] md:h-[500px] w-full order-2 md:order-1 flex items-end justify-center"
+          className="md:w-1/2 relative h-[380px] md:h-[580px] w-full order-2 md:order-1 flex items-end justify-center"
         >
           {/* Background blobs */}
           <div className="absolute inset-0 bg-[#2C5E2E]/15 rounded-full blur-3xl scale-75 pointer-events-none" />
-          <div className="absolute bottom-0 right-[10%] w-40 h-40 bg-[#FFC727]/25 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 right-[10%] w-48 h-48 bg-[#FFC727]/25 rounded-full blur-3xl pointer-events-none" />
 
           {/* Phone screen — main hero visual */}
           <motion.img
-            src="/public/images/rider-screen.png"
+            src="/images/rider-screen.png"
             alt="Rider app screen"
             initial={{ opacity: 0, scale: 0.88, y: 20 }}
-            animate={isInView ? {
-              opacity: 1,
-              scale: 1,
-              y: [0, -10, 0],
-            } : {}}
-            transition={{
-              opacity: { duration: 0.6, delay: 0.1 },
-              scale: { duration: 0.6, delay: 0.1 },
-              y: { duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.8 },
-            }}
-            className="relative z-10 h-[260px] md:h-[420px] lg:h-[470px] w-auto object-contain drop-shadow-2xl"
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ opacity: { duration: 0.6, delay: 0.1 }, scale: { duration: 0.6, delay: 0.1 } }}
+            className="relative z-10 h-[380px] md:h-[540px] lg:h-[620px] w-auto object-contain drop-shadow-2xl"
           />
 
-          {/* Delivery guy — slides across over the screen */}
+          {/* Delivery guy — slides across */}
           <motion.img
-            src="/public/images/delivery-guy.png"
+            src="/images/delivery-guy.png"
             alt="Delivery rider"
             initial={{ x: -40, opacity: 0 }}
             animate={isInView ? {
@@ -64,46 +56,28 @@ const RiderSection = () => {
               x: { duration: 5, ease: "easeInOut", repeat: Infinity, repeatDelay: 0.5, delay: 0.5 },
               opacity: { duration: 0.4, delay: 0.5 },
             }}
-            className="absolute bottom-[4%] left-[0%] z-20 w-[120px] md:w-[190px] lg:w-[240px] h-auto object-contain drop-shadow-xl"
+            className="%] left-[10%] z-20 w-[220px] md:w-[230px] lg:w-[280px] h-auto object-contain drop-shadow-xl"
           />
-
 
           {/* Earn Daily badge — top right float */}
           <motion.div
             animate={{ y: [0, -7, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-3 right-2 md:top-6 md:right-0 bg-[#2C5E2E] text-white rounded-2xl px-3 py-2.5 shadow-xl z-30 flex items-center gap-2"
+            className="absolute top-4 right-0 md:top-8 md:-right-2 bg-[#2C5E2E] text-white rounded-2xl px-4 py-3 shadow-xl z-30 flex items-center gap-2"
           >
             <TrendingUp className="w-4 h-4 text-[#FFC727]" />
             <span className="text-xs md:text-sm font-bold">Earn Daily</span>
           </motion.div>
 
-          {/* Fast delivery badge — lower right */}
+          {/* Fast delivery badge — mid right */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.9 }}
-            className="absolute bottom-[28%] right-[2%] md:right-[-4%] bg-white rounded-2xl px-3 py-2.5 shadow-lg z-30 flex items-center gap-2 border border-gray-100"
+            className="absolute bottom-[55%] right-0 md:-right-2 bg-white rounded-2xl px-4 py-3 shadow-lg z-30 flex items-center gap-2 border border-gray-100"
           >
             <Zap className="w-4 h-4 text-[#FFC727]" />
-            <span className="text-xs font-bold text-[#1A3F1C]">Fast Delivery</span>
-          </motion.div>
-
-          {/* Animated route dots */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.7 }}
-            className="absolute bottom-[50%] left-[30%] z-30 flex gap-1.5 items-center"
-          >
-            {[0, 1, 2, 3].map((i) => (
-              <motion.div
-                key={i}
-                animate={{ opacity: [0.25, 1, 0.25] }}
-                transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.25 }}
-                className={`rounded-full bg-[#2C5E2E] ${i === 0 || i === 3 ? "w-2 h-2" : "w-1.5 h-1.5"}`}
-              />
-            ))}
+            <span className="text-xs md:text-sm font-bold text-[#1A3F1C]">Fast Delivery</span>
           </motion.div>
         </motion.div>
 

@@ -102,14 +102,14 @@ export default function Hero() {
           <motion.div
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -left-6 top-8 bg-white border border-[#2C5E2E]/20 rounded-2xl px-3 py-2 shadow-lg flex items-center gap-2 text-xs font-semibold text-[#1A3F1C]"
+            className="absolute -left-16 sm:-left-20 top-8 bg-white border border-[#2C5E2E]/20 rounded-2xl px-3 py-2 shadow-lg flex items-center gap-2 text-xs font-semibold text-[#1A3F1C]"
           >
             💬 Chat with us
           </motion.div>
           <motion.div
             animate={{ y: [0, 5, 0] }}
             transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            className="absolute -right-6 bottom-16 bg-[#FFC727] rounded-2xl px-3 py-2 shadow-lg flex items-center gap-2 text-xs font-semibold text-[#1A3F1C]"
+            className="absolute -right-16 sm:-right-20 bottom-16 bg-[#FFC727] rounded-2xl px-3 py-2 shadow-lg flex items-center gap-2 text-xs font-semibold text-[#1A3F1C]"
           >
             📧 Quick response
           </motion.div>

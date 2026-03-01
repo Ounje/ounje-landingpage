@@ -21,7 +21,7 @@ const FAQSection = () => {
       id="FAQ"
       className="relative py-16 md:py-24 px-4 md:px-8 overflow-hidden"
       style={{
-        backgroundImage: "url(/public/images/FAQs-bg.png)",
+        backgroundImage: "url(/images/FAQs-bg.png)",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

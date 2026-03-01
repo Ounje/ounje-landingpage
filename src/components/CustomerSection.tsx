@@ -109,7 +109,7 @@ const CustomerSection = () => {
             initial={{ x: 0, opacity: 0 }}
             animate={isInView ? {
               x: [0, 80, 80, 0],
-              opacity: [0, 1, 1, 0],
+              opacity: [0, 1, 0, 0],
             } : { x: 0, opacity: 0 }}
             transition={{
               duration: 5,

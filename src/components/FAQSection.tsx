@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Plus, HelpCircle } from "lucide-react";
 
 const faqs = [
   { q: "What is Ounje?", a: "Ounje (which means 'food' in Yoruba) is a Nigerian food delivery platform connecting hungry customers to local vendors — fast, affordable, and fresh." },
@@ -38,7 +38,7 @@ const FAQSection = () => {
           className="text-center mb-12"
         >
           <span className="inline-flex items-center gap-2 bg-white/15 border border-white/25 rounded-full px-4 py-1.5 text-xs font-semibold text-white mb-4">
-            ❓ Got Questions?
+            <HelpCircle className="w-3.5 h-3.5" /> Got Questions?
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-3">
             Frequently Asked Questions

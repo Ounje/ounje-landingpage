@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import WhatsAppOrderModal from "../modals/WhatsAppOrderModal";
+import NewsletterSuccessModal from "../modals/NewsletterSuccessModal";
 import { MessageCircle } from "lucide-react";
 
 const WHATSAPP_NUMBER = "2348123358739";
@@ -10,13 +11,14 @@ const WHATSAPP_NUMBER = "2348123358739";
 const Footer = () => {
   const [email, setEmail] = useState("");
   const [isOrderOpen, setIsOrderOpen] = useState(false);
+  const [isNewsletterSuccess, setIsNewsletterSuccess] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Newsletter service coming soon! Thanks for your interest.");
     setEmail("");
+    setIsNewsletterSuccess(true);
   };
 
   const container = {
@@ -115,7 +117,7 @@ const Footer = () => {
               {
                 title: "Be a Part of Us",
                 links: [
-                  { label: "Careers", to: "/#customer" },
+                  { label: "Join as Customer", to: "/#joinUs" },
                   { label: "Ounje for Vendors", to: "/#vendor" },
                   { label: "Become a Rider", to: "/#rider" },
                 ],
@@ -190,6 +192,7 @@ const Footer = () => {
       </footer>
 
       <WhatsAppOrderModal isOpen={isOrderOpen} onClose={() => setIsOrderOpen(false)} />
+      <NewsletterSuccessModal isOpen={isNewsletterSuccess} onClose={() => setIsNewsletterSuccess(false)} />
     </>
   );
 };

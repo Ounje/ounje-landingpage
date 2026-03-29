@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const teamMembers = [
   { img: "/images/team/south-madu.png", name: "South Madu" },
-  { img: "/images/team/ego-chukwuebuka.png", name: "Ego Chukwuebuka" },
+  { img: "/images/team/ego-chukwuebuka.png", name: "Ago Chukwubuikem" },
   { img: "/images/team/dandy-chukwudi.png", name: "Dandy Chukwudi" },
   { img: "/images/team/charles-chukudi.png", name: "Charles Chukwudi" },
   { img: "/images/team/osarhe-micheal.png", name: "Osarhe Michael" },
@@ -14,7 +14,8 @@ const teamMembers = [
 export default function TeamSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const prev = () => setActiveIndex((i) => (i - 1 + teamMembers.length) % teamMembers.length);
+  const prev = () =>
+    setActiveIndex((i) => (i - 1 + teamMembers.length) % teamMembers.length);
   const next = () => setActiveIndex((i) => (i + 1) % teamMembers.length);
 
   useEffect(() => {
@@ -23,7 +24,7 @@ export default function TeamSection() {
   }, []);
 
   return (
-    <section className="py-16 md:py-20 bg-white overflow-hidden">
+    <section className="py-16 overflow-hidden bg-white md:py-20">
       {/* Title banner */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -32,19 +33,23 @@ export default function TeamSection() {
         transition={{ duration: 0.6 }}
         className="w-full bg-[#1A3F1C] py-10 flex flex-col items-center gap-2 mb-8 md:mb-12"
       >
-        <h2 className="text-white text-2xl md:text-4xl font-extrabold">Meet The Team</h2>
-        <p className="text-white/60 text-xs md:text-sm font-medium">The people making Ounje happen</p>
+        <h2 className="text-2xl font-extrabold text-white md:text-4xl">
+          Meet The Team
+        </h2>
+        <p className="text-xs font-medium text-white/60 md:text-sm">
+          The people making Ounje happen
+        </p>
       </motion.div>
 
       {/* Subtext */}
       <p className="text-center text-[#1A3F1C]/70 px-6 md:px-24 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
-        Meet the team that has been working behind the screens making sure you get the best
-        experience. We have all faced the problems you have encountered and that's why we are
-        here to serve you better.
+        Meet the team that has been working behind the screens making sure you
+        get the best experience. We have all faced the problems you have
+        encountered and that's why we are here to serve you better.
       </p>
 
       {/* Mobile — Carousel */}
-      <div className="md:hidden flex flex-col items-center px-6">
+      <div className="flex flex-col items-center px-6 md:hidden">
         <div className="relative w-full max-w-[300px] flex items-center justify-center">
           {/* Prev button */}
           <button
@@ -66,7 +71,7 @@ export default function TeamSection() {
               <img
                 src={teamMembers[activeIndex].img}
                 alt={teamMembers[activeIndex].name}
-                className="w-full h-full object-cover"
+                className="object-cover w-full h-full"
               />
             </motion.div>
           </AnimatePresence>
@@ -103,7 +108,7 @@ export default function TeamSection() {
       </div>
 
       {/* Desktop — Responsive Grid */}
-      <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6 px-8 lg:px-24 max-w-5xl mx-auto">
+      <div className="hidden max-w-5xl grid-cols-2 gap-6 px-8 mx-auto md:grid lg:grid-cols-3 lg:px-24">
         {teamMembers.map((member, i) => (
           <motion.div
             key={member.img}
@@ -117,11 +122,11 @@ export default function TeamSection() {
             <img
               src={member.img}
               alt={member.name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
             />
             {/* Name overlay on hover */}
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-              <p className="text-white font-semibold text-sm">{member.name}</p>
+            <div className="absolute inset-x-0 bottom-0 p-4 transition-transform duration-300 translate-y-full bg-gradient-to-t from-black/70 to-transparent group-hover:translate-y-0">
+              <p className="text-sm font-semibold text-white">{member.name}</p>
             </div>
           </motion.div>
         ))}

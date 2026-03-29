@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Users } from "lucide-react";
 
 export default function JoinTeamSection() {
   return (
@@ -17,7 +17,7 @@ export default function JoinTeamSection() {
 
         {/* Badge */}
         <span className="mb-4 inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-xs font-semibold text-white/80">
-          🤝 We're Hiring
+          <Users className="w-3.5 h-3.5" /> We're Hiring
         </span>
 
         <h2 className="text-white text-2xl md:text-3xl font-extrabold mb-3 leading-tight">

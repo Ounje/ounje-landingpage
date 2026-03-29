@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Loader2 } from "lucide-react";
+import { Send, Loader2, Mail, CheckCircle2 } from "lucide-react";
 
 const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string;
 
@@ -63,7 +63,7 @@ export default function FormSection() {
           className="text-center mb-10"
         >
           <span className="inline-flex items-center gap-2 bg-[#ECFFED] border border-[#2C5E2E]/20 rounded-full px-4 py-1.5 text-xs font-semibold text-[#2C5E2E] mb-4">
-            ✉️ Send a Message
+            <Mail className="w-3.5 h-3.5" /> Send a Message
           </span>
           <h2 className="text-2xl md:text-3xl font-extrabold text-[#1A3F1C] mb-2">Drop us a line</h2>
           <p className="text-gray-500 text-sm md:text-base">We typically respond within 24 hours.</p>
@@ -83,7 +83,9 @@ export default function FormSection() {
               animate={{ opacity: 1, scale: 1 }}
               className="text-center py-10 space-y-3"
             >
-              <div className="text-4xl">✅</div>
+              <div className="flex justify-center">
+                <CheckCircle2 className="w-12 h-12 text-[#2C5E2E]" />
+              </div>
               <h3 className="text-xl font-extrabold text-[#1A3F1C]">Message Sent!</h3>
               <p className="text-gray-500 text-sm">We've received your message and will get back to you within 24 hours.</p>
               <button

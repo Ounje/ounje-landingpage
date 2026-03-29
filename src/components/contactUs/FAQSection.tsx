@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Plus, HelpCircle } from "lucide-react";
 
 interface FAQ {
   id: string;
@@ -63,7 +63,7 @@ export default function FAQSection() {
         className="w-full bg-[#1A3F1C] py-10 flex flex-col items-center gap-2 mb-12"
       >
         <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-xs font-semibold text-white/80 mb-2">
-          ❓ Got Questions?
+          <HelpCircle className="w-3.5 h-3.5" /> Got Questions?
         </span>
         <h2 className="text-white text-2xl md:text-4xl font-extrabold">Frequently Asked Questions</h2>
         <p className="text-white/60 text-xs md:text-sm font-medium">Everything you need to know about OunjeFood</p>

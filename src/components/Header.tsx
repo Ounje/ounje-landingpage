@@ -2,22 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { MapPin, Menu, X, ShoppingBag, ChevronDown } from "lucide-react";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "./ui/Select";
+import { Menu, X, ShoppingBag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import WhatsAppOrderModal from "../modals/WhatsAppOrderModal";
-
-const cities = [
-  { label: "Lagos", value: "lagos" },
-  { label: "Abuja", value: "abuja" },
-  { label: "Enugu", value: "enugu" },
-];
 
 const menuItems = [
   { label: "Join Us", href: "/#joinUs" },
@@ -28,7 +15,6 @@ const menuItems = [
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLocationOpen, setIsLocationOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOrderOpen, setIsOrderOpen] = useState(false);
   const navigate = useNavigate();
@@ -138,32 +124,8 @@ const Header = () => {
             })}
           </nav>
 
-          {/* ─── Desktop right: Location + Order Now ─── */}
+          {/* ─── Desktop right: Order Now ─── */}
           <div className="hidden md:flex items-center gap-3">
-            <Select onOpenChange={setIsLocationOpen} defaultValue="">
-              <SelectTrigger className="flex items-center gap-1.5 rounded-2xl px-3 py-2 bg-white text-[#1A3F1C] text-sm font-semibold border border-[#2C5E2E]/20 shadow-sm hover:bg-[#ECFFED] transition cursor-pointer">
-                <MapPin className="w-3.5 h-3.5 text-[#2C5E2E] flex-shrink-0" />
-                <SelectValue placeholder="Location" />
-                <motion.div
-                  animate={{ rotate: isLocationOpen ? 180 : 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <ChevronDown className="w-3.5 h-3.5 text-[#2C5E2E]" />
-                </motion.div>
-              </SelectTrigger>
-              <SelectContent className="bg-white border border-[#2C5E2E]/15 rounded-2xl shadow-lg overflow-hidden">
-                {cities.map((city) => (
-                  <SelectItem
-                    key={city.value}
-                    value={city.value}
-                    className="text-sm font-medium text-[#1A3F1C] hover:bg-[#ECFFED] cursor-pointer"
-                  >
-                    {city.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
             <motion.button
               onClick={() => setIsOrderOpen(true)}
               whileHover={{ scale: 1.04 }}
@@ -292,35 +254,6 @@ const Header = () => {
                   );
                 })}
 
-                {/* Location picker */}
-                <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.25, delay: 0.06 * menuItems.length }}
-                  className="flex items-center gap-2 bg-white/10 rounded-2xl px-4 py-3 mt-2"
-                >
-                  <MapPin className="w-4 h-4 text-[#FFC727] flex-shrink-0" />
-                  <Select defaultValue="">
-                    <SelectTrigger className="flex-1 bg-transparent border-none shadow-none text-white text-sm font-semibold focus:ring-0 p-0">
-                      <SelectValue placeholder="Select Location" />
-                    </SelectTrigger>
-                    <SelectContent
-                      className="bg-[#1A3F1C] border border-white/20 rounded-2xl shadow-xl z-[70]"
-                      side="bottom"
-                      align="start"
-                    >
-                      {cities.map((city) => (
-                        <SelectItem
-                          key={city.value}
-                          value={city.value}
-                          className="text-white/80 hover:text-white hover:bg-white/10 text-sm font-medium cursor-pointer"
-                        >
-                          {city.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </motion.div>
               </nav>
             </motion.div>
           </>

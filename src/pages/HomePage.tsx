@@ -7,6 +7,8 @@ import JoinUsSection from "../components/JoinUsSection";
 import RiderSection from "../components/RiderSection";
 import VendorSection from "../components/VendorSection";
 import FAQSection from "../components/FAQSection";
+import TaglineStrip from "../components/TaglineStrip";
+import CoverageSection from "../components/CoverageSection";
 import { useLocation } from "react-router-dom";
 
 export default function HomePage() {
@@ -33,7 +35,9 @@ export default function HomePage() {
     <div className="bg-[#ECFFED] overflow-x-hidden">
       <Header />
       <HeroSection />
+      <TaglineStrip />
       <CustomerSection />
+      <CoverageSection />
       <VendorSection />
       <RiderSection />
       <JoinUsSection />

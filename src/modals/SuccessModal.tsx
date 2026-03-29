@@ -67,7 +67,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
               transition={{ delay: 0.3, duration: 0.35 }}
               className="text-[#1A3F1C] font-extrabold text-xl md:text-2xl leading-snug mb-2"
             >
-              You're on the list! 🎉
+              You're on the list!
             </motion.h2>
 
             <motion.p

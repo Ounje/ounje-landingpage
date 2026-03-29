@@ -1,4 +1,4 @@
-import { X, Loader2 } from "lucide-react";
+import { X, Loader2, Rocket, Bell } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, type ChangeEvent } from "react";
 import SuccessModal from "./SuccessModal";
@@ -143,7 +143,7 @@ export default function ComingSoonModal({ isOpen, onClose }: ComingSoonModalProp
                 className="text-center mb-2 relative z-10"
               >
                 <span className="inline-flex items-center gap-2 bg-white/15 border border-white/20 rounded-full px-3 py-1 text-xs font-semibold text-white/80 mb-3">
-                  🚀 Launching Soon
+                  <Rocket className="w-3.5 h-3.5" /> Launching Soon
                 </span>
                 <h1 className="text-3xl md:text-5xl font-extrabold mb-3">Coming Soon!!</h1>
                 <p className="text-white/75 text-sm md:text-base max-w-md mx-auto">
@@ -240,7 +240,10 @@ export default function ComingSoonModal({ isOpen, onClose }: ComingSoonModalProp
                     Sending...
                   </>
                 ) : (
-                  "Get Notified 🔔"
+                  <>
+                    <Bell className="w-4 h-4" />
+                    Get Notified
+                  </>
                 )}
               </motion.button>
             </motion.div>

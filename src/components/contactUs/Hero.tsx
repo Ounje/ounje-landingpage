@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { MessageCircle, Mail } from "lucide-react";
 
 export default function Hero() {
   const phrases = ["We'd love to hear from you", "Contact us"];
@@ -34,10 +35,6 @@ export default function Hero() {
       id="contactHero"
       className="relative overflow-hidden bg-gradient-to-b from-[#ECFFED] to-white pt-28 pb-12 md:pb-16"
     >
-      {/* Decorative blobs */}
-      <div className="absolute top-10 left-[5%] w-56 h-56 bg-[#FFC727]/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-20 right-[5%] w-48 h-48 bg-[#2C5E2E]/10 rounded-full blur-3xl pointer-events-none" />
-
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 flex flex-col items-center text-center">
         {/* Badge */}
         <motion.div
@@ -98,20 +95,22 @@ export default function Hero() {
             />
           </motion.div>
 
-          {/* Floating contact badges */}
+          {/* Floating contact badges — icons only, no emojis */}
           <motion.div
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             className="absolute -left-16 sm:-left-20 top-8 bg-white border border-[#2C5E2E]/20 rounded-2xl px-3 py-2 shadow-lg flex items-center gap-2 text-xs font-semibold text-[#1A3F1C]"
           >
-            💬 Chat with us
+            <MessageCircle className="w-3.5 h-3.5 text-[#2C5E2E]" />
+            Chat with us
           </motion.div>
           <motion.div
             animate={{ y: [0, 5, 0] }}
             transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             className="absolute -right-16 sm:-right-20 bottom-16 bg-[#FFC727] rounded-2xl px-3 py-2 shadow-lg flex items-center gap-2 text-xs font-semibold text-[#1A3F1C]"
           >
-            📧 Quick response
+            <Mail className="w-3.5 h-3.5" />
+            Quick response
           </motion.div>
         </motion.div>
       </div>

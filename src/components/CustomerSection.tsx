@@ -51,6 +51,18 @@ const features = [
     bubble: "Your rider is on the way",
     bottom: "tracking" as const,
   },
+  {
+    image: "/assets/fast-delivery.png",
+    title: "Fast Delivery",
+    copy: "From order to doorstep in minutes. Hot, fresh, and always on time.",
+    bg: "#FFC727",
+    titleColor: "text-[#1A3F1C]",
+    copyColor: "text-[#1A3F1C]/70",
+    Icon: CheckCircle2,
+    iconColor: "text-[#2C5E2E]",
+    bubble: "Your food is almost there!",
+    bottom: "plate" as const,
+  },
 ];
 
 const SLIDE_COUNT = features.length;
@@ -312,6 +324,8 @@ const CustomerSection = () => {
                     exit="exit"
                     transition={{ duration: 0.45, ease: "easeOut" }}
                     className="h-[54vh] md:h-[70vh] max-h-[640px] w-auto object-contain drop-shadow-2xl"
+                    loading="eager"
+                    decoding="async"
                   />
                 </AnimatePresence>
 

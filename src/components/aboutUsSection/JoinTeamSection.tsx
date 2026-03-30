@@ -13,19 +13,20 @@ export default function JoinTeamSection() {
       >
         {/* Decorative circle */}
         <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#FFC727]/10 rounded-full blur-2xl pointer-events-none" />
-        <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-white/5 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute w-40 h-40 rounded-full pointer-events-none -bottom-10 -left-10 bg-white/5 blur-2xl" />
 
         {/* Badge */}
         <span className="mb-4 inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-xs font-semibold text-white/80">
-          <Users className="w-3.5 h-3.5" /> We're Hiring
+          <Users className="w-3.5 h-3.5" /> Check Out Open Roles
         </span>
 
-        <h2 className="text-white text-2xl md:text-3xl font-extrabold mb-3 leading-tight">
+        <h2 className="mb-3 text-2xl font-extrabold leading-tight text-white md:text-3xl">
           Join Our Team
         </h2>
-        <p className="text-white/70 text-sm md:text-base max-w-md leading-relaxed mb-8">
-          Together we can make a difference in serving the nation one plate at a time.
-          If you're passionate about food and technology, we'd love to hear from you.
+        <p className="max-w-md mb-8 text-sm leading-relaxed text-white/70 md:text-base">
+          Together we can make a difference in serving the nation one plate at a
+          time. If you're passionate about food and technology, we'd love to
+          hear from you.
         </p>
 
         <motion.a

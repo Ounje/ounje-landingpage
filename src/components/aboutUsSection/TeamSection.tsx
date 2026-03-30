@@ -8,7 +8,7 @@ const teamMembers = [
   { img: "/images/team/dandy-chukwudi.png", name: "Dandy Chukwudi" },
   { img: "/images/team/charles-chukudi.png", name: "Charles Chukwudi" },
   { img: "/images/team/osarhe-micheal.png", name: "Osarhe Michael" },
-  { img: "/images/team/samuel-nyado.png", name: "Samuel Nyado" },
+  { img: "/images/team/samuel-nyado.png", name: "Samuel Kayode" },
 ];
 
 export default function TeamSection() {

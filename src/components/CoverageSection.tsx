@@ -1,6 +1,7 @@
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { MapPin, Plane, Building2, ShoppingBag, BookOpen, Sparkles, X } from "lucide-react";
+import { MapPin, Plane, Building2, ShoppingBag, BookOpen } from "lucide-react";
+import WhatsAppOrderModal from "../modals/WhatsAppOrderModal";
 
 const zones = [
   {
@@ -35,82 +36,6 @@ const zones = [
 ];
 
 type Zone = typeof zones[number];
-
-/* ── Map modal (browser-window style) ── */
-const MapModal = ({ zone, onClose }: { zone: Zone; onClose: () => void }) => (
-  <AnimatePresence>
-    <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {/* Backdrop */}
-      <motion.div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
-
-      {/* Window */}
-      <motion.div
-        initial={{ scale: 0.92, opacity: 0, y: 24 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.92, opacity: 0, y: 24 }}
-        transition={{ type: "spring", stiffness: 300, damping: 28 }}
-        className="relative w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl z-10"
-        style={{ border: "3px solid #A8D5B0" }}
-      >
-        {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-3" style={{ background: "#A8D5B0" }}>
-          {/* Traffic dots */}
-          <button
-            onClick={onClose}
-            className="w-3 h-3 rounded-full bg-[#FF5F57] hover:brightness-110 transition shrink-0"
-          />
-          <span className="w-3 h-3 rounded-full bg-[#FFBD2E] shrink-0" />
-          <span className="w-3 h-3 rounded-full bg-[#28C840] shrink-0" />
-
-          {/* URL bar */}
-          <div
-            className="flex-1 mx-3 rounded-md h-6 flex items-center px-3 gap-1.5"
-            style={{ background: "rgba(44,94,46,0.15)" }}
-          >
-            <MapPin className="w-3 h-3 shrink-0" style={{ color: "rgba(26,63,28,0.5)" }} />
-            <span className="text-xs font-mono truncate" style={{ color: "rgba(26,63,28,0.6)" }}>
-              {zone.name}, Lagos · OunjeFood Delivery Zone
-            </span>
-          </div>
-
-          {/* Close */}
-          <button
-            onClick={onClose}
-            className="ml-1 w-7 h-7 rounded-lg flex items-center justify-center hover:bg-black/10 transition shrink-0"
-          >
-            <X className="w-4 h-4 text-[#1A3F1C]/60" />
-          </button>
-        </div>
-
-        {/* Map iframe */}
-        <iframe
-          src={zone.embedSrc}
-          title={`Map of ${zone.name}, Lagos`}
-          className="w-full"
-          style={{ height: "420px", border: "none", display: "block" }}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-
-        {/* Footer strip */}
-        <div className="px-5 py-3 flex items-center gap-2 bg-[#1A3F1C]">
-          <zone.Icon className="w-4 h-4 text-[#FFC727] shrink-0" />
-          <span className="text-white font-bold text-sm">{zone.name}</span>
-          <span className="text-white/40 text-xs">· Active delivery zone</span>
-          <span className="ml-auto w-2 h-2 bg-[#28C840] rounded-full animate-pulse" />
-        </div>
-      </motion.div>
-    </motion.div>
-  </AnimatePresence>
-);
 
 /* ── Abstract Lagos road map SVG ── */
 const MapSVG = () => (
@@ -194,7 +119,7 @@ const Pin = ({
 const CoverageSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
-  const [activeZone, setActiveZone] = useState<Zone | null>(null);
+  const [orderLocation, setOrderLocation] = useState<string | null>(null);
 
   return (
     <>
@@ -204,7 +129,6 @@ const CoverageSection = () => {
         style={{ background: "linear-gradient(180deg, #1A3F1C 0%, #0f2e12 100%)" }}
       >
         <MapSVG />
-        <Sparkles className="absolute bottom-6 right-8 w-8 h-8 text-white/20 z-10" />
 
         <div className="relative z-10 pt-12 pb-0">
           <motion.p
@@ -233,7 +157,7 @@ const CoverageSection = () => {
                 key={z.name}
                 {...z}
                 delay={0.3 + i * 0.12}
-                onClick={() => setActiveZone(z)}
+                onClick={() => setOrderLocation(z.name)}
               />
             ))}
           </div>
@@ -250,13 +174,13 @@ const CoverageSection = () => {
             {zones.map((z) => (
               <button
                 key={z.name}
-                onClick={() => setActiveZone(z)}
+                onClick={() => setOrderLocation(z.name)}
                 className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/18 border border-white/15 rounded-full px-5 py-2.5 transition-colors group"
               >
                 <MapPin className="w-3.5 h-3.5 text-[#FFC727] shrink-0" />
                 <span className="text-white text-xs md:text-sm font-medium">{z.name}</span>
                 <span className="text-[#FFC727] text-xs font-bold uppercase tracking-wider group-hover:underline">
-                  View on map
+                  Order here
                 </span>
               </button>
             ))}
@@ -269,10 +193,11 @@ const CoverageSection = () => {
         </motion.div>
       </section>
 
-      {/* Map modal */}
-      {activeZone && (
-        <MapModal zone={activeZone} onClose={() => setActiveZone(null)} />
-      )}
+      <WhatsAppOrderModal
+        isOpen={orderLocation !== null}
+        onClose={() => setOrderLocation(null)}
+        defaultLocation={orderLocation ?? ""}
+      />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Plus, Minus, ShoppingBag, MessageCircle, Trash2 } from "lucide-react";
 
@@ -36,16 +36,21 @@ interface CartItem extends MenuItem {
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  defaultLocation?: string;
 }
 
-export default function WhatsAppOrderModal({ isOpen, onClose }: Props) {
+export default function WhatsAppOrderModal({ isOpen, onClose, defaultLocation }: Props) {
   const [activeCategory, setActiveCategory] = useState("All");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [step, setStep] = useState<"menu" | "details">("menu");
   const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(defaultLocation ?? "");
   const [phone, setPhone] = useState("");
   const [note, setNote] = useState("");
+
+  useEffect(() => {
+    if (defaultLocation) setLocation(defaultLocation);
+  }, [defaultLocation]);
 
   const filtered = activeCategory === "All" ? menuItems : menuItems.filter(m => m.category === activeCategory);
 
@@ -93,7 +98,10 @@ export default function WhatsAppOrderModal({ isOpen, onClose }: Props) {
 
   const handleClose = () => {
     onClose();
-    setTimeout(() => { setStep("menu"); }, 400);
+    setTimeout(() => {
+      setStep("menu");
+      setLocation(defaultLocation ?? "");
+    }, 400);
   };
 
   return (

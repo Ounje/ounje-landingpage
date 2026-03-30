@@ -17,7 +17,7 @@ const ticker = [...items, ...items];
 
 const TaglineStrip = () => {
   return (
-    <div className="bg-[#1A3F1C] py-4 overflow-hidden select-none">
+    <div className="py-4 overflow-hidden select-none" style={{ background: "linear-gradient(90deg, #B8DEFF 0%, #D4ECFF 50%, #B8DEFF 100%)" }}>
       <motion.div
         animate={{ x: ["0%", "-50%"] }}
         transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -27,14 +27,14 @@ const TaglineStrip = () => {
           <div
             key={i}
             className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl shrink-0"
-            style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.09)" }}
+            style={{ background: "rgba(255,255,255,0.55)", border: "1px solid rgba(100,160,220,0.25)" }}
           >
             <item.Icon
               style={{ color: item.iconColor }}
               className="w-4 h-4 shrink-0"
               strokeWidth={2}
             />
-            <span className="text-white/90 text-sm font-semibold">
+            <span className="text-[#1A3F1C]/80 text-sm font-semibold">
               {item.text}
             </span>
           </div>

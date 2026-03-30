@@ -275,6 +275,8 @@ const HeroSection = () => {
           src="/icons/Street Food-cuate.png"
           alt="Person ordering food"
           className="w-[130px] h-auto md:w-[260px] lg:w-[390px] object-contain drop-shadow-2xl"
+          loading="eager"
+          decoding="async"
         />
       </motion.div>
 
@@ -289,6 +291,8 @@ const HeroSection = () => {
           src="/icons/Take Away-cuate.png"
           alt="Food delivery arriving"
           className="w-[130px] h-auto md:w-[260px] lg:w-[390px] object-contain drop-shadow-2xl"
+          loading="eager"
+          decoding="async"
         />
       </motion.div>
 

@@ -44,6 +44,8 @@ const BrowserFrame = ({ src, alt, height }: { src: string; alt: string; height: 
         src={src}
         alt={alt}
         className="w-full h-full object-cover"
+        loading="lazy"
+        decoding="async"
         draggable={false}
       />
     </div>

@@ -304,10 +304,10 @@ const CustomerSection = () => {
 
           {/* ── Content grid ── */}
           <div className="h-full flex flex-col">
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-7xl mx-auto w-full px-6 md:px-16 pt-14 pb-2 items-center">
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 max-w-7xl mx-auto w-full px-4 md:px-16 pt-8 md:pt-14 pb-2 items-center">
 
-              {/* Left — Phone */}
-              <div className="relative flex items-center justify-center h-full">
+              {/* Left — Phone (hidden on mobile, shown md+) */}
+              <div className="relative hidden md:flex items-center justify-center h-full">
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.img
                     key={activeIndex}
@@ -348,8 +348,8 @@ const CustomerSection = () => {
                 </AnimatePresence>
               </div>
 
-              {/* Right — Feature card */}
-              <div className="relative h-full flex items-center">
+              {/* Right — Feature card (full width on mobile, half on md+) */}
+              <div className="relative h-full flex items-center col-span-1">
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
                     key={activeIndex}
@@ -363,10 +363,10 @@ const CustomerSection = () => {
                     animate="center"
                     exit="exit"
                     transition={{ duration: 0.42, ease: "easeOut" }}
-                    className="w-full rounded-3xl p-8 md:p-12 flex flex-col"
+                    className="w-full rounded-3xl p-6 md:p-12 flex flex-col"
                     style={{
                       background: f.bg,
-                      minHeight: "min(68vh, 600px)",
+                      minHeight: "min(78vh, 600px)",
                     }}
                   >
                     {/* Icon + counter */}
@@ -402,7 +402,7 @@ const CustomerSection = () => {
             </div>
 
             {/* ── Bottom bar: CTAs + scroll hint ── */}
-            <div className="pb-6 md:pb-8 flex flex-col items-center gap-3 px-4">
+            <div className="pb-4 md:pb-8 flex flex-col items-center gap-2 md:gap-3 px-4">
               <div className="flex flex-col sm:flex-row items-center gap-3">
                 <motion.button
                   whileHover={{ scale: 1.04 }}

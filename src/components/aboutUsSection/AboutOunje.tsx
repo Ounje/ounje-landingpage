@@ -50,12 +50,13 @@ export default function AboutOunje() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="py-20 md:py-32 px-4 md:px-8 lg:px-16 bg-white overflow-hidden">
+    <section
+      ref={ref}
+      className="px-4 py-20 overflow-hidden bg-white md:py-32 md:px-8 lg:px-16"
+    >
       <div className="max-w-6xl mx-auto">
-
         {/* ── Top text block ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 mb-20 items-start">
-
+        <div className="grid items-start grid-cols-1 gap-12 mb-20 lg:grid-cols-2 md:gap-20">
           {/* Left — brand statement */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -69,8 +70,10 @@ export default function AboutOunje() {
               className="font-extrabold text-[#1A3F1C] leading-[1.0] mb-6"
               style={{ fontSize: "clamp(44px, 7vw, 88px)" }}
             >
-              Built for<br />
-              everyday<br />
+              Built for
+              <br />
+              everyday
+              <br />
               <span className="text-[#2C5E2E]">Nigerians.</span>
             </h2>
             {/* Accent bar */}
@@ -90,26 +93,24 @@ export default function AboutOunje() {
             className="flex flex-col gap-6 pt-2 lg:pt-12"
           >
             <p className="text-[#1A3F1C]/75 text-base md:text-lg leading-relaxed">
-              OUNJE connects you to your favourite local food vendors quickly,
-              affordably, and the way you like it. Born from the need for generous,
-              affordable meals, OUNJE lets you build your own plate — just like at
-              your favourite buka.
+              OUNJEFOOD connects you to your favourite local food vendors
+              quickly, affordably, and the way you like it. Born from the need
+              for generous, affordable meals, OUNJEFOOD lets you build your own
+              plate — just like at your favourite buka.
             </p>
             <p className="text-[#1A3F1C]/75 text-base md:text-lg leading-relaxed">
-              We work with trusted home chefs and food spots, giving them a way to
-              serve you better while keeping things simple and local. From Pidgin
-              support to seamless delivery, OUNJE is built for you.
+              We work with trusted home chefs and food spots, giving them a way
+              to serve you better while keeping things simple and local. From
+              Pidgin support to seamless delivery, OUNJEFOOD is built for you.
             </p>
-            <p
-              className="text-xl md:text-2xl font-extrabold text-[#2C5E2E] leading-snug"
-            >
+            <p className="text-xl md:text-2xl font-extrabold text-[#2C5E2E] leading-snug">
               "Na food wey go belleful you."
             </p>
           </motion.div>
         </div>
 
         {/* ── Feature cards ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((f, i) => (
             <motion.div
               key={f.title}
@@ -117,12 +118,12 @@ export default function AboutOunje() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.25 + i * 0.1 }}
               whileHover={{ y: -6, transition: { duration: 0.22 } }}
-              className="rounded-3xl p-7 flex flex-col gap-4 cursor-default"
+              className="flex flex-col gap-4 cursor-default rounded-3xl p-7"
               style={{ background: f.bg }}
             >
               {/* Icon */}
               <div
-                className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0"
+                className="flex items-center justify-center w-12 h-12 rounded-2xl shrink-0"
                 style={{ background: f.iconBg }}
               >
                 <f.Icon className="w-6 h-6" style={{ color: f.iconColor }} />
@@ -130,7 +131,9 @@ export default function AboutOunje() {
 
               {/* Text */}
               <div>
-                <h3 className={`font-extrabold text-lg mb-2 leading-tight ${f.textColor}`}>
+                <h3
+                  className={`font-extrabold text-lg mb-2 leading-tight ${f.textColor}`}
+                >
                   {f.title}
                 </h3>
                 <p className={`text-sm leading-relaxed ${f.descColor}`}>
@@ -140,7 +143,6 @@ export default function AboutOunje() {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );

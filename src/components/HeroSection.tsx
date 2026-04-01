@@ -102,7 +102,12 @@ const HeroSection = () => {
       {/* Cloud 2 */}
       <motion.div
         animate={{ x: [0, -22, 0] }}
-        transition={{ duration: 28, repeat: Infinity, ease: "easeInOut", delay: 6 }}
+        transition={{
+          duration: 28,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 6,
+        }}
         className="absolute top-28 right-[28%] pointer-events-none z-0 hidden md:block"
       >
         <div className="relative w-20 h-8">
@@ -114,7 +119,12 @@ const HeroSection = () => {
       {/* Cloud 3 */}
       <motion.div
         animate={{ x: [0, 15, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 3,
+        }}
         className="absolute top-10 right-[4%] pointer-events-none z-0 hidden lg:block"
       >
         <div className="relative w-16 h-6">
@@ -128,7 +138,7 @@ const HeroSection = () => {
         variants={container}
         initial="hidden"
         animate={controls}
-        className="relative z-10 flex flex-col items-center px-4 text-center pt-24 md:pt-32"
+        className="relative z-10 flex flex-col items-center px-4 pt-24 text-center md:pt-32"
       >
         {/* Badge */}
         <motion.div
@@ -136,7 +146,7 @@ const HeroSection = () => {
           className="mb-6 inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-[#2C5E2E]/20 rounded-full px-4 py-1.5 text-xs md:text-sm font-semibold text-[#2C5E2E] shadow-sm"
         >
           <span className="w-2 h-2 bg-[#FFC727] rounded-full animate-pulse inline-block" />
-          Nigeria's Fastest Food Delivery
+          Authentic Nigerian Food
         </motion.div>
 
         {/* Static headline */}
@@ -145,7 +155,8 @@ const HeroSection = () => {
           className="font-extrabold text-[#1A3F1C] leading-[1.05] tracking-tight mb-4"
           style={{ fontSize: "clamp(42px, 9vw, 120px)" }}
         >
-          Naija food,<br />
+          Naija food,
+          <br />
           at your door{" "}
           <span className="text-[#2C5E2E] relative inline-block">
             fast.
@@ -162,7 +173,7 @@ const HeroSection = () => {
         {/* Rotating multilingual subtext */}
         <motion.div
           variants={fadeUp}
-          className="mb-7 md:mb-9 h-8 md:h-10 flex items-center justify-center gap-3"
+          className="flex items-center justify-center h-8 gap-3 mb-7 md:mb-9 md:h-10"
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -189,7 +200,7 @@ const HeroSection = () => {
         {/* Food ticker */}
         <motion.div
           variants={fadeUp}
-          className="w-full max-w-lg md:max-w-2xl mb-8 md:mb-10 overflow-hidden relative"
+          className="relative w-full max-w-lg mb-8 overflow-hidden md:max-w-2xl md:mb-10"
         >
           {/* fade edges */}
           <div className="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-[#EAF6FF] to-transparent z-10 pointer-events-none" />
@@ -269,7 +280,7 @@ const HeroSection = () => {
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.85, delay: 0.5, ease: "easeOut" }}
-        className="absolute left-0 z-10 pointer-events-none bottom-0"
+        className="absolute bottom-0 left-0 z-10 pointer-events-none"
       >
         <img
           src="/icons/Street Food-cuate.png"
@@ -285,7 +296,7 @@ const HeroSection = () => {
         initial={{ x: 120, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.9, delay: 0.7, ease: "easeOut" }}
-        className="absolute right-0 z-10 pointer-events-none bottom-0"
+        className="absolute bottom-0 right-0 z-10 pointer-events-none"
       >
         <img
           src="/icons/Take Away-cuate.png"

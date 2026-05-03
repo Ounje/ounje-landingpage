@@ -2,13 +2,15 @@ import { useState } from "react";
 import CookiesPolicy from "./CookiesPolicy";
 import PrivacyPolicy from "./PrivacyPolicy";
 import TermsAndConditions from "./TermsAndConditions";
+import AccountDeletion from "./AccountDeletion";
 import { motion, AnimatePresence } from "framer-motion";
-import { Shield, FileText, Cookie } from "lucide-react";
+import { Shield, FileText, Cookie, UserMinus } from "lucide-react";
 
 const tabs = [
   { id: "1", title: "Privacy Policy", icon: Shield, content: <PrivacyPolicy /> },
   { id: "2", title: "Terms & Conditions", icon: FileText, content: <TermsAndConditions /> },
   { id: "3", title: "Cookies Policy", icon: Cookie, content: <CookiesPolicy /> },
+  { id: "4", title: "Account Deletion", icon: UserMinus, content: <AccountDeletion /> },
 ];
 
 export default function PolicyPage() {

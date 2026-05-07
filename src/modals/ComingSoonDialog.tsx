@@ -55,7 +55,7 @@ export default function ComingSoonModal({ isOpen, onClose }: ComingSoonModalProp
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `New Waitlist Signup — ${form.firstName} ${form.lastName}`,
+          subject: `New Waitlist Signup, ${form.firstName} ${form.lastName}`,
           from_name: "OunjeFood Waitlist",
           name: `${form.firstName} ${form.lastName}`,
           email: form.email,

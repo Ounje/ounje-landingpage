@@ -59,7 +59,7 @@ const NewsletterSuccessModal = ({ isOpen, onClose }: Props) => {
                 You're subscribed! 🎉
               </h3>
               <p className="text-sm text-gray-500 mb-7 leading-relaxed">
-                Thanks for joining. We'll send you the best updates — no spam, just
+                Thanks for joining. We'll send you the best updates, no spam, just
                 good food news.
               </p>
 

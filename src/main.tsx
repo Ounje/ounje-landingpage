@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
-// Always start at top on refresh — disable browser scroll restoration
+// Always start at top on refresh, disable browser scroll restoration
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }

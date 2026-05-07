@@ -3,20 +3,31 @@ import { motion, useInView } from "framer-motion";
 import { Smartphone, Bike, TrendingUp } from "lucide-react";
 
 const perks = [
-  { icon: Smartphone, title: "Orders to Your Phone", desc: "Customers find you and place orders directly — you just cook." },
+  { icon: Smartphone, title: "Orders to Your Phone", desc: "Customers find you and place orders directly, you just cook." },
   { icon: Bike, title: "We Handle Delivery", desc: "Our riders pick up and deliver. You focus 100% on the food." },
   { icon: TrendingUp, title: "Grow Your Income", desc: "Reach more customers without a big shop or expensive setup." },
 ];
 
-const scenes = [1, 2, 3, 4, 5, 6, 7].map((n) => `/assets/vendor-scenes/scene ${n}.png`);
+const BASE = "/assets/vendor-scene/photo_";
+const EXT  = "_2026-05-07_11-42-18.jpg";
+
+// Narrative order: customer places order → vendor notified → vendor accepts →
+// preparing → order ready → rider requested → rider to store → rider at store →
+// order enroute → order arrived → delivered → rider paid → vendor paid
+const scenes = [1, 4, 5, 2, 7, 12, 9, 10, 3, 6, 8, 13, 14, 11].map(
+  (n) => `${BASE}${n}${EXT}`
+);
 // Duplicate for seamless infinite loop
 const ticker = [...scenes, ...scenes];
 
 /* ── Browser-window frame ── */
 const FRAME_COLOR = "#A8D5B0";
 
-// Alternating heights — tall / short / tall / short …
-const HEIGHTS = ["380px", "280px", "380px", "280px", "380px", "280px", "380px"];
+// Alternating heights for visual rhythm
+const HEIGHTS = [
+  "380px","280px","380px","280px","380px","280px","380px",
+  "280px","380px","280px","380px","280px","380px","280px",
+];
 
 const BrowserFrame = ({ src, alt, height }: { src: string; alt: string; height: string }) => (
   <div

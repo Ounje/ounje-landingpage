@@ -95,7 +95,7 @@ export default function Hero() {
             />
           </motion.div>
 
-          {/* Floating contact badges — icons only, no emojis */}
+          {/* Floating contact badges, icons only, no emojis */}
           <motion.div
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}

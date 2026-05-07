@@ -13,11 +13,11 @@ const zones = [
     embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.0!2d3.3515!3d6.6018!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b923a4a3e9a7b%3A0x6b45b5a6b5a6b5a6!2sIkeja%2C%20Lagos!5e0!3m2!1sen!2sng!4v1700000000000",
   },
   {
-    name: "Berger",
+    name: "Lekki",
     Icon: Building2,
     x: "46%",
     y: "42%",
-    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.0!2d3.3792!3d6.6310!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b93b7c0e1e1e1%3A0x1e1e1e1e1e1e1e1e!2sBerger%2C%20Lagos!5e0!3m2!1sen!2sng!4v1700000000000",
+    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.0!2d3.3792!3d6.6310!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b93b7c0e1e1e1%3A0x1e1e1e1e1e1e1e1e!2sLekki%2C%20Lagos!5e0!3m2!1sen!2sng!4v1700000000000",
   },
   {
     name: "Yaba",

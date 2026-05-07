@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ComingSoonModal from "../modals/ComingSoonDialog";
 import WhatsAppOrderModal from "../modals/WhatsAppOrderModal";
@@ -10,7 +10,8 @@ import {
   Navigation,
   CheckCircle2,
   Clock,
-  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 /* ─── Feature data ─────────────────────────────────────────────── */
@@ -66,6 +67,7 @@ const features = [
 ];
 
 const SLIDE_COUNT = features.length;
+const AUTO_PLAY_MS = 4000;
 
 /* ─── Card bottom visuals ───────────────────────────────────────── */
 const VendorsBottom = () => (
@@ -151,139 +153,80 @@ const CustomerSection = () => {
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
   const [isOrderOpen, setIsOrderOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
+  const [direction, setDirection] = useState(1); // 1 = forward (right→left), -1 = backward
+  const [isPaused, setIsPaused] = useState(false);
 
-  const sectionRef = useRef<HTMLDivElement>(null);
-  // Mutable ctrl ref avoids stale closures inside event handlers
-  const ctrl = useRef({ active: false, idx: 0, accum: 0, touchY: 0, cooldown: false });
+  const touchStartX = useRef(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const c = ctrl.current;
-
-    // Advance exactly one slide, then block further advances for 650 ms
-    const goTo = (next: number, dir: number) => {
-      if (next === c.idx || c.cooldown) return;
-      c.cooldown = true;
-      c.accum = 0;
-      c.idx = next;
-      setDirection(dir);
-      setActiveIndex(next);
-      setTimeout(() => { c.cooldown = false; }, 650);
-    };
-
-    /* ── Wheel (desktop) ── */
-    const onWheel = (e: WheelEvent) => {
-      if (!c.active) return;
-
-      if (e.deltaY < 0 && c.idx === 0) { c.active = false; return; } // exit top
-      if (e.deltaY > 0 && c.idx === SLIDE_COUNT - 1) {               // exit bottom
-        e.preventDefault();
-        if (!c.cooldown) {
-          c.accum += e.deltaY;
-          if (c.accum >= 250) { c.active = false; c.accum = 0; }
-        }
-        return;
-      }
-
-      e.preventDefault();
-      if (c.cooldown) return; // absorb scroll during transition
-
-      c.accum += e.deltaY;
-      if (Math.abs(c.accum) >= 80) {
-        const dir = c.accum > 0 ? 1 : -1;
-        goTo(Math.min(SLIDE_COUNT - 1, Math.max(0, c.idx + dir)), dir);
-      }
-    };
-
-    /* ── Touch (mobile) ── */
-    const onTouchStart = (e: TouchEvent) => { c.touchY = e.touches[0].clientY; };
-    const onTouchMove = (e: TouchEvent) => {
-      if (!c.active) return;
-      const dy = c.touchY - e.touches[0].clientY; // positive = swipe up = scroll down
-
-      if (dy < 0 && c.idx === 0)                        { c.active = false; return; }
-      if (dy > 0 && c.idx === SLIDE_COUNT - 1) {
-        e.preventDefault();
-        if (!c.cooldown) {
-          c.accum += Math.abs(dy);
-          if (c.accum >= 120) { c.active = false; c.accum = 0; }
-        }
-        c.touchY = e.touches[0].clientY;
-        return;
-      }
-
-      e.preventDefault();
-      if (c.cooldown) { c.touchY = e.touches[0].clientY; return; }
-
-      c.accum += dy;
-      if (Math.abs(c.accum) >= 60) {
-        const dir = c.accum > 0 ? 1 : -1;
-        goTo(Math.min(SLIDE_COUNT - 1, Math.max(0, c.idx + dir)), dir);
-      }
-      c.touchY = e.touches[0].clientY;
-    };
-
-    /* ── IntersectionObserver: snap section to top and activate lock ── */
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.95) {
-          const top = Math.round(section.getBoundingClientRect().top);
-          if (top !== 0) window.scrollTo({ top: window.scrollY + top });
-          c.active = true;
-          c.accum = 0;
-        } else if (!entry.isIntersecting) {
-          c.active = false;
-        }
-      },
-      { threshold: [0, 0.95, 1] }
-    );
-    observer.observe(section);
-
-    window.addEventListener("wheel", onWheel, { passive: false });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: false });
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
-    };
+  const goNext = useCallback(() => {
+    setDirection(1);
+    setActiveIndex((prev) => (prev + 1) % SLIDE_COUNT);
   }, []);
+
+  const goPrev = useCallback(() => {
+    setDirection(-1);
+    setActiveIndex((prev) => (prev - 1 + SLIDE_COUNT) % SLIDE_COUNT);
+  }, []);
+
+  const goToIndex = useCallback((i: number, current: number) => {
+    setDirection(i > current ? 1 : -1);
+    setActiveIndex(i);
+  }, []);
+
+  // Auto-play
+  useEffect(() => {
+    if (isPaused) return;
+    timerRef.current = setInterval(goNext, AUTO_PLAY_MS);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [isPaused, goNext]);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const dx = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 50) {
+      if (dx > 0) goNext();
+      else goPrev();
+    }
+  };
 
   const f = features[activeIndex];
 
   return (
     <>
       <div
-        ref={sectionRef}
         id="customer"
         className="relative h-screen overflow-hidden bg-white"
-        style={{ scrollSnapAlign: "start" }}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
       >
-        {/* ── Content (fills the 100vh section) ── */}
+        {/* ── Prev / Next arrows ── */}
+        <button
+          onClick={goPrev}
+          className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/80 shadow-md flex items-center justify-center hover:bg-white transition-colors"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-5 h-5 text-[#2C5E2E]" />
+        </button>
+        <button
+          onClick={goNext}
+          className="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/80 shadow-md flex items-center justify-center hover:bg-white transition-colors"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-5 h-5 text-[#2C5E2E]" />
+        </button>
+
+        {/* ── Content ── */}
         <div className="h-full overflow-hidden bg-white">
 
-          {/* Vertical scroll-progress bar — right edge */}
-          <div className="absolute right-5 md:right-7 top-1/2 -translate-y-1/2 flex flex-col items-center gap-3.5 z-20">
-            {features.map((_, i) => (
-              <div
-                key={i}
-                className={`rounded-full transition-all duration-500 ${
-                  i === activeIndex
-                    ? "w-2 h-10 bg-[#2C5E2E]"
-                    : i < activeIndex
-                    ? "w-1.5 h-4 bg-[#2C5E2E]/50"
-                    : "w-1.5 h-4 bg-[#2C5E2E]/20"
-                }`}
-              />
-            ))}
-          </div>
-
-          {/* Slide counter — left edge */}
-          <div className="absolute left-5 md:left-7 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col items-center gap-1.5">
+          {/* Slide counter, left edge */}
+          <div className="absolute left-14 md:left-16 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col items-center gap-1.5">
             <AnimatePresence mode="wait">
               <motion.span
                 key={activeIndex}
@@ -304,9 +247,9 @@ const CustomerSection = () => {
 
           {/* ── Content grid ── */}
           <div className="h-full flex flex-col">
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 max-w-7xl mx-auto w-full px-4 md:px-16 pt-8 md:pt-14 pb-2 items-center">
+            <div className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 max-w-7xl mx-auto w-full px-4 md:px-16 pt-8 md:pt-14 pb-4 items-center">
 
-              {/* Left — Phone (hidden on mobile, shown md+) */}
+              {/* Left — Phone image (hidden on mobile) */}
               <div className="relative hidden md:flex items-center justify-center h-full">
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.img
@@ -315,9 +258,9 @@ const CustomerSection = () => {
                     alt={f.title}
                     custom={direction}
                     variants={{
-                      enter: (d: number) => ({ opacity: 0, y: d * 40 }),
-                      center: { opacity: 1, y: 0 },
-                      exit: (d: number) => ({ opacity: 0, y: d * -40 }),
+                      enter: (d: number) => ({ opacity: 0, x: d * 60 }),
+                      center: { opacity: 1, x: 0 },
+                      exit: (d: number) => ({ opacity: 0, x: d * -60 }),
                     }}
                     initial="enter"
                     animate="center"
@@ -342,13 +285,12 @@ const CustomerSection = () => {
                     <p className="text-sm font-semibold text-[#1A3F1C] leading-snug">
                       {f.bubble}
                     </p>
-                    {/* Tail */}
                     <div className="absolute top-3 -left-1.5 w-3 h-3 bg-white border-l border-b border-gray-100 rotate-45" />
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              {/* Right — Feature card (full width on mobile, half on md+) */}
+              {/* Right — Feature card */}
               <div className="relative h-full flex items-center col-span-1">
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
@@ -366,7 +308,7 @@ const CustomerSection = () => {
                     className="w-full rounded-3xl p-6 md:p-12 flex flex-col"
                     style={{
                       background: f.bg,
-                      minHeight: "min(78vh, 600px)",
+                      minHeight: "min(62vh, 500px)",
                     }}
                   >
                     {/* Icon + counter */}
@@ -401,8 +343,26 @@ const CustomerSection = () => {
               </div>
             </div>
 
-            {/* ── Bottom bar: CTAs + scroll hint ── */}
-            <div className="pb-4 md:pb-8 flex flex-col items-center gap-2 md:gap-3 px-4">
+            {/* ── Bottom bar: dot indicators + CTAs ── */}
+            <div className="py-5 md:py-8 flex flex-col items-center gap-3 md:gap-4 px-4">
+
+              {/* Dot indicators */}
+              <div className="flex items-center gap-2.5">
+                {features.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => goToIndex(i, activeIndex)}
+                    className={`rounded-full transition-all duration-400 ${
+                      i === activeIndex
+                        ? "w-8 h-2.5 bg-[#2C5E2E]"
+                        : "w-2.5 h-2.5 bg-[#2C5E2E]/25 hover:bg-[#2C5E2E]/50"
+                    }`}
+                    aria-label={`Go to slide ${i + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* CTAs */}
               <div className="flex flex-col sm:flex-row items-center gap-3">
                 <motion.button
                   whileHover={{ scale: 1.04 }}
@@ -423,26 +383,6 @@ const CustomerSection = () => {
                   <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </button>
               </div>
-
-              {/* Scroll hint — only on the last slide show a "keep scrolling" cue */}
-              <AnimatePresence>
-                {activeIndex < SLIDE_COUNT - 1 && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="flex items-center gap-1.5 text-[#2C5E2E]/35 text-xs font-semibold"
-                  >
-                    <motion.div
-                      animate={{ y: [0, 3, 0] }}
-                      transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <ChevronDown className="w-4 h-4" />
-                    </motion.div>
-                    Scroll to see more
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
           </div>
 

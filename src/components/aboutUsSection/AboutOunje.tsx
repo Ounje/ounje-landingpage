@@ -57,7 +57,7 @@ export default function AboutOunje() {
       <div className="max-w-6xl mx-auto">
         {/* ── Top text block ── */}
         <div className="grid items-start grid-cols-1 gap-12 mb-20 lg:grid-cols-2 md:gap-20">
-          {/* Left — brand statement */}
+          {/* Left, brand statement */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -85,7 +85,7 @@ export default function AboutOunje() {
             />
           </motion.div>
 
-          {/* Right — body copy */}
+          {/* Right, body copy */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -96,7 +96,7 @@ export default function AboutOunje() {
               OUNJEFOOD connects you to your favourite local food vendors
               quickly, affordably, and the way you like it. Born from the need
               for generous, affordable meals, OUNJEFOOD lets you build your own
-              plate — just like at your favourite buka.
+              plate, just like at your favourite buka.
             </p>
             <p className="text-[#1A3F1C]/75 text-base md:text-lg leading-relaxed">
               We work with trusted home chefs and food spots, giving them a way

@@ -3,12 +3,12 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Plus, HelpCircle } from "lucide-react";
 
 const faqs = [
-  { q: "What is Ounje?", a: "Ounje (which means 'food' in Yoruba) is a Nigerian food delivery platform connecting hungry customers to local vendors — fast, affordable, and fresh." },
+  { q: "What is OunjeFood?", a: "OunjeFood is a Nigerian food delivery platform connecting hungry customers to local vendors, fast, affordable, and fresh." },
   { q: "How do I place an order?", a: "You can order right now via WhatsApp using the green 'Order Now' button! Once our app launches, you can also browse vendors, select your meal, and place orders in seconds." },
   { q: "Can I pay on delivery?", a: "Yes! We support pay-on-delivery for your convenience. We're also adding card and transfer payment options in the app." },
-  { q: "Do I need to pay to join Ounje?", a: "No — joining Ounje is completely free for customers, vendors, and riders alike." },
+  { q: "Do I need to pay to join OunjeFood?", a: "No, joining OunjeFood is completely free for customers, whiles vendors and riders are to join OunjeMarket where vendors take customers orders and riders deliver such orders to the customer." },
   { q: "How fast is delivery?", a: "Our riders are dispatched immediately after your order is confirmed. Delivery times depend on your location and vendor distance, but we aim for the fastest possible service." },
-  { q: "I'm a vendor — how do I list my food?", a: "Sign up as a vendor on the waitlist and our team will reach out to get you onboarded. You'll receive orders directly to your phone!" },
+  { q: "I'm a vendor, how do I list my food?", a: "Sign up as a vendor on the waitlist and our team will reach out to get you onboarded. You'll receive orders directly to your phone!" },
 ];
 
 const FAQSection = () => {

@@ -56,7 +56,7 @@ const Header = () => {
         navigate(path + "#" + hash);
       }
     } else {
-      // No hash — if same page with a hash active, clear it and scroll to top
+      // No hash, if same page with a hash active, clear it and scroll to top
       const isCurrentPage = location.pathname === item.href;
       if (isCurrentPage && location.hash) {
         e.preventDefault();

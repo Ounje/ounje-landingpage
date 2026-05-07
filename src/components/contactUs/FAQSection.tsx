@@ -11,9 +11,9 @@ interface FAQ {
 const faqs: FAQ[] = [
   {
     id: "1",
-    question: "What is Ounje?",
+    question: "What is OunjeFood?",
     answer:
-      "Ounje is a platform that connects you to your favourite local food vendors for fast and affordable food delivery within your neighbourhood.",
+      "OunjeFood is a platform that connects you to your favourite local food vendors for fast and affordable food delivery within your neighbourhood.",
   },
   {
     id: "2",
@@ -23,7 +23,7 @@ const faqs: FAQ[] = [
   },
   {
     id: "3",
-    question: "Is Ounje Available In My Area?",
+    question: "Is OunjeFood Available In My Area?",
     answer:
       "We currently operate in select areas across Lagos. You can check availability by entering your delivery address in the app.",
   },
@@ -35,13 +35,13 @@ const faqs: FAQ[] = [
   },
   {
     id: "5",
-    question: "Do I Need To Pay To Join Ounje?",
+    question: "Do I Need To Pay To Join OunjeFood?",
     answer:
-      "No. Signing up on Ounje is completely free for customers, vendors, and riders.",
+      "No. Signing up on OunjeFood is completely free for customers, vendors, and riders.",
   },
   {
     id: "6",
-    question: "How Do I Become A Vendor Or Rider On Ounje?",
+    question: "How Do I Become A Vendor Or Rider On OunjeFood?",
     answer:
       'Just head to our website or app, click on "Join Us," and choose whether you want to sign up as a vendor or rider. It\'s quick and easy.',
   },

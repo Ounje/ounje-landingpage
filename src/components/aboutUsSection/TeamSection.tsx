@@ -48,7 +48,7 @@ export default function TeamSection() {
         encountered and that's why we are here to serve you better.
       </p>
 
-      {/* Mobile — Carousel */}
+      {/* Mobile, Carousel */}
       <div className="flex flex-col items-center px-6 md:hidden">
         <div className="relative w-full max-w-[300px] flex items-center justify-center">
           {/* Prev button */}
@@ -107,7 +107,7 @@ export default function TeamSection() {
         </div>
       </div>
 
-      {/* Desktop — Responsive Grid */}
+      {/* Desktop, Responsive Grid */}
       <div className="hidden max-w-5xl grid-cols-2 gap-6 px-8 mx-auto md:grid lg:grid-cols-3 lg:px-24">
         {teamMembers.map((member, i) => (
           <motion.div

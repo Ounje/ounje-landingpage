@@ -166,7 +166,7 @@ export default function TermsAndConditions() {
       <ul>
         <li>
           For questions or concerns about these Terms, please contact us: 📧
-          Email: ounje.support@ounjefood.com 📞 Phone: +2349071686888
+          Email: support@ounjefood.com 📞 Phone: +2349071686888
         </li>
       </ul>
     </div>

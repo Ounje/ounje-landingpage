@@ -18,7 +18,7 @@ const scrollToJoinUs = () => {
 
 const benefits = [
   { icon: Banknote, text: "Earn daily on your own schedule" },
-  { icon: Bike, text: "Flexible hours — you choose when to ride" },
+  { icon: Bike, text: "Flexible hours, you choose when to ride" },
   { icon: MapPin, text: "Deliver in your local area" },
   { icon: HeartHandshake, text: "Full support from the Ounje team" },
 ];
@@ -56,7 +56,7 @@ const RiderSection = () => {
             className="relative z-10 h-[380px] md:h-[540px] lg:h-[620px] w-auto object-contain drop-shadow-2xl"
           />
 
-          {/* Delivery guy — slides across */}
+          {/* Delivery guy, slides across */}
           <motion.img
             src="/images/delivery-guy.png"
             alt="Delivery rider"
@@ -112,9 +112,9 @@ const RiderSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl font-extrabold leading-tight text-black md:text-4xl lg:text-5xl"
           >
-            Join the Ounje
+            Join the OunjeMarket
             <br />
-            <span className="text-[#2C5E2E]">Rider Force.</span>
+            <span className="text-[#2C5E2E]">Be a Rider.</span>
             <br />
             Deliver Happiness.
           </motion.h2>

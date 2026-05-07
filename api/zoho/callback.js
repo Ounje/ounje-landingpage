@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({
       message:
-        "Check your Vercel logs for the refresh token — store it in .env",
+        "Check your Vercel logs for the refresh token, store it in .env",
       data,
     });
   } catch (error) {

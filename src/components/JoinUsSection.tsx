@@ -91,7 +91,7 @@ const JoinUsSection = () => {
               className="flex flex-col overflow-hidden rounded-3xl"
               style={{ background: role.bg }}
             >
-              {/* Screen image — floats at top */}
+              {/* Screen image, floats at top */}
               <div className="relative flex justify-center px-6 pt-8 overflow-hidden">
                 {/* Soft glow behind image */}
                 <div

@@ -7,7 +7,7 @@ export default function PrivacyPolicy() {
       </div>
 
       <p className="text-gray-600">
-        At OUNJE, your privacy is important to us. This Privacy Policy explains how we collect, use,
+        At OUNJEFOOD, your privacy is important to us. This Privacy Policy explains how we collect, use,
         disclose, and protect your information when you use our website, mobile app, and services.
       </p>
       <p className="text-gray-600">By using OUNJE, you agree to the terms of this Privacy Policy.</p>
@@ -120,7 +120,7 @@ export default function PrivacyPolicy() {
           title: "9. Children's Privacy",
           content: (
             <p className="text-gray-600">
-              OUNJE is not directed to individuals under 18. We do not knowingly collect data from children.
+              OUNJEFOOD is not directed to individuals under 18. We do not knowingly collect data from children.
             </p>
           ),
         },
@@ -137,7 +137,7 @@ export default function PrivacyPolicy() {
           title: "11. Contact Us",
           content: (
             <div className="bg-[#ECFFED] border border-[#2C5E2E]/20 rounded-2xl p-4 space-y-1 text-gray-700 text-sm">
-              <p>📧 Email: <a href="mailto:ounje.support@ounjefood.com" className="text-[#2C5E2E] font-semibold hover:underline">ounje.support@ounjefood.com</a></p>
+              <p>📧 Email: <a href="mailto:support@ounjefood.com" className="text-[#2C5E2E] font-semibold hover:underline">support@ounjefood.com</a></p>
               <p>📞 Phone: <span className="font-semibold">+2349071686888</span></p>
             </div>
           ),

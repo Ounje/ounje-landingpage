@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import CookiesPolicy from "./CookiesPolicy";
 import PrivacyPolicy from "./PrivacyPolicy";
 import TermsAndConditions from "./TermsAndConditions";
@@ -14,7 +15,13 @@ const tabs = [
 ];
 
 export default function PolicyPage() {
-  const [activeTab, setActiveTab] = useState("1");
+  const [searchParams] = useSearchParams();
+  const [activeTab, setActiveTab] = useState(searchParams.get("tab") ?? "1");
+
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab) setActiveTab(tab);
+  }, [searchParams]);
   const activeContent = tabs.find((t) => t.id === activeTab);
 
   return (

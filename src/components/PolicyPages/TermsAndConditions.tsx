@@ -142,7 +142,7 @@ export default function TermsAndConditions() {
         <li>
           Your personal information is handled in accordance with our{" "}
           <Link
-            to="/privacyandcompliance"
+            to="/privacyandcompliance?tab=1"
             className="underline font-semibold hover:opacity-75 transition-opacity"
           >
             Privacy Policy

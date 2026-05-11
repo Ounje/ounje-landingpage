@@ -173,14 +173,14 @@ const Footer = () => {
                 <img src="/icons/whatsapp-logo.png" alt="WhatsApp" className="w-5 h-5" />
               </motion.a>
               <motion.a
-                href="#"
+                href="https://x.com/ounjefood"
                 whileHover={{ scale: 1.15, y: -2 }}
                 className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#1DA1F2] transition"
               >
                 <img src="/icons/x-logo.png" alt="X/Twitter" className="w-4 h-4" />
               </motion.a>
               <motion.a
-                href="#"
+                href="https://www.linkedin.com/company/ounjefood/"
                 whileHover={{ scale: 1.15, y: -2 }}
                 className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#0077b5] transition"
               >

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function TermsAndConditions() {
   return (
     <div className="py-4 px-10 w-full lg:w-[80%] text-[#2C5E2E] bg-[#FFF3E8] rounded-[20px] items-center transition easein">
@@ -6,15 +8,15 @@ export default function TermsAndConditions() {
       </h1>
       <h2 className="text-lg font-bold">Last updated: 17/08/2025</h2>
       <p>
-        Welcome to OUNJE. These Terms and Conditions govern your use of our
-        website, mobile app, and services. By accessing or using OUNJE, you
+        Welcome to OUNJEFOOD. These Terms and Conditions govern your use of our
+        website, mobile app, and services. By accessing or using OUNJEFOOD, you
         agree to comply with these Terms. Please read them carefully.
       </p>
 
       <h2 className="text-lg font-bold">1. Definitions</h2>
       <ul>
         <li>
-          “OUNJE” / “We” / “Us” / “Our” refers to OUNJE, the food delivery
+          “OUNJEFOOD” / “We” / “Us” / “Our” refers to OUNJEFOOD, the food delivery
           platform.
         </li>
         <li>
@@ -23,7 +25,7 @@ export default function TermsAndConditions() {
         </li>
         <li>
           “Vendors” means food sellers, restaurants, or merchants registered on
-          OUNJE.
+          OUNJEMARKET.
         </li>
         <li>
           “Services” means our website, mobile application, and food
@@ -33,22 +35,22 @@ export default function TermsAndConditions() {
       <h2 className="text-lg font-bold">2. Eligibility</h2>
       <ul>
         <li>
-          You must be at least 18 years old to use OUNJE. By using our services,
+          You must be at least 18 years old to use OUNJEFOOD. By using our services,
           you confirm that you meet this requirement.
         </li>
       </ul>
       <h2 className="text-lg font-bold">3. Our Services</h2>
       <ul>
         <li>
-          OUNJE connects customers with food vendors and facilitates the
+          OUNJEFOOD connects customers with food vendors and facilitates the
           ordering and delivery of food items.
         </li>
         <li>
-          OUNJE is a marketplace, we do not prepare or produce food. Vendors are
+          OUNJEMARKET is a marketplace, we do not prepare or produce food. Vendors are
           solely responsible for the quality, safety, and compliance of the food
           they provide.
         </li>
-        <li>Delivery is managed by OUNJE or its third-party partners.</li>
+        <li>Delivery is managed by OUNJEMARKET or its third-party partners.</li>
       </ul>
       <h2 className="text-lg font-bold">4. User Responsibilities</h2>
       <ul>
@@ -60,7 +62,7 @@ export default function TermsAndConditions() {
           activities.
         </li>
         <li>
-          Do not use OUNJE for any illegal, fraudulent, or harmful activities.
+          Do not use OUNJEFOOD for any illegal, fraudulent, or harmful activities.
         </li>
       </ul>
       <h2 className="text-lg font-bold">5. Orders and Payments</h2>
@@ -107,7 +109,7 @@ export default function TermsAndConditions() {
           Vendors are responsible for the accuracy of their menu, prices, and
           food quality.
         </li>
-        <li>Vendors agree to honor orders placed and confirmed via OUNJE.</li>
+        <li>Vendors agree to honor orders placed and confirmed via OUNJEFOOD.</li>
       </ul>
       <h2 className="text-lg font-bold">9. Account and Security</h2>
       <ul>
@@ -115,12 +117,12 @@ export default function TermsAndConditions() {
           You are responsible for maintaining the confidentiality of your
           account details.
         </li>
-        <li>OUNJE is not liable for unauthorized use of your account.</li>
+        <li>OUNJEFOOD is not liable for unauthorized use of your account.</li>
       </ul>
       <h2 className="text-lg font-bold">10. Limitation of Liability</h2>
       <ul>
         <li>
-          OUNJE is not responsible for food quality, allergies, or health issues
+          OUNJEFOOD is not responsible for food quality, allergies, or health issues
           arising from vendor-prepared meals.
         </li>
         <li>
@@ -131,15 +133,21 @@ export default function TermsAndConditions() {
       <h2 className="text-lg font-bold">11. Intellectual Property</h2>
       <ul>
         <li>
-          All content on OUNJE (logo, design, text, software, images) is owned
-          by OUNJE and protected under applicable copyright and trademark laws.
+          All content on OUNJEFOOD (logo, design, text, software, images) is owned
+          by OUNJEFOOD and protected under applicable copyright and trademark laws.
         </li>
       </ul>
       <h2 className="text-lg font-bold">12. Privacy Policy</h2>
       <ul>
         <li>
-          Your personal information is handled in accordance with our Privacy
-          Policy [Insert Link].
+          Your personal information is handled in accordance with our{" "}
+          <Link
+            to="/privacyandcompliance"
+            className="underline font-semibold hover:opacity-75 transition-opacity"
+          >
+            Privacy Policy
+          </Link>
+          .
         </li>
       </ul>
       <h2 className="text-lg font-bold">13. Termination</h2>
@@ -166,7 +174,7 @@ export default function TermsAndConditions() {
       <ul>
         <li>
           For questions or concerns about these Terms, please contact us: 📧
-          Email: support@ounjefood.com 📞 Phone: +2349071686888
+          Email: support@OUNJEFOODfood.com 📞 Phone: +2349071686888
         </li>
       </ul>
     </div>

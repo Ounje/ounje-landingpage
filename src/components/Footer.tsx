@@ -118,7 +118,7 @@ const Footer = () => {
                 title: "Be a Part of Us",
                 links: [
                   { label: "Join as Customer", to: "/#joinUs" },
-                  { label: "Ounje for Vendors", to: "/#vendor" },
+                  { label: "OunjeMarket for Vendors", to: "/#vendor" },
                   { label: "Become a Rider", to: "/#rider" },
                 ],
               },

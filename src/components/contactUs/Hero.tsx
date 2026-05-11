@@ -91,7 +91,7 @@ export default function Hero() {
             <img
               src="/images/contactUsHero-img.png"
               alt="Ounje mascot"
-              className="w-[180px] sm:w-[220px] md:w-[300px] lg:w-[380px] h-auto object-contain drop-shadow-xl"
+              className="w-[180px] sm:w-[220px] md:w-[300px] lg:w-[380px] h-auto object-contain drop-shadow-xl scale-x-[-1]"
             />
           </motion.div>
 

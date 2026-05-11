@@ -5,7 +5,7 @@ export default function CookiesPolicy() {
       <h2 className="text-lg font-bold">Effective Date: 18/08/2025</h2>
 
       <p>
-        This Cookie Policy explains how OUNJE (“we,” “our,” or “us”) uses
+        This Cookie Policy explains how OUNJEFOOD (“we,” “our,” or “us”) uses
         cookies and similar technologies on our website www.ounjefood.com. By
         using our website, you agree to the use of cookies as described in this
         policy.

@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
         At OUNJEFOOD, your privacy is important to us. This Privacy Policy explains how we collect, use,
         disclose, and protect your information when you use our website, mobile app, and services.
       </p>
-      <p className="text-gray-600">By using OUNJE, you agree to the terms of this Privacy Policy.</p>
+      <p className="text-gray-600">By using OUNJEFOOD, you agree to the terms of this Privacy Policy.</p>
 
       {[
         {

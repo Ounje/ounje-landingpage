@@ -31,7 +31,7 @@ const faqs: FAQ[] = [
     id: "4",
     question: "Can I Pay On Delivery?",
     answer:
-      "No. All payments are made securely online through our integrated Paystack system to ensure smooth transactions.",
+      "We don't support payment on delivery for noe but we offer bank transfer and wallet payment (In app wallet).",
   },
   {
     id: "5",

@@ -20,9 +20,6 @@ const scenes = [1, 4, 5, 2, 7, 12, 9, 10, 3, 6, 8, 13, 14, 11].map(
 // Duplicate for seamless infinite loop
 const ticker = [...scenes, ...scenes];
 
-/* ── Browser-window frame ── */
-const FRAME_COLOR = "#A8D5B0";
-
 // Alternating heights for visual rhythm
 const HEIGHTS = [
   "380px","280px","380px","280px","380px","280px","380px",
@@ -32,34 +29,16 @@ const HEIGHTS = [
 const BrowserFrame = ({ src, alt, height }: { src: string; alt: string; height: string }) => (
   <div
     className="rounded-2xl overflow-hidden shadow-lg w-[260px] md:w-[320px] shrink-0 self-center"
-    style={{ border: `3px solid ${FRAME_COLOR}`, height }}
+    style={{ height }}
   >
-    {/* Title bar */}
-    <div
-      className="px-4 py-2.5 flex items-center gap-2 shrink-0"
-      style={{ background: FRAME_COLOR }}
-    >
-      <span className="w-3 h-3 rounded-full bg-[#2C5E2E]/40" />
-      <span className="w-3 h-3 rounded-full bg-[#2C5E2E]/40" />
-      <span className="w-3 h-3 rounded-full bg-[#2C5E2E]/40" />
-      <div
-        className="flex-1 mx-3 rounded-md h-5 flex items-center px-2"
-        style={{ background: "rgba(44,94,46,0.15)" }}
-      >
-        <span className="text-[10px] font-mono truncate" style={{ color: "rgba(26,63,28,0.5)" }}>ounje.food</span>
-      </div>
-    </div>
-    {/* Image fills remaining height */}
-    <div className="overflow-hidden" style={{ height: "calc(100% - 40px)" }}>
-      <img
-        src={src}
-        alt={alt}
-        className="w-full h-full object-cover"
-        loading="lazy"
-        decoding="async"
-        draggable={false}
-      />
-    </div>
+    <img
+      src={src}
+      alt={alt}
+      className="w-full h-full object-cover"
+      loading="lazy"
+      decoding="async"
+      draggable={false}
+    />
   </div>
 );
 
@@ -110,9 +89,6 @@ const VendorSection = () => {
 
       {/* ── Full-width scrolling carousel ── */}
       <div className="relative w-full overflow-hidden">
-        {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#ECFFED] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#ECFFED] to-transparent z-10 pointer-events-none" />
 
         <motion.div
           animate={{ x: ["0%", "-50%"] }}

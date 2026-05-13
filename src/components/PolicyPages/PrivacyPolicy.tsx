@@ -73,8 +73,7 @@ export default function PrivacyPolicy() {
           title: "4. Data Security",
           content: (
             <p className="text-gray-600">
-              We implement reasonable security measures to protect your information. However, no method
-              of transmission over the internet is 100% secure, and we cannot guarantee absolute protection.
+            We implement reasonable security measures to protect your information. However, no method
             </p>
           ),
         },

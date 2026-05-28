@@ -6,6 +6,7 @@ import HeroSection from "../components/HeroSection";
 import JoinUsSection from "../components/JoinUsSection";
 import RiderSection from "../components/RiderSection";
 import VendorSection from "../components/VendorSection";
+import GetPromo from "../components/GetPromoCode";
 import FAQSection from "../components/FAQSection";
 import TaglineStrip from "../components/TaglineStrip";
 import CoverageSection from "../components/CoverageSection";
@@ -41,6 +42,7 @@ export default function HomePage() {
       <VendorSection />
       <RiderSection />
       <JoinUsSection />
+      <GetPromo />
       <FAQSection />
       <Footer />
     </div>

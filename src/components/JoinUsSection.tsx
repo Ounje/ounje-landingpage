@@ -156,7 +156,7 @@ const JoinUsSection = () => {
                   className="w-full flex items-center justify-center gap-2 font-bold py-3.5 rounded-2xl text-sm shadow-lg transition-colors"
                   style={{ background: role.btnBg, color: role.btnText }}
                 >
-                  Join the Waitlist
+                  Download Our App
                   <ArrowRight className="w-4 h-4" />
                 </motion.button>
               </div>

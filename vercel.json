@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/VendorMenu/:id",
+      "destination": "https://ounje-mobile-backend.pxxl.pro/VendorMenu/:id",
+      "permanent": false
+    }
+  ]
+}

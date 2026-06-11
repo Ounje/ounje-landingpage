@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Smartphone, Bike, TrendingUp } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Smartphone, Bike, TrendingUp, ArrowRight } from "lucide-react";
 
 const perks = [
   { icon: Smartphone, title: "Orders to Your Phone", desc: "Customers find you and place orders directly — you just cook." },
@@ -53,6 +54,7 @@ const BrowserFrame = ({ src, alt, height }: { src: string; alt: string; height: 
 );
 
 const VendorSection = () => {
+  const navigate = useNavigate();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -77,7 +79,7 @@ const VendorSection = () => {
         </motion.div>
 
         {/* Perks grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-12">
           {perks.map((perk, i) => (
             <motion.div
               key={perk.title}
@@ -95,6 +97,25 @@ const VendorSection = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Vendor CTA Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="flex flex-col items-center gap-3 mb-16"
+        >
+          <motion.button
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
+            onClick={() => navigate("/vendor/auth")}
+            className="flex items-center gap-2 bg-[#2C5E2E] hover:bg-[#1A3F1C] text-white font-extrabold px-8 py-4 rounded-2xl shadow-lg transition-colors text-sm md:text-base cursor-pointer"
+          >
+            Start Selling as a Vendor
+            <ArrowRight className="w-4 h-4" />
+          </motion.button>
+          <p className="text-xs text-gray-400 font-semibold">Already registered? Log in to your kitchen dashboard.</p>
+        </motion.div>
       </div>
 
       {/* ── Full-width scrolling carousel ── */}

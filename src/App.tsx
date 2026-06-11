@@ -4,6 +4,9 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ContactUsPage from "./pages/ContactUsPage";
 import PrivacyAndCompliance from "./pages/PrivacyAndCompliance";
+import CustomerBrowsePage from "./pages/CustomerBrowsePage";
+import VendorAuthPage from "./pages/VendorAuthPage";
+import RiderAuthPage from "./pages/RiderAuthPage";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -27,6 +30,9 @@ const App = () => (
           path="/privacyandcompliance"
           element={<PrivacyAndCompliance />}
         />
+        <Route path="/customer/browse" element={<CustomerBrowsePage />} />
+        <Route path="/vendor/auth" element={<VendorAuthPage />} />
+        <Route path="/rider/auth" element={<RiderAuthPage />} />
       </Routes>
     </Router>
   </>

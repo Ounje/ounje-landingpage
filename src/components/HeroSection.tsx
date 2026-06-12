@@ -6,10 +6,12 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ComingSoonModal from "../modals/ComingSoonDialog";
 import WhatsAppOrderModal from "../modals/WhatsAppOrderModal";
 import { ShoppingBag, Bell, Search, MapPin, Locate } from "lucide-react";
 import { loadGoogleMapsScript } from "../utils/googleMapsLoader";
+import { ShoppingBag, Bell, Search, MapPin } from "lucide-react";
 
 const phrases = [
   { text: "Come chop.", lang: "Pidgin" },
@@ -48,7 +50,20 @@ const ALL_LOCATIONS = [
   "Alausa, Lagos, Nigeria",
 ];
 
+const ALL_LOCATIONS = [
+  "Yaba, Lagos, Nigeria",
+  "Ikeja, Lagos, Nigeria",
+  "Berger, Lagos, Nigeria",
+  "Surulere, Lagos, Nigeria",
+  "Lekki, Lagos, Nigeria",
+  "Victoria Island, Lagos, Nigeria",
+  "Gbagada, Lagos, Nigeria",
+  "Maryland, Lagos, Nigeria",
+  "Alausa, Lagos, Nigeria",
+];
+
 const HeroSection = () => {
+  const navigate = useNavigate();
   const navigate = useNavigate();
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
   const [isOrderOpen, setIsOrderOpen] = useState(false);
@@ -147,6 +162,34 @@ const HeroSection = () => {
       },
       { enableHighAccuracy: true, timeout: 8000 }
     );
+  };
+
+  const selectSuggestion = (val: string) => {
+    setLocationQuery(val);
+    setShowDropdown(false);
+  };
+
+  const handleOrderNow = () => {
+    const targetLocation = locationQuery.trim() || "Lagos, Nigeria";
+    navigate(`/customer/browse?location=${encodeURIComponent(targetLocation)}`);
+  };
+  const [locationQuery, setLocationQuery] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setLocationQuery(value);
+    if (value.trim().length > 0) {
+      const filtered = ALL_LOCATIONS.filter((loc) =>
+        loc.toLowerCase().includes(value.toLowerCase())
+      );
+      setSuggestions(filtered);
+      setShowDropdown(true);
+    } else {
+      setSuggestions([]);
+      setShowDropdown(false);
+    }
   };
 
   const selectSuggestion = (val: string) => {
@@ -340,6 +383,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Search & CTAs */}
+        {/* Search & CTAs */}
         <motion.div
           variants={fadeUp}
           className="w-full max-w-xl mx-auto flex flex-col gap-4 relative px-4"
@@ -414,6 +458,76 @@ const HeroSection = () => {
           </div>
 
 
+          className="w-full max-w-xl mx-auto flex flex-col gap-4 relative px-4"
+        >
+          <div className="relative flex flex-col sm:flex-row items-stretch gap-2.5 bg-white/75 backdrop-blur-md border border-[#2C5E2E]/15 rounded-3xl p-2.5 shadow-xl">
+            {/* Input Wrapper */}
+            <div className="relative flex-1 flex items-center min-h-[50px]">
+              <MapPin className="absolute left-4 w-5 h-5 text-[#2C5E2E]" />
+              <input
+                type="text"
+                placeholder="Enter delivery area (e.g. Yaba, Ikeja...)"
+                value={locationQuery}
+                onChange={handleInputChange}
+                onFocus={() => {
+                  if (locationQuery.trim().length > 0) setShowDropdown(true);
+                }}
+                className="w-full pl-11 pr-16 bg-transparent border-0 text-[#1A3F1C] font-semibold text-base placeholder-gray-400 focus:outline-none"
+              />
+              {locationQuery && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLocationQuery("");
+                    setSuggestions([]);
+                    setShowDropdown(false);
+                  }}
+                  className="absolute right-3 text-xs font-bold text-gray-400 hover:text-gray-600 bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded-md"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            {/* Order Now Button */}
+            <button
+              onClick={handleOrderNow}
+              className="flex items-center justify-center gap-2 bg-[#2C5E2E] hover:bg-[#1A3F1C] text-white font-extrabold px-8 py-3.5 sm:py-0 rounded-2xl transition-colors text-base shadow-md shrink-0"
+            >
+              <Search className="w-5 h-5" />
+              Order Now
+            </button>
+
+            {/* Place suggestions Autocomplete Dropdown */}
+            {showDropdown && suggestions.length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50 text-left">
+                <div className="px-4 py-2 border-b border-gray-50 text-[10px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
+                  Suggested Locations
+                </div>
+                {suggestions.map((loc) => (
+                  <button
+                    key={loc}
+                    onClick={() => selectSuggestion(loc)}
+                    className="w-full flex items-center gap-3 px-4 py-3 hover:bg-[#ECFFED] text-gray-700 text-sm font-semibold transition-colors border-b border-gray-50 last:border-0"
+                  >
+                    <MapPin className="w-4 h-4 text-[#FFC727] shrink-0" />
+                    <span>{loc}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="flex justify-center items-center gap-4 mt-1">
+            <button
+              onClick={() => setIsWaitlistOpen(true)}
+              className="group flex items-center gap-1.5 text-[#1A3F1C]/60 text-xs font-semibold hover:text-[#2C5E2E] transition-colors"
+            >
+              <Bell className="w-3.5 h-3.5" />
+              Join the launch waitlist
+              <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+            </button>
+          </div>
         </motion.div>
 
         {/* Live coverage + pulse */}

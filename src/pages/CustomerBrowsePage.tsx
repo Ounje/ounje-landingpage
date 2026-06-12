@@ -279,9 +279,9 @@ export default function CustomerBrowsePage() {
               key={cat}
               onClick={() => setSelectedCategory(cat)}
               className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all shrink-0 ${(cat === "All" && selectedCategory === "All") ||
-                  (cat !== "All" && selectedCategory.toLowerCase().includes(cat.toLowerCase()))
-                  ? "bg-[#2C5E2E] text-white shadow-md shadow-[#2C5E2E]/20"
-                  : "bg-white text-[#1A3F1C]/75 border border-gray-200/80 hover:bg-gray-50"
+                (cat !== "All" && selectedCategory.toLowerCase().includes(cat.toLowerCase()))
+                ? "bg-[#2C5E2E] text-white shadow-md shadow-[#2C5E2E]/20"
+                : "bg-white text-[#1A3F1C]/75 border border-gray-200/80 hover:bg-gray-50"
                 }`}
             >
               {cat}

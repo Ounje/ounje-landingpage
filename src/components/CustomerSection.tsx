@@ -3,8 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ComingSoonModal from "../modals/ComingSoonDialog";
 import WhatsAppOrderModal from "../modals/WhatsAppOrderModal";
 import {
-  ShoppingBag,
-  Bell,
+
   MapPin,
   UtensilsCrossed,
   Navigation,
@@ -353,8 +352,8 @@ const CustomerSection = () => {
                     key={i}
                     onClick={() => goToIndex(i, activeIndex)}
                     className={`rounded-full transition-all duration-400 ${i === activeIndex
-                        ? "w-8 h-2.5 bg-[#2C5E2E]"
-                        : "w-2.5 h-2.5 bg-[#2C5E2E]/25 hover:bg-[#2C5E2E]/50"
+                      ? "w-8 h-2.5 bg-[#2C5E2E]"
+                      : "w-2.5 h-2.5 bg-[#2C5E2E]/25 hover:bg-[#2C5E2E]/50"
                       }`}
                     aria-label={`Go to slide ${i + 1}`}
                   />

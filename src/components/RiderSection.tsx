@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   CheckCircle2,
   ArrowRight,
@@ -24,6 +25,7 @@ const benefits = [
 ];
 
 const RiderSection = () => {
+  const navigate = useNavigate();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -147,18 +149,28 @@ const RiderSection = () => {
             ))}
           </div>
 
-          <motion.button
-            onClick={scrollToJoinUs}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.6 }}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-7 py-3.5 rounded-2xl shadow-md hover:bg-[#1a3f1c] transition text-sm"
+            className="flex flex-col sm:flex-row items-center gap-3 pt-2"
           >
-            Become a Rider
-            <ArrowRight className="w-4 h-4" />
-          </motion.button>
+            <motion.button
+              onClick={() => navigate("/rider/auth")}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 bg-[#2C5E2E] text-white font-bold px-7 py-3.5 rounded-2xl shadow-md hover:bg-[#1a3f1c] transition text-sm cursor-pointer"
+            >
+              Become a Rider
+              <ArrowRight className="w-4 h-4" />
+            </motion.button>
+            <button
+              onClick={() => navigate("/rider/auth")}
+              className="text-[#1A3F1C] hover:underline text-xs font-bold transition-all px-4 py-2"
+            >
+              Rider Log In
+            </button>
+          </motion.div>
         </motion.div>
       </div>
     </section>

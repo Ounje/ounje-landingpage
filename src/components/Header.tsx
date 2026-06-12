@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu, X, ShoppingBag, LogIn } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import WhatsAppOrderModal from "../modals/WhatsAppOrderModal";
+import LoginModal from "../modals/LoginModal";
+import { useAuthStore } from "../hooks/useAuthStore";
 
 const menuItems = [
   { label: "Join Us", href: "/#joinUs" },
@@ -17,6 +19,8 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOrderOpen, setIsOrderOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const { isAuthenticated, role, logout, user } = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -124,17 +128,52 @@ const Header = () => {
             })}
           </nav>
 
-          {/* ─── Desktop right: Order Now ─── */}
+          {/* ─── Desktop right: Auth & Controls ─── */}
           <div className="hidden md:flex items-center gap-3">
-            <motion.button
-              onClick={() => setIsOrderOpen(true)}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-2 bg-[#25D366] text-white font-bold px-5 py-2.5 rounded-2xl text-sm shadow-md hover:bg-[#1fb855] transition"
-            >
-              <ShoppingBag className="w-4 h-4" />
-              Order Now
-            </motion.button>
+            {!isAuthenticated ? (
+              <>
+                <button
+                  onClick={() => setIsLoginOpen(true)}
+                  className="text-[#1A3F1C] hover:text-[#2C5E2E] font-bold text-sm px-4 py-2 transition-colors cursor-pointer"
+                >
+                  Log In
+                </button>
+                <motion.button
+                  onClick={() => navigate("/customer/browse")}
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="flex items-center gap-2 bg-[#2C5E2E] text-white font-bold px-5 py-2.5 rounded-xl text-sm shadow-md hover:bg-[#1a3f1c] transition cursor-pointer"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  Order Now
+                </motion.button>
+              </>
+            ) : (
+              <>
+                <span className="text-xs font-semibold text-[#1A3F1C]/75">
+                  Hi, <span className="font-bold text-[#2C5E2E]">{user?.name}</span> ({role})
+                </span>
+                <button
+                  onClick={() => {
+                    if (role === "vendor") navigate("/vendor/dashboard");
+                    else if (role === "rider") navigate("/rider/dashboard");
+                    else navigate("/customer/browse");
+                  }}
+                  className="bg-[#ECFFED] text-[#2C5E2E] hover:bg-[#2C5E2E] hover:text-white border border-[#2C5E2E]/20 font-bold px-4 py-2 rounded-xl text-xs transition-all cursor-pointer"
+                >
+                  Dashboard
+                </button>
+                <button
+                  onClick={() => {
+                    logout();
+                    navigate("/");
+                  }}
+                  className="text-red-600 hover:text-red-800 font-bold text-xs px-2 py-2 cursor-pointer"
+                >
+                  Logout
+                </button>
+              </>
+            )}
           </div>
 
           {/* ─── Mobile hamburger ─── */}
@@ -219,7 +258,7 @@ const Header = () => {
               </div>
 
               {/* Nav links */}
-              <nav className="flex-1 px-5 py-8 space-y-1.5 overflow-y-auto">
+              <nav className="flex-1 px-5 py-8 space-y-3 overflow-y-auto">
                 {menuItems.map((item, i) => {
                   const [itemPath, itemHash] = item.href.split("#");
                   const path = itemPath || "/";
@@ -254,6 +293,55 @@ const Header = () => {
                   );
                 })}
 
+                <div className="border-t border-white/10 my-6 pt-6 space-y-4">
+                  {!isAuthenticated ? (
+                    <>
+                      <button
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          setIsLoginOpen(true);
+                        }}
+                        className="w-full flex items-center justify-center bg-white text-[#2C5E2E] font-bold py-3.5 rounded-2xl text-sm shadow-md transition cursor-pointer"
+                      >
+                        Log In
+                      </button>
+                      <button
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          navigate("/customer/browse");
+                        }}
+                        className="w-full flex items-center justify-center bg-[#FFC727] text-[#1A3F1C] font-bold py-3.5 rounded-2xl text-sm shadow-md transition cursor-pointer"
+                      >
+                        Order Online
+                      </button>
+                    </>
+                  ) : (
+                    <div className="space-y-3 text-white text-center">
+                      <p className="text-xs text-white/60">Logged in as {user?.name} ({role})</p>
+                      <button
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          if (role === "vendor") navigate("/vendor/dashboard");
+                          else if (role === "rider") navigate("/rider/dashboard");
+                          else navigate("/customer/browse");
+                        }}
+                        className="w-full bg-white/10 text-white font-bold py-3 rounded-2xl text-sm transition cursor-pointer"
+                      >
+                        Go to Dashboard
+                      </button>
+                      <button
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          logout();
+                          navigate("/");
+                        }}
+                        className="w-full text-red-400 hover:text-red-500 font-bold py-2 text-sm transition cursor-pointer"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
               </nav>
             </motion.div>
           </>
@@ -261,6 +349,7 @@ const Header = () => {
       </AnimatePresence>
 
       <WhatsAppOrderModal isOpen={isOrderOpen} onClose={() => setIsOrderOpen(false)} />
+      <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
     </>
   );
 };

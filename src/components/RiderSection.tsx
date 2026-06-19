@@ -12,11 +12,6 @@ import {
   HeartHandshake,
 } from "lucide-react";
 
-const scrollToJoinUs = () => {
-  const el = document.getElementById("joinUs");
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-};
-
 const benefits = [
   { icon: Banknote, text: "Earn daily on your own schedule" },
   { icon: Bike, text: "Flexible hours, you choose when to ride" },

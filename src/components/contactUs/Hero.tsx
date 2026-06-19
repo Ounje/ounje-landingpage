@@ -10,7 +10,7 @@ export default function Hero() {
 
   useEffect(() => {
     const currentPhrase = phrases[currentPhraseIndex];
-    let timeout: number;
+    let timeout: any;
 
     if (!isDeleting && displayText.length < currentPhrase.length) {
       timeout = setTimeout(() => {

@@ -262,7 +262,11 @@ const HeroSection = () => {
           variants={fadeUp}
           className="mb-6 inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-[#2C5E2E]/20 rounded-full px-4 py-1.5 text-xs md:text-sm font-semibold text-[#2C5E2E] shadow-sm"
         >
-          <span className="w-2 h-2 bg-[#FFC727] rounded-full animate-pulse inline-block" />
+          <svg className="w-4.5 h-3 rounded-[2px] shadow-sm shrink-0 border border-gray-100" viewBox="0 0 3 2">
+            <rect width="1" height="2" fill="#008751" />
+            <rect x="1" width="1" height="2" fill="#FFFFFF" />
+            <rect x="2" width="1" height="2" fill="#008751" />
+          </svg>
           Authentic Nigerian Food
         </motion.div>
 

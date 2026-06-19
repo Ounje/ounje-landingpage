@@ -6,6 +6,14 @@ export interface CartItem {
   price: number;
   quantity: number;
   options: string[]; // for "Build a Plate" customized toppings
+  itemIds?: string[]; // specific food item/dish IDs that compose a custom plate
+  itemType?: "FoodItem" | "Combo" | "Plate";
+  comboSelections?: {
+    itemId: string;
+    name?: string;
+    price?: number;
+    quantity?: number;
+  }[];
 }
 
 interface CartState {

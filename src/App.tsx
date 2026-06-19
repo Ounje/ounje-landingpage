@@ -5,8 +5,12 @@ import AboutPage from "./pages/AboutPage";
 import ContactUsPage from "./pages/ContactUsPage";
 import PrivacyAndCompliance from "./pages/PrivacyAndCompliance";
 import CustomerBrowsePage from "./pages/CustomerBrowsePage";
-import VendorAuthPage from "./pages/VendorAuthPage";
-import RiderAuthPage from "./pages/RiderAuthPage";
+import CustomerVendorPage from "./pages/CustomerVendorPage";
+import CustomerCheckoutPage from "./pages/CustomerCheckoutPage";
+import CustomerOrderTrackingPage from "./pages/CustomerOrderTrackingPage";
+import ComingSoonPage from "./pages/ComingSoonPage";
+import { useSocketNotifications } from "./hooks/useSocketNotifications";
+import NotificationToastContainer from "./components/ui/NotificationToastContainer";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -18,10 +22,17 @@ const ScrollToTop = () => {
   return null;
 };
 
+const NotificationHandler = () => {
+  useSocketNotifications();
+  return null;
+};
+
 const App = () => (
   <>
     <Router>
       <ScrollToTop />
+      <NotificationHandler />
+      <NotificationToastContainer />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/aboutus" element={<AboutPage />} />
@@ -31,8 +42,14 @@ const App = () => (
           element={<PrivacyAndCompliance />}
         />
         <Route path="/customer/browse" element={<CustomerBrowsePage />} />
-        <Route path="/vendor/auth" element={<VendorAuthPage />} />
-        <Route path="/rider/auth" element={<RiderAuthPage />} />
+        <Route path="/customer/vendor/:id" element={<CustomerVendorPage />} />
+        <Route path="/customer/checkout" element={<CustomerCheckoutPage />} />
+        <Route path="/customer/order/:id" element={<CustomerOrderTrackingPage />} />
+        <Route path="/vendor/auth" element={<ComingSoonPage />} />
+        <Route path="/vendor/dashboard" element={<ComingSoonPage />} />
+        <Route path="/vendor/menu" element={<ComingSoonPage />} />
+        <Route path="/rider/auth" element={<ComingSoonPage />} />
+        <Route path="/rider/dashboard" element={<ComingSoonPage />} />
       </Routes>
     </Router>
   </>

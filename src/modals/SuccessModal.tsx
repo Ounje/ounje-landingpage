@@ -23,7 +23,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             exit={{ scale: 0.85, opacity: 0, y: 20 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="bg-white rounded-3xl w-full max-w-md p-8 text-center shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e: any) => e.stopPropagation()}
           >
             {/* Logo */}
             <motion.div

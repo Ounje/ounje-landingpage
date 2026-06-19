@@ -121,7 +121,7 @@ export default function WhatsAppOrderModal({ isOpen, onClose, defaultLocation }:
             transition={{ type: "spring", damping: 28, stiffness: 300 }}
             className="relative bg-white w-full sm:max-w-2xl rounded-t-[28px] sm:rounded-[28px] overflow-hidden shadow-2xl"
             style={{ maxHeight: "92vh" }}
-            onClick={e => e.stopPropagation()}
+            onClick={(e: any) => e.stopPropagation()}
           >
             {/* Header */}
             <div className="bg-[#2C5E2E] px-5 pt-5 pb-4 flex items-center justify-between sticky top-0 z-10">

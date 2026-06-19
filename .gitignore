@@ -26,3 +26,5 @@ dist-ssr
 
 # enviroment variables
 .env
+
+# test files

@@ -19,6 +19,7 @@ const roles = [
     btnText: "#1A3F1C",
     iconBg: "bg-white/15",
     iconColor: "text-[#FFC727]",
+    appleLink: "https://apps.apple.com/ng/app/ounjefood/id6762204959",
   },
   {
     id: "vendor",
@@ -35,6 +36,7 @@ const roles = [
     btnText: "#ffffff",
     iconBg: "bg-[#1A3F1C]/10",
     iconColor: "text-[#2C5E2E]",
+    appleLink: "https://apps.apple.com/ng/app/ounjemarket/id6762347962",
   },
   {
     id: "rider",
@@ -51,6 +53,7 @@ const roles = [
     btnText: "#1A3F1C",
     iconBg: "bg-white/15",
     iconColor: "text-[#FFC727]",
+    appleLink: "https://apps.apple.com/ng/app/ounjemarket/id6762347962",
   },
 ];
 
@@ -148,17 +151,40 @@ const JoinUsSection = () => {
                   {role.desc}
                 </p>
 
-                {/* CTA */}
-                <motion.button
-                  onClick={() => setIsModalOpen(true)}
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="w-full flex items-center justify-center gap-2 font-bold py-3.5 rounded-2xl text-sm shadow-lg transition-colors"
-                  style={{ background: role.btnBg, color: role.btnText }}
-                >
-                  Download Our App
-                  <ArrowRight className="w-4 h-4" />
-                </motion.button>
+                {/* App Store and Play Store buttons */}
+                <div className="flex gap-3 mt-auto">
+                  <motion.a
+                    href={role.appleLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-2xl border border-white/10 bg-black text-white hover:bg-black/90 transition-colors shadow-md text-left cursor-pointer"
+                  >
+                    <svg className="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
+                      <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C3.79 16.32 3.06 10.11 6.5 7.64c1.68-1.07 3.32-.82 4.41-.33.84.38 1.56.39 2.4 0 1.04-.49 2.76-.79 4.1.47-3.13 1.9-2.52 7.15.54 8.52a8.55 8.55 0 0 1-2.9 3.98M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.22 2.5-2.04 4.42-3.74 4.25" />
+                    </svg>
+                    <div className="leading-none">
+                      <span className="block text-[8px] opacity-75 font-normal tracking-wide uppercase">Download on</span>
+                      <span className="block text-xs font-extrabold mt-0.5 whitespace-nowrap">App Store</span>
+                    </div>
+                  </motion.a>
+
+                  <motion.button
+                    onClick={() => setIsModalOpen(true)}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-2xl border border-white/10 bg-black text-white hover:bg-black/90 transition-colors shadow-md text-left cursor-pointer"
+                  >
+                    <svg className="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
+                      <path d="M3.609 1.814L13.792 12 3.61 22.186A2.22 2.22 0 0 1 3 20.612V3.388c0-.629.232-1.205.609-1.574M14.972 13.18l3.754-3.754-4.708-2.69-2.826 2.826 3.78 3.618M11.21 9.562l2.826-2.826L3.896 1.047a2.22 2.22 0 0 0-1.896.767l9.21 7.748M14.018 14.135l-2.808-2.686-9.2 7.74c.48.571 1.258.742 1.896.377l10.112-5.431" />
+                    </svg>
+                    <div className="leading-none">
+                      <span className="block text-[8px] opacity-75 font-normal tracking-wide uppercase">Get it on</span>
+                      <span className="block text-xs font-extrabold mt-0.5 whitespace-nowrap">Google Play</span>
+                    </div>
+                  </motion.button>
+                </div>
               </div>
             </motion.div>
           ))}

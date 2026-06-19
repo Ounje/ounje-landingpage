@@ -3,8 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ComingSoonModal from "../modals/ComingSoonDialog";
 import WhatsAppOrderModal from "../modals/WhatsAppOrderModal";
 import {
-  ShoppingBag,
-  Bell,
+
   MapPin,
   UtensilsCrossed,
   Navigation,
@@ -12,6 +11,8 @@ import {
   Clock,
   ChevronLeft,
   ChevronRight,
+  Smartphone,
+  Download,
 } from "lucide-react";
 
 /* ─── Feature data ─────────────────────────────────────────────── */
@@ -122,18 +123,16 @@ const TrackingBottom = () => {
       {steps.map((step) => (
         <div key={step.label} className="flex items-center gap-3.5">
           <div
-            className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-colors ${
-              step.done ? "bg-[#FFC727]" : "bg-white/10 border border-white/20"
-            }`}
+            className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-colors ${step.done ? "bg-[#FFC727]" : "bg-white/10 border border-white/20"
+              }`}
           >
             <step.Icon
               className={`w-4.5 h-4.5 ${step.done ? "text-[#1A3F1C]" : "text-white/35"}`}
             />
           </div>
           <span
-            className={`text-sm font-semibold flex-1 ${
-              step.done ? "text-white" : "text-white/35"
-            }`}
+            className={`text-sm font-semibold flex-1 ${step.done ? "text-white" : "text-white/35"
+              }`}
           >
             {step.label}
           </span>
@@ -352,11 +351,10 @@ const CustomerSection = () => {
                   <button
                     key={i}
                     onClick={() => goToIndex(i, activeIndex)}
-                    className={`rounded-full transition-all duration-400 ${
-                      i === activeIndex
-                        ? "w-8 h-2.5 bg-[#2C5E2E]"
-                        : "w-2.5 h-2.5 bg-[#2C5E2E]/25 hover:bg-[#2C5E2E]/50"
-                    }`}
+                    className={`rounded-full transition-all duration-400 ${i === activeIndex
+                      ? "w-8 h-2.5 bg-[#2C5E2E]"
+                      : "w-2.5 h-2.5 bg-[#2C5E2E]/25 hover:bg-[#2C5E2E]/50"
+                      }`}
                     aria-label={`Go to slide ${i + 1}`}
                   />
                 ))}
@@ -367,20 +365,19 @@ const CustomerSection = () => {
                 <motion.button
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.96 }}
-                  onClick={() => setIsOrderOpen(true)}
-                  className="flex items-center gap-2.5 bg-[#25D366] text-white font-bold px-8 py-3.5 rounded-2xl shadow-lg hover:bg-[#1fb855] transition-colors text-base"
+                  onClick={() => setIsWaitlistOpen(true)}
+                  className="flex items-center gap-2.5 bg-[#2C5E2E] text-white font-bold px-8 py-3.5 rounded-2xl shadow-lg hover:bg-[#1a3f1c] transition-colors text-base cursor-pointer"
                 >
-                  <ShoppingBag className="w-5 h-5" />
-                  Order Now via WhatsApp
+                  <Smartphone className="w-5 h-5 text-[#FFC727]" />
+                  Download Customer App
                 </motion.button>
 
                 <button
                   onClick={() => setIsWaitlistOpen(true)}
-                  className="group flex items-center gap-1.5 text-[#1A3F1C]/55 text-sm font-semibold hover:text-[#2C5E2E] transition-colors"
+                  className="group flex items-center gap-2 text-[#1A3F1C] font-bold bg-[#FFC727]/10 hover:bg-[#FFC727]/25 border border-[#FFC727]/30 px-6 py-3.5 rounded-2xl transition-colors text-sm cursor-pointer"
                 >
-                  <Bell className="w-4 h-4" />
-                  Get notified when the app launches
-                  <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+                  <Download className="w-4 h-4 text-[#2C5E2E]" />
+                  Download Vendor & Rider App
                 </button>
               </div>
             </div>

@@ -99,3 +99,58 @@ html {
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+/* Custom Dashboard Pulsing Button Animation */
+.dashboard-pulsing-btn {
+  animation: dashboardPulseColor 3s infinite ease-in-out;
+  transition: all 0.3s ease;
+  border-width: 1px;
+}
+
+@keyframes dashboardPulseColor {
+
+  0%,
+  100% {
+    background-color: #ECFFED;
+    color: #2C5E2E;
+    border-color: rgba(44, 94, 46, 0.25);
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(44, 94, 46, 0.15);
+  }
+
+  25% {
+    background-color: #FFF9E6;
+    /* Light yellow-amber */
+    color: #856404;
+    border-color: rgba(133, 100, 4, 0.25);
+    transform: scale(1.04);
+    box-shadow: 0 0 8px 2px rgba(255, 199, 39, 0.25);
+  }
+
+  50% {
+    background-color: #E6F0FF;
+    /* Light cyan-blue */
+    color: #1a56b3;
+    border-color: rgba(26, 86, 179, 0.25);
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(26, 86, 179, 0);
+  }
+
+  75% {
+    background-color: #FCE8E6;
+    /* Light coral-pink */
+    color: #a8201a;
+    border-color: rgba(168, 32, 26, 0.25);
+    transform: scale(1.04);
+    box-shadow: 0 0 8px 2px rgba(168, 32, 26, 0.2);
+  }
+}
+
+.dashboard-pulsing-btn:hover {
+  animation: none !important;
+  background-color: #2C5E2E !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  transform: scale(1.03) !important;
+  box-shadow: 0 4px 12px rgba(44, 94, 46, 0.2) !important;
+}

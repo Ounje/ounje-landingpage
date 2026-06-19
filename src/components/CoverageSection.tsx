@@ -1,41 +1,42 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { MapPin, Plane, Building2, ShoppingBag, BookOpen } from "lucide-react";
-import WhatsAppOrderModal from "../modals/WhatsAppOrderModal";
+import { useNavigate } from "react-router-dom";
+import { MapPin, Plane, Building2, ShoppingBag, BookOpen, X, ChefHat, Bike } from "lucide-react";
 
 const zones = [
   {
-    name: "Ikeja",
-    Icon: Plane,
+    name: "Surulere",
+    fullName: "Surulere, Lagos, Nigeria",
+    Icon: BookOpen,
     x: "30%",
-    y: "22%",
-    // Google Maps embed src (no API key needed for basic embed)
-    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.0!2d3.3515!3d6.6018!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b923a4a3e9a7b%3A0x6b45b5a6b5a6b5a6!2sIkeja%2C%20Lagos!5e0!3m2!1sen!2sng!4v1700000000000",
-  },
-  {
-    name: "Lekki",
-    Icon: Building2,
-    x: "46%",
-    y: "42%",
-    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.0!2d3.3792!3d6.6310!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b93b7c0e1e1e1%3A0x1e1e1e1e1e1e1e1e!2sLekki%2C%20Lagos!5e0!3m2!1sen!2sng!4v1700000000000",
+    y: "40%",
+    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.0!2d3.3542!3d6.5059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8c0e0e0e0e0e%3A0x0e0e0e0e0e0e0e0e!2sSurulere%2C%20Lagos!5e0!3m2!1sen!2sng!4v1700000000000",
   },
   {
     name: "Yaba",
+    fullName: "Yaba, Lagos, Nigeria",
     Icon: ShoppingBag,
-    x: "58%",
-    y: "56%",
+    x: "48%",
+    y: "50%",
     embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.0!2d3.3792!3d6.5095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b2a7b2a7b2a%3A0x7b2a7b2a7b2a7b2a!2sYaba%2C%20Lagos!5e0!3m2!1sen!2sng!4v1700000000000",
   },
   {
-    name: "Surulere",
-    Icon: BookOpen,
-    x: "74%",
-    y: "34%",
-    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.0!2d3.3542!3d6.5059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8c0e0e0e0e0e%3A0x0e0e0e0e0e0e0e0e!2sSurulere%2C%20Lagos!5e0!3m2!1sen!2sng!4v1700000000000",
+    name: "Yabatech",
+    fullName: "Yabatech Front Gate, Hussey Road, Lagos, Nigeria",
+    Icon: Building2,
+    x: "64%",
+    y: "35%",
+    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.1!2d3.3745!3d6.5182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8cf0f0f0f0f0%3A0xf0f0f0f0f0f0f0f0!2sYaba%20College%20of%20Technology!5e0!3m2!1sen!2sng!4v1700000000000",
+  },
+  {
+    name: "LASU",
+    fullName: "Lagos State University, Lasu Main Road, Lagos, Nigeria",
+    Icon: Plane,
+    x: "78%",
+    y: "55%",
+    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.3!2d3.2001!3d6.4678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b860000000000%3A0x0000000000000000!2sLagos%20State%20University!5e0!3m2!1sen!2sng!4v1700000000000",
   },
 ];
-
-type Zone = typeof zones[number];
 
 /* ── Abstract Lagos road map SVG ── */
 const MapSVG = () => (
@@ -119,7 +120,7 @@ const Pin = ({
 const CoverageSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
-  const [orderLocation, setOrderLocation] = useState<string | null>(null);
+  const [orderLocation, setOrderLocation] = useState<typeof zones[0] | null>(null);
 
   return (
     <>
@@ -157,7 +158,7 @@ const CoverageSection = () => {
                 key={z.name}
                 {...z}
                 delay={0.3 + i * 0.12}
-                onClick={() => setOrderLocation(z.name)}
+                onClick={() => setOrderLocation(z)}
               />
             ))}
           </div>
@@ -174,7 +175,7 @@ const CoverageSection = () => {
             {zones.map((z) => (
               <button
                 key={z.name}
-                onClick={() => setOrderLocation(z.name)}
+                onClick={() => setOrderLocation(z)}
                 className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/18 border border-white/15 rounded-full px-5 py-2.5 transition-colors group"
               >
                 <MapPin className="w-3.5 h-3.5 text-[#FFC727] shrink-0" />
@@ -193,12 +194,102 @@ const CoverageSection = () => {
         </motion.div>
       </section>
 
-      <WhatsAppOrderModal
+      <LocationOptionsModal
         isOpen={orderLocation !== null}
         onClose={() => setOrderLocation(null)}
-        defaultLocation={orderLocation ?? ""}
+        location={orderLocation?.name ?? ""}
+        fullName={orderLocation?.fullName ?? ""}
       />
     </>
+  );
+};
+
+const LocationOptionsModal = ({
+  isOpen,
+  onClose,
+  location,
+  fullName,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  location: string;
+  fullName: string;
+}) => {
+  const navigate = useNavigate();
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+      <div className="bg-white w-full max-w-md rounded-3xl p-6 md:p-8 border border-gray-100 shadow-2xl relative space-y-6 animate-scale-up text-gray-800">
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 p-2 text-gray-400 hover:text-gray-600 transition-colors rounded-full hover:bg-gray-50 cursor-pointer animate-none"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        <div className="text-center space-y-2">
+          <div className="w-12 h-12 bg-[#ECFFED] text-[#2C5E2E] rounded-full flex items-center justify-center mx-auto mb-2">
+            <MapPin className="w-6 h-6" />
+          </div>
+          <h3 className="text-xl font-extrabold text-[#1A3F1C]">Join Ounje in {location}</h3>
+          <p className="text-xs text-gray-400 max-w-xs mx-auto">
+            Choose how you would like to proceed. We will set <span className="font-semibold text-[#1A3F1C]">{location}</span> as your default location.
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <button
+            onClick={() => {
+              onClose();
+              navigate(`/customer/browse?location=${encodeURIComponent(fullName)}`);
+            }}
+            className="w-full flex items-center gap-4 p-4 bg-gray-50 hover:bg-[#ECFFED]/30 border border-gray-100 hover:border-[#2C5E2E]/20 rounded-2xl transition-all group text-left cursor-pointer"
+          >
+            <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-gray-100 shrink-0 text-[#2C5E2E] group-hover:bg-[#2C5E2E] group-hover:text-white transition-all">
+              <ShoppingBag className="w-5 h-5" />
+            </div>
+            <div>
+              <span className="font-extrabold text-sm text-[#1A3F1C] block">Order Delicious Meals</span>
+              <span className="text-[11px] text-gray-400 font-medium">Browse Buka kitchens in {location}</span>
+            </div>
+          </button>
+
+          <button
+            onClick={() => {
+              onClose();
+              navigate(`/vendor/auth?location=${encodeURIComponent(fullName)}`);
+            }}
+            className="w-full flex items-center gap-4 p-4 bg-gray-50 hover:bg-[#ECFFED]/30 border border-gray-100 hover:border-[#2C5E2E]/20 rounded-2xl transition-all group text-left cursor-pointer"
+          >
+            <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-gray-100 shrink-0 text-[#2C5E2E] group-hover:bg-[#2C5E2E] group-hover:text-white transition-all">
+              <ChefHat className="w-5 h-5" />
+            </div>
+            <div>
+              <span className="font-extrabold text-sm text-[#1A3F1C] block">Register as Buka (Vendor)</span>
+              <span className="text-[11px] text-gray-400 font-medium">Grow your kitchen and start receiving orders</span>
+            </div>
+          </button>
+
+          <button
+            onClick={() => {
+              onClose();
+              navigate(`/rider/auth?location=${encodeURIComponent(fullName)}`);
+            }}
+            className="w-full flex items-center gap-4 p-4 bg-gray-50 hover:bg-[#ECFFED]/30 border border-gray-100 hover:border-[#2C5E2E]/20 rounded-2xl transition-all group text-left cursor-pointer"
+          >
+            <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-gray-100 shrink-0 text-[#2C5E2E] group-hover:bg-[#2C5E2E] group-hover:text-white transition-all">
+              <Bike className="w-5 h-5" />
+            </div>
+            <div>
+              <span className="font-extrabold text-sm text-[#1A3F1C] block">Become Delivery Rider</span>
+              <span className="text-[11px] text-gray-400 font-medium">Earn money delivering food around {location}</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

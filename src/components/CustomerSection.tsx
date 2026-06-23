@@ -362,23 +362,33 @@ const CustomerSection = () => {
 
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row items-center gap-3">
-                <motion.button
+                <motion.a
+                  href="https://apps.apple.com/ng/app/ounjefood/id6762204959"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.96 }}
-                  onClick={() => setIsWaitlistOpen(true)}
                   className="flex items-center gap-2.5 bg-[#2C5E2E] text-white font-bold px-8 py-3.5 rounded-2xl shadow-lg hover:bg-[#1a3f1c] transition-colors text-base cursor-pointer"
                 >
-                  <Smartphone className="w-5 h-5 text-[#FFC727]" />
+                  <svg className="w-5 h-5 fill-current text-[#FFC727] shrink-0" viewBox="0 0 24 24">
+                    <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C3.79 16.32 3.06 10.11 6.5 7.64c1.68-1.07 3.32-.82 4.41-.33.84.38 1.56.39 2.4 0 1.04-.49 2.76-.79 4.1.47-3.13 1.9-2.52 7.15.54 8.52a8.55 8.55 0 0 1-2.9 3.98M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.22 2.5-2.04 4.42-3.74 4.25" />
+                  </svg>
                   Download Customer App
-                </motion.button>
+                </motion.a>
 
-                <button
-                  onClick={() => setIsWaitlistOpen(true)}
+                <motion.a
+                  href="https://apps.apple.com/ng/app/ounjemarket/id6762347962"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.96 }}
                   className="group flex items-center gap-2 text-[#1A3F1C] font-bold bg-[#FFC727]/10 hover:bg-[#FFC727]/25 border border-[#FFC727]/30 px-6 py-3.5 rounded-2xl transition-colors text-sm cursor-pointer"
                 >
-                  <Download className="w-4 h-4 text-[#2C5E2E]" />
+                  <svg className="w-4 h-4 fill-current text-[#2C5E2E] shrink-0" viewBox="0 0 24 24">
+                    <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C3.79 16.32 3.06 10.11 6.5 7.64c1.68-1.07 3.32-.82 4.41-.33.84.38 1.56.39 2.4 0 1.04-.49 2.76-.79 4.1.47-3.13 1.9-2.52 7.15.54 8.52a8.55 8.55 0 0 1-2.9 3.98M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.22 2.5-2.04 4.42-3.74 4.25" />
+                  </svg>
                   Download Vendor & Rider App
-                </button>
+                </motion.a>
               </div>
             </div>
           </div>

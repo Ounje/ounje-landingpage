@@ -12,10 +12,7 @@ import ComingSoonPage from "./pages/ComingSoonPage";
 import { useSocketNotifications } from "./hooks/useSocketNotifications";
 import NotificationToastContainer from "./components/ui/NotificationToastContainer";
 import CookieConsentBanner from "./components/ui/CookieConsentBanner";
-import VendorAuthPage from "./pages/VendorAuthPage";
-import VendorDashboardPage from "./pages/VendorDashboardPage";
-import RiderAuthPage from "./pages/RiderAuthPage";
-import RiderDashboardPage from "./pages/RiderDashboardPage";
+
 import ErrorBoundary from "./components/ErrorBoundary";
 
 const ScrollToTop = () => {

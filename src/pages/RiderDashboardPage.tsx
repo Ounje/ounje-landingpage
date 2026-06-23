@@ -195,7 +195,7 @@ export default function RiderDashboardPage() {
       <Header />
 
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 md:px-8 py-8 space-y-8">
-        
+
         {/* Top welcome banner */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white rounded-3xl p-6 border border-[#2C5E2E]/10 shadow-sm">
           <div className="flex items-center gap-4">
@@ -254,7 +254,7 @@ export default function RiderDashboardPage() {
             </div>
             <div>
               <h2 className="text-xl font-extrabold text-[#1A3F1C]">
-                {ongoingJob ? `Order #${ongoingJob.orderNumber || ongoingJob._id?.substring(0,8).toUpperCase()}` : "No Active Trip"}
+                {ongoingJob ? `Order #${ongoingJob.orderNumber || ongoingJob._id?.substring(0, 8).toUpperCase()}` : "No Active Trip"}
               </h2>
               <p className="text-[10px] text-gray-400 font-semibold mt-1">
                 {ongoingJob ? `Current status: ${ongoingJob.status}` : "Accept a dispatch request below"}
@@ -379,7 +379,7 @@ export default function RiderDashboardPage() {
                     <form onSubmit={handleCompleteDelivery} className="space-y-3 pt-3 border-t border-gray-100">
                       {otpSuccess && <p className="text-xs font-semibold text-emerald-600">{otpSuccess}</p>}
                       {otpError && <p className="text-xs font-semibold text-red-600">{otpError}</p>}
-                      
+
                       <div className="flex gap-2">
                         <input
                           id="rider-otp-input"
@@ -424,13 +424,13 @@ export default function RiderDashboardPage() {
                 <div key={job._id} className="border border-gray-100 rounded-3xl p-5 bg-gray-50/20 flex flex-col justify-between h-48">
                   <div>
                     <div className="flex justify-between items-center pb-2 mb-2 border-b border-gray-50">
-                      <span className="font-extrabold text-xs text-[#2C5E2E]">Order #{job.orderNumber || job._id.substring(0,8).toUpperCase()}</span>
+                      <span className="font-extrabold text-xs text-[#2C5E2E]">Order #{job.orderNumber || job._id.substring(0, 8).toUpperCase()}</span>
                       <span className="text-[10px] text-gray-400 font-bold">₦{job.deliveryFee || 500} payout</span>
                     </div>
-                    
+
                     <p className="text-xs text-gray-700 font-bold truncate">From: {job.vendor?.name || "Buka Kitchen"}</p>
                     <p className="text-[10px] text-gray-400 truncate mt-0.5">{job.vendor?.address || "Yaba, Lagos"}</p>
-                    
+
                     <p className="text-xs text-gray-700 font-bold truncate mt-2">To: {job.customer?.name || "Customer"}</p>
                     <p className="text-[10px] text-gray-400 truncate mt-0.5">{job.deliveryAddress}</p>
                   </div>
@@ -455,7 +455,7 @@ export default function RiderDashboardPage() {
       {isPayoutOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsPayoutOpen(false)} />
-          
+
           <div className="relative bg-white w-full max-w-md rounded-3xl p-6 md:p-8 shadow-2xl border border-gray-100 z-10 space-y-6">
             <button
               onClick={() => {

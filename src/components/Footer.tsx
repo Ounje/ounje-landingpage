@@ -133,9 +133,9 @@ const Footer = () => {
               {
                 title: "Privacy & Legal",
                 links: [
-                  { label: "Terms & Conditions", to: "/privacyandcompliance" },
-                  { label: "Privacy Policy", to: "/privacyandcompliance" },
-                  { label: "Cookies Policy", to: "/privacyandcompliance" },
+                  { label: "Terms & Conditions", to: "/privacyandcompliance?tab=2" },
+                  { label: "Privacy Policy", to: "/privacyandcompliance?tab=1" },
+                  { label: "Cookies Policy", to: "/privacyandcompliance?tab=3" },
                 ],
               },
             ].map((col) => (

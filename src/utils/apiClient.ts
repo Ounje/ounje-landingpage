@@ -80,31 +80,54 @@ class ApiClient {
       config.body = isMultipart ? bodyData : JSON.stringify(bodyData);
     }
 
-    try {
-      const response = await fetch(url, config);
-      
-      // Auto-refresh token if 401 occurs
-      if (response.status === 401 && path !== "/api/auth/refresh" && path !== "/api/auth/login") {
-        const refreshed = await this.tryTokenRefresh();
-        if (refreshed) {
-          // Retry the request with the new token
-          const retryHeaders = await this.getHeaders(isMultipart);
-          if (options.headers) {
-            Object.entries(options.headers).forEach(([key, val]) => {
-              retryHeaders.set(key, String(val));
-            });
-          }
-          const retryConfig = { ...config, headers: retryHeaders };
-          const retryResponse = await fetch(url, retryConfig);
-          return await this.handleResponse<T>(retryResponse);
-        }
-      }
+    const isGet = (options.method || "GET").toUpperCase() === "GET";
+    const maxAttempts = isGet ? 3 : 1;
+    let attempt = 0;
+    const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-      return await this.handleResponse<T>(response);
-    } catch (err: any) {
-      // Re-throw formatted errors
-      if (err.status) throw err;
-      throw { status: 500, message: err.message || "Network Error" };
+    while (true) {
+      attempt++;
+      try {
+        const response = await fetch(url, config);
+        
+        // Auto-refresh token if 401 occurs
+        if (response.status === 401 && path !== "/api/auth/refresh" && path !== "/api/auth/login") {
+          const refreshed = await this.tryTokenRefresh();
+          if (refreshed) {
+            // Retry the request with the new token
+            const retryHeaders = await this.getHeaders(isMultipart);
+            if (options.headers) {
+              Object.entries(options.headers).forEach(([key, val]) => {
+                retryHeaders.set(key, String(val));
+              });
+            }
+            const retryConfig = { ...config, headers: retryHeaders };
+            const retryResponse = await fetch(url, retryConfig);
+            return await this.handleResponse<T>(retryResponse);
+          }
+        }
+
+        // Retry on gateway/server transient errors (502 Bad Gateway, 503 Service Unavailable, 504 Gateway Timeout)
+        if (isGet && [502, 503, 504].includes(response.status) && attempt < maxAttempts) {
+          console.warn(`Transient server error ${response.status} on GET ${path}. Retrying attempt ${attempt + 1}...`);
+          await sleep(1000 * Math.pow(2, attempt - 1)); // 1s, 2s backoff
+          continue;
+        }
+
+        return await this.handleResponse<T>(response);
+      } catch (err: any) {
+        // Catch connection failures / DNS errors (usually throw TypeError: Failed to fetch)
+        const isNetworkError = err.name === "TypeError" || err.message?.includes("Failed to fetch") || err.message?.includes("NetworkError");
+        if (isGet && isNetworkError && attempt < maxAttempts) {
+          console.warn(`Network error on GET ${path}: ${err.message}. Retrying attempt ${attempt + 1}...`);
+          await sleep(1000 * Math.pow(2, attempt - 1)); // 1s, 2s backoff
+          continue;
+        }
+
+        // Re-throw formatted errors
+        if (err.status) throw err;
+        throw { status: 500, message: err.message || "Network Error" };
+      }
     }
   }
 

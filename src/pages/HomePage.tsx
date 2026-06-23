@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import  { useEffect } from "react";
 import CustomerSection from "../components/CustomerSection";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -14,6 +14,11 @@ import { useLocation } from "react-router-dom";
 
 export default function HomePage() {
   const location = useLocation();
+  
+  useEffect(() => {
+    document.title = "Ounjé | Order Fast. Eat Fresh. Spend Less.";
+  }, []);
+
   useEffect(() => {
     if (location.hash) {
       const attemptScroll = () => {

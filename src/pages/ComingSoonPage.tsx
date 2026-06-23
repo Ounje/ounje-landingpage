@@ -3,6 +3,7 @@ import { Smartphone, ChefHat, Bike, Apple } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
+
 export default function ComingSoonPage() {
   const navigate = useNavigate();
 

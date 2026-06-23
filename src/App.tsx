@@ -11,6 +11,12 @@ import CustomerOrderTrackingPage from "./pages/CustomerOrderTrackingPage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 import { useSocketNotifications } from "./hooks/useSocketNotifications";
 import NotificationToastContainer from "./components/ui/NotificationToastContainer";
+import CookieConsentBanner from "./components/ui/CookieConsentBanner";
+import VendorAuthPage from "./pages/VendorAuthPage";
+import VendorDashboardPage from "./pages/VendorDashboardPage";
+import RiderAuthPage from "./pages/RiderAuthPage";
+import RiderDashboardPage from "./pages/RiderDashboardPage";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -28,11 +34,12 @@ const NotificationHandler = () => {
 };
 
 const App = () => (
-  <>
+  <ErrorBoundary>
     <Router>
       <ScrollToTop />
       <NotificationHandler />
       <NotificationToastContainer />
+      <CookieConsentBanner />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/aboutus" element={<AboutPage />} />
@@ -47,12 +54,12 @@ const App = () => (
         <Route path="/customer/order/:id" element={<CustomerOrderTrackingPage />} />
         <Route path="/vendor/auth" element={<ComingSoonPage />} />
         <Route path="/vendor/dashboard" element={<ComingSoonPage />} />
-        <Route path="/vendor/menu" element={<ComingSoonPage />} />
+        {/* <Route path="/vendor/menu" element={<VendorMenuPage />} /> */}
         <Route path="/rider/auth" element={<ComingSoonPage />} />
         <Route path="/rider/dashboard" element={<ComingSoonPage />} />
       </Routes>
     </Router>
-  </>
+  </ErrorBoundary>
 );
 
 export default App;

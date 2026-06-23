@@ -194,7 +194,7 @@ export default function CustomerOrderTrackingPage() {
           <p className="text-gray-500 text-sm mb-6">{error || "This order may have expired or is unauthorized."}</p>
           <button
             id="back-to-browse-btn"
-            onClick={() => navigate("/customer/browse")}
+            onClick={() => navigate("/customer/browse?tab=orders")}
             className="bg-[#2C5E2E] hover:bg-[#1A3F1C] text-white font-bold px-6 py-2.5 rounded-xl text-sm transition-colors cursor-pointer"
           >
             Back to Browse
@@ -283,7 +283,7 @@ export default function CustomerOrderTrackingPage() {
           <div className="flex items-center gap-3">
             <button
               id="back-to-browse-btn"
-              onClick={() => navigate("/customer/browse")}
+              onClick={() => navigate("/customer/browse?tab=orders")}
               className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors shadow-sm cursor-pointer"
             >
               <ArrowLeft className="w-5 h-5" />

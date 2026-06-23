@@ -40,6 +40,22 @@ export default function CustomerCheckoutPage() {
   const [isLocating, setIsLocating] = useState(false);
   const [deliveryLat, setDeliveryLat] = useState<number | null>(null);
   const [deliveryLng, setDeliveryLng] = useState<number | null>(null);
+  const [vendorCoords, setVendorCoords] = useState<[number, number] | null>(null);
+
+  useEffect(() => {
+    const fetchVendorCoords = async () => {
+      if (!vendorId) return;
+      try {
+        const response: any = await apiClient.get(`/api/vendors/vendor/${vendorId}`);
+        if (response && response.location?.coordinates) {
+          setVendorCoords(response.location.coordinates);
+        }
+      } catch (err) {
+        console.error("Failed to load vendor coordinates on checkout:", err);
+      }
+    };
+    fetchVendorCoords();
+  }, [vendorId]);
 
   // Paystack payment process states
   const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
@@ -286,8 +302,33 @@ export default function CustomerCheckoutPage() {
   // Pre-fill fields if user is logged in
   useEffect(() => {
     if (user) {
-      if (user.location || user.address) {
-        setDeliveryAddress(user.location || user.address || "");
+      let profileAddress = "";
+      let profileCoords: [number, number] | null = null;
+
+      const userLoc = user.location as any;
+      if (userLoc && typeof userLoc === "object") {
+        profileAddress = userLoc.address || "";
+        if (Array.isArray(userLoc.coordinates) && userLoc.coordinates.length === 2) {
+          profileCoords = [userLoc.coordinates[0], userLoc.coordinates[1]];
+        }
+      } else if (typeof user.location === "string") {
+        profileAddress = user.location;
+      }
+
+      if (!profileAddress && user.address) {
+        profileAddress = user.address;
+      }
+
+      if (!profileCoords && Array.isArray((user as any).coordinates) && (user as any).coordinates.length === 2) {
+        profileCoords = [(user as any).coordinates[0], (user as any).coordinates[1]];
+      }
+
+      if (profileAddress) {
+        setDeliveryAddress(profileAddress);
+      }
+      if (profileCoords) {
+        setDeliveryLng(profileCoords[0]);
+        setDeliveryLat(profileCoords[1]);
       }
       if (user.phone) {
         setPhoneNumber(user.phone);
@@ -295,10 +336,50 @@ export default function CustomerCheckoutPage() {
     }
   }, [user]);
 
-  const deliveryFee = 500;
+  // Distance and delivery fee tiers from Ounje Algorithm
+  const DELIVERY_TIERS = [
+    { max: 1.5, base: 500, start: 0 },
+    { max: 3.5, base: 700, start: 1.5 },
+    { max: 6.0, base: 750, start: 3.5 },
+    { max: 10.0, base: 900, start: 6.0 },
+    { max: 15.0, base: 1200, start: 10.0 },
+    { max: Infinity, base: 1400, start: 15.0 },
+  ];
+
+  function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number) {
+    const R = 6371;
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLng = ((lng2 - lng1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLng / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  function computeDeliveryFee(distanceKm: number): number {
+    const tier = DELIVERY_TIERS.find((t) => distanceKm <= t.max) || DELIVERY_TIERS[DELIVERY_TIERS.length - 1];
+    if (distanceKm <= 1.5) return tier.base;
+    const extra = (distanceKm - tier.start) * 150;
+    const raw = tier.base + extra;
+    return Math.ceil((distanceKm > 15 ? Math.min(raw, 1900) : raw) / 10) * 10;
+  }
+
+  const getDeliveryDistanceKm = () => {
+    if (!vendorCoords?.length || deliveryLat === null || deliveryLng === null) return undefined;
+    const [vLng, vLat] = vendorCoords;
+    return haversineKm(vLat, vLng, deliveryLat, deliveryLng);
+  };
+
+  const calculatedDistance = getDeliveryDistanceKm();
+  const deliveryFee = calculatedDistance !== undefined
+    ? computeDeliveryFee(calculatedDistance)
+    : (deliveryAddress.trim() ? 500 : null);
+
   const serviceFee = 100;
   const discountAmount = promoDiscount;
-  const finalTotal = Math.max(0, cartTotal + deliveryFee + serviceFee - discountAmount);
+  const finalTotal = deliveryFee !== null ? Math.max(0, cartTotal + deliveryFee + serviceFee - discountAmount) : null;
 
   const handleApplyPromo = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -774,7 +855,7 @@ export default function CustomerCheckoutPage() {
                 </div>
                 <div className="flex justify-between text-gray-500">
                   <span>Delivery Fee</span>
-                  <span>₦{deliveryFee.toLocaleString()}</span>
+                  <span>{deliveryFee !== null ? `₦${deliveryFee.toLocaleString()}` : "Set address"}</span>
                 </div>
                 <div className="flex justify-between text-gray-500">
                   <span>Service Fee</span>
@@ -788,7 +869,9 @@ export default function CustomerCheckoutPage() {
                 )}
                 <div className="flex justify-between text-sm font-extrabold text-[#1A3F1C] pt-2 border-t border-dashed border-gray-200">
                   <span>Total amount</span>
-                  <span className="text-[#2C5E2E] text-base">₦{finalTotal.toLocaleString()}</span>
+                  <span className="text-[#2C5E2E] text-base">
+                    {finalTotal !== null ? `₦${finalTotal.toLocaleString()}` : "Set address to view"}
+                  </span>
                 </div>
               </div>
 
@@ -925,7 +1008,7 @@ export default function CustomerCheckoutPage() {
                 <div>
                   <h3 className="text-xl font-extrabold text-emerald-800 mb-2">Payment Successful!</h3>
                   <p className="text-gray-500 text-xs leading-relaxed max-w-xs mx-auto">
-                    Your payment of <span className="font-bold text-[#1A3F1C]">₦{finalTotal.toLocaleString()}</span> has been confirmed. Setting up your order tracking...
+                    Your payment of <span className="font-bold text-[#1A3F1C]">₦{finalTotal?.toLocaleString()}</span> has been confirmed. Setting up your order tracking...
                   </p>
                 </div>
               </>

@@ -12,6 +12,7 @@ export interface UserInfo {
   profileId?: string;
   location?: string;
   address?: string;
+  avatarUrl?: string;
 }
 
 interface AuthState {

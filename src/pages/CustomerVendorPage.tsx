@@ -1,24 +1,171 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Star, Clock, Utensils, Plus, Minus, ShoppingBag, Loader2, X, PlusCircle, Check, Sparkles, Flame } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { apiClient } from "../utils/apiClient";
 import { useCartStore } from "../hooks/useCartStore";
+import { useAuthStore } from "../hooks/useAuthStore";
+import { loadGoogleMapsScript } from "../utils/googleMapsLoader";
 import { checkVendorStatus } from "../utils/vendorStatus";
+
+// Distance and delivery fee tiers from Ounje Algorithm
+const DELIVERY_TIERS = [
+  { max: 1.5, base: 500, start: 0 },
+  { max: 3.5, base: 700, start: 1.5 },
+  { max: 6.0, base: 750, start: 3.5 },
+  { max: 10.0, base: 900, start: 6.0 },
+  { max: 15.0, base: 1200, start: 10.0 },
+  { max: Infinity, base: 1400, start: 15.0 },
+];
+
+function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number) {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLng = ((lng2 - lng1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) *
+    Math.cos((lat2 * Math.PI) / 180) *
+    Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function computeDeliveryFee(distanceKm: number): number {
+  const tier = DELIVERY_TIERS.find((t) => distanceKm <= t.max) || DELIVERY_TIERS[DELIVERY_TIERS.length - 1];
+  if (distanceKm <= 1.5) return tier.base;
+  const extra = (distanceKm - tier.start) * 150;
+  const raw = tier.base + extra;
+  return Math.ceil((distanceKm > 15 ? Math.min(raw, 1900) : raw) / 10) * 10;
+}
+
+function getDistanceKm(vendorCoords?: [number, number] | null, customerCoords?: [number, number] | null): number | undefined {
+  if (!vendorCoords?.length || !customerCoords?.length) return undefined;
+  const [vLng, vLat] = vendorCoords;
+  const [cLng, cLat] = customerCoords;
+  return haversineKm(vLat, vLng, cLat, cLng);
+}
+
+function estimateFee(vendorCoords?: [number, number] | null, customerCoords?: [number, number] | null): number | undefined {
+  const dist = getDistanceKm(vendorCoords, customerCoords);
+  if (dist === undefined) return undefined;
+  return computeDeliveryFee(dist);
+}
+
+function estimateDeliveryTime(
+  vendorCoords?: [number, number] | null,
+  customerCoords?: [number, number] | null,
+  prepTimeMin?: number
+): string {
+  const dist = getDistanceKm(vendorCoords, customerCoords);
+  const prep = prepTimeMin || 20;
+  if (dist === undefined) {
+    return `${prep}-${prep + 10} min`;
+  }
+  const travelTime = Math.ceil(dist * 3); // ~20km/h average speed in Lagos traffic
+  const totalMin = prep + travelTime;
+  const lowerRange = Math.round(totalMin / 5) * 5;
+  const upperRange = lowerRange + 10;
+  return `${lowerRange}-${upperRange} min`;
+}
 
 export default function CustomerVendorPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const addItem = useCartStore((state) => state.addItem);
   const cartItems = useCartStore((state) => state.items);
   const cartTotal = useCartStore((state) => state.getCartTotal());
+
+  const { isAuthenticated, user } = useAuthStore();
 
   const [vendor, setVendor] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const [customerCoords, setCustomerCoords] = useState<[number, number] | null>(null);
+  const [googleReady, setGoogleReady] = useState(false);
+
+  useEffect(() => {
+    loadGoogleMapsScript()
+      .then(() => setGoogleReady(true))
+      .catch(() => setGoogleReady(false));
+  }, []);
+
+  const getProfileLocationData = () => {
+    if (!isAuthenticated || !user) return { address: "", coords: null as [number, number] | null };
+
+    let address = "";
+    let coords: [number, number] | null = null;
+
+    const userLoc = user.location as any;
+    if (userLoc && typeof userLoc === "object") {
+      address = userLoc.address || "";
+      if (Array.isArray(userLoc.coordinates) && userLoc.coordinates.length === 2) {
+        coords = [userLoc.coordinates[0], userLoc.coordinates[1]];
+      }
+    } else if (typeof user.location === "string") {
+      address = user.location;
+    }
+
+    if (!address && user.address) {
+      address = user.address;
+    }
+
+    if (!coords && Array.isArray((user as any).coordinates) && (user as any).coordinates.length === 2) {
+      coords = [(user as any).coordinates[0], (user as any).coordinates[1]];
+    }
+
+    return { address, coords };
+  };
+
+  useEffect(() => {
+    const resolveCoords = async () => {
+      const loc = searchParams.get("location");
+      let lat: number | undefined = undefined;
+      let lng: number | undefined = undefined;
+
+      const { address: profileAddress, coords: profileCoords } = getProfileLocationData();
+
+      if (loc && loc === profileAddress && profileCoords) {
+        lng = profileCoords[0];
+        lat = profileCoords[1];
+      } else if (loc && (googleReady || window.google?.maps?.Geocoder)) {
+        try {
+          const coords = await new Promise<{ lat: number; lng: number }>((resolve, reject) => {
+            const geocoder = new window.google.maps.Geocoder();
+            geocoder.geocode({ address: loc }, (results: any, status: any) => {
+              if (status === "OK" && results && results[0]) {
+                resolve({
+                  lat: results[0].geometry.location.lat(),
+                  lng: results[0].geometry.location.lng(),
+                });
+              } else {
+                reject(new Error("Geocoding failed"));
+              }
+            });
+          });
+          lat = coords.lat;
+          lng = coords.lng;
+        } catch (e) {
+          console.error("Geocoding failed in CustomerVendorPage", e);
+        }
+      } else if (!loc && profileCoords) {
+        lng = profileCoords[0];
+        lat = profileCoords[1];
+      }
+
+      if (lat !== undefined && lng !== undefined) {
+        setCustomerCoords([lng, lat]);
+      } else {
+        setCustomerCoords(null);
+      }
+    };
+
+    resolveCoords();
+  }, [searchParams, googleReady, isAuthenticated, user]);
 
   const { isOpen, reason: closedReason } = vendor
     ? checkVendorStatus(vendor)
@@ -56,6 +203,13 @@ export default function CustomerVendorPage() {
 
     fetchVendorDetails();
   }, [id]);
+
+  useEffect(() => {
+    if (vendor) {
+      const name = vendor.storeName || vendor.name || "Buka Kitchen";
+      document.title = `Ounjé | Order from ${name}`;
+    }
+  }, [vendor]);
 
   if (loading) {
     return (
@@ -97,8 +251,18 @@ export default function CustomerVendorPage() {
   const rating = vendor.averageRating || vendor.rating || 0;
   const reviews = vendor.ratingCount || 0;
   const address = vendor.location?.address || "Lagos, Nigeria";
-  const estimatedDeliveryTime = vendor.estimatedDeliveryTime ? `${vendor.estimatedDeliveryTime} min` : "25-35 min";
-  const deliveryPrice = vendor.fulfillmentSettings?.deliveryPrice ? `₦${vendor.fulfillmentSettings.deliveryPrice}` : "₦500";
+  
+  const calculatedFee = estimateFee(vendor.location?.coordinates, customerCoords);
+  const deliveryFeeStr = calculatedFee !== undefined 
+    ? `₦${calculatedFee.toLocaleString()}` 
+    : (vendor.fulfillmentSettings?.deliveryPrice ? `₦${vendor.fulfillmentSettings.deliveryPrice}` : "₦500");
+  const prepMin = vendor.fulfillmentSettings?.preparationTimeMin;
+  const deliveryTimeStr = vendor.estimatedDeliveryTime
+    ? (typeof vendor.estimatedDeliveryTime === "number" ? `${vendor.estimatedDeliveryTime} min` : vendor.estimatedDeliveryTime)
+    : estimateDeliveryTime(vendor.location?.coordinates, customerCoords, prepMin);
+
+  const estimatedDeliveryTime = customerCoords ? deliveryTimeStr : "Set location";
+  const deliveryPrice = customerCoords ? deliveryFeeStr : "Set location";
 
   // Flatmap the nested subcategory items to a single flat list of dishes
   const flatDishes: any[] = [];
@@ -301,11 +465,11 @@ export default function CustomerVendorPage() {
       <Header />
 
       {/* Cover Image & Store Details */}
-      <div className="relative h-64 md:h-80 w-full overflow-hidden">
+      <div className="relative h-[340px] md:h-80 w-full overflow-hidden">
         <img src={image} alt={storeName} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
         
-        <div className="absolute bottom-6 left-0 right-0 max-w-7xl mx-auto px-4 md:px-8 text-white flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="absolute inset-x-0 bottom-6 top-0 pt-20 md:pt-0 max-w-7xl mx-auto px-4 md:px-8 text-white flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="space-y-2">
             <button
               onClick={() => navigate("/customer/browse")}

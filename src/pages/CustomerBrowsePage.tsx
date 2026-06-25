@@ -1126,7 +1126,7 @@ export default function CustomerBrowsePage() {
       </div>
 
       {/* 3. CONTENT AREA */}
-      <div className="flex-1 overflow-y-auto overflow-x-hidden h-full bg-[#F4FBF4] flex flex-col pb-12">
+      <div className="flex-1 md:overflow-y-auto overflow-x-hidden md:h-full bg-[#F4FBF4] flex flex-col pb-12">
 
         {/* Render Guest State warning for Orders and Profile tabs if not logged in */}
         {!isAuthenticated && (currentTab === "orders" || currentTab === "profile") ? (

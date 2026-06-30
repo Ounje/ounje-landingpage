@@ -516,7 +516,7 @@ const HeroSection = () => {
           className="mt-5 flex items-center gap-2 text-xs text-[#4a4a4a]/60 font-medium sm:hidden md:hidden"
         >
           <span className="w-1.5 h-1.5 bg-[#25D366] rounded-full animate-pulse" />
-          Now delivering in Lagos · Yaba · LASU · Yabatech · Surulere
+          Now delivering in Lagos · Yaba · UniLag · Yabatech · Surulere
         </motion.div>
       </motion.div>
 

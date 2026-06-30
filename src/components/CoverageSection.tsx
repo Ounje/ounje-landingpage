@@ -29,12 +29,12 @@ const zones = [
     embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.1!2d3.3745!3d6.5182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8cf0f0f0f0f0%3A0xf0f0f0f0f0f0f0f0!2sYaba%20College%20of%20Technology!5e0!3m2!1sen!2sng!4v1700000000000",
   },
   {
-    name: "LASU",
-    fullName: "Lagos State University, Lasu Main Road, Lagos, Nigeria",
+    name: "UniLag",
+    fullName: "University of Lagos, Lagos, Nigeria",
     Icon: Plane,
     x: "78%",
     y: "55%",
-    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.3!2d3.2001!3d6.4678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b860000000000%3A0x0000000000000000!2sLagos%20State%20University!5e0!3m2!1sen!2sng!4v1700000000000",
+    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.385552943716!2d3.386159374751792!3d6.516568223635397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8cf5f42657e5%3A0x64426570954b8d76!2sUniversity%20of%20Lagos!5e0!3m2!1sen!2sng!4v1719751740000!5m2!1sen!2sng",
   },
 ];
 

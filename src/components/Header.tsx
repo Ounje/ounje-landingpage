@@ -282,15 +282,17 @@ const Header = () => {
                 >
                   Log In
                 </button>
-                <motion.button
-                  onClick={() => navigate("/customer/browse")}
+                <motion.a
+                  href="https://apps.apple.com/ng/app/ounjefood/id6762204959"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
                   className="flex items-center gap-2 bg-[#2C5E2E] text-white font-bold px-5 py-2.5 rounded-xl text-sm shadow-md hover:bg-[#1a3f1c] transition cursor-pointer"
                 >
                   <ShoppingBag className="w-4 h-4" />
-                  Order Online
-                </motion.button>
+                  Download App
+                </motion.a>
               </>
             ) : (
               <>
@@ -460,15 +462,15 @@ const Header = () => {
                       >
                         Log In
                       </button>
-                      <button
-                        onClick={() => {
-                          setIsMenuOpen(false);
-                          navigate("/customer/browse");
-                        }}
-                        className="w-full flex items-center justify-center bg-[#FFC727] text-[#1A3F1C] font-bold py-3.5 rounded-2xl text-sm shadow-md transition cursor-pointer"
+                      <a
+                        href="https://apps.apple.com/ng/app/ounjefood/id6762204959"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="w-full flex items-center justify-center bg-[#FFC727] text-[#1A3F1C] font-bold py-3.5 rounded-2xl text-sm shadow-md transition cursor-pointer text-center"
                       >
-                        Order Online
-                      </button>
+                        Download App
+                      </a>
                     </>
                   ) : (
                     <div className="space-y-3 text-white text-center">

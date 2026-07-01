@@ -53,14 +53,18 @@ export default function FAQSection() {
   const toggle = (id: string) => setOpenId(openId === id ? null : id);
 
   return (
-    <section id="FAQ" className="py-16 md:py-24 bg-[#ECFFED]">
+    <section
+      id="FAQ"
+      className="py-16 md:py-24"
+      style={{ background: "linear-gradient(180deg, #0f2e12 0%, #ECFFED 65%)" }}
+    >
       {/* Header banner */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="w-full bg-[#1A3F1C] py-10 flex flex-col items-center gap-2 mb-12"
+        className="w-full flex flex-col items-center gap-2 mb-12"
       >
         <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-xs font-semibold text-white/80 mb-2">
           <HelpCircle className="w-3.5 h-3.5" /> Got Questions?

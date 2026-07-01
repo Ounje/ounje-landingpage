@@ -45,7 +45,7 @@ const NotificationBell = () => {
       await markAsRead(n.id);
     }
     setIsOpen(false);
-    
+
     if (n.type === "order_update" || n.type === "order_status") {
       if (n.relatedId) {
         navigate(`/customer/order/${n.relatedId}`);
@@ -96,9 +96,8 @@ const NotificationBell = () => {
                   <button
                     key={n.id}
                     onClick={() => handleNotificationClick(n)}
-                    className={`w-full text-left px-4 py-3 flex gap-3 hover:bg-[#ECFFED]/35 transition-colors cursor-pointer relative ${
-                      !n.isRead ? "bg-[#ECFFED]/15" : ""
-                    }`}
+                    className={`w-full text-left px-4 py-3 flex gap-3 hover:bg-[#ECFFED]/35 transition-colors cursor-pointer relative ${!n.isRead ? "bg-[#ECFFED]/15" : ""
+                      }`}
                   >
                     {!n.isRead && (
                       <span className="absolute top-4 right-4 w-2 h-2 bg-emerald-500 rounded-full" />
@@ -146,16 +145,16 @@ const Header = () => {
   };
 
   const isCustomerPage = location.pathname.startsWith("/customer/");
-  const isPortalPage = 
-    location.pathname.startsWith("/customer/") || 
-    location.pathname.startsWith("/vendor/") || 
+  const isPortalPage =
+    location.pathname.startsWith("/customer/") ||
+    location.pathname.startsWith("/vendor/") ||
     location.pathname.startsWith("/rider/");
-  const logoLink = isCustomerPage 
-    ? "/customer/browse" 
-    : location.pathname.startsWith("/vendor/") 
-      ? "/vendor/dashboard" 
-      : location.pathname.startsWith("/rider/") 
-        ? "/rider/dashboard" 
+  const logoLink = isCustomerPage
+    ? "/customer/browse"
+    : location.pathname.startsWith("/vendor/")
+      ? "/vendor/dashboard"
+      : location.pathname.startsWith("/rider/")
+        ? "/rider/dashboard"
         : "/";
 
   const handleLoginClick = () => {
@@ -219,13 +218,11 @@ const Header = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`fixed w-full top-0 transition-all duration-300 ${
-          isMenuOpen ? "z-30" : "z-50"
-        } ${
-          isScrolled
+        className={`fixed w-full top-0 transition-all duration-300 ${isMenuOpen ? "z-30" : "z-50"
+          } ${isScrolled
             ? "bg-white/80 backdrop-blur-xl shadow-sm border-b border-[#2C5E2E]/10"
             : "bg-transparent"
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-6 lg:px-10 h-16 md:h-[68px]">
 
@@ -259,11 +256,10 @@ const Header = () => {
                     key={item.label}
                     to={item.href}
                     onClick={(e) => handleNavClick(e, item)}
-                    className={`px-4 py-1.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                      isActive
-                        ? "bg-[#ECFFED] text-[#2C5E2E]"
-                        : "text-[#1A3F1C] hover:bg-gray-50 hover:text-[#2C5E2E]"
-                    }`}
+                    className={`px-4 py-1.5 rounded-xl text-sm font-semibold transition-all duration-200 ${isActive
+                      ? "bg-[#ECFFED] text-[#2C5E2E]"
+                      : "text-[#1A3F1C] hover:bg-gray-50 hover:text-[#2C5E2E]"
+                      }`}
                   >
                     {item.label}
                   </Link>
@@ -276,12 +272,12 @@ const Header = () => {
           <div className="hidden md:flex items-center gap-3">
             {!isAuthenticated ? (
               <>
-                <button
+                {/* <button
                   onClick={handleLoginClick}
                   className="text-[#1A3F1C] hover:text-[#2C5E2E] font-bold text-sm px-4 py-2 transition-colors cursor-pointer"
                 >
                   Log In
-                </button>
+                </button> */}
                 <motion.a
                   href="https://apps.apple.com/ng/app/ounjefood/id6762204959"
                   target="_blank"
@@ -290,8 +286,10 @@ const Header = () => {
                   whileTap={{ scale: 0.97 }}
                   className="flex items-center gap-2 bg-[#2C5E2E] text-white font-bold px-5 py-2.5 rounded-xl text-sm shadow-md hover:bg-[#1a3f1c] transition cursor-pointer"
                 >
-                  <ShoppingBag className="w-4 h-4" />
-                  Download App
+                  <svg className="w-5 h-5 fill-current text-white shrink-0" viewBox="0 0 24 24">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.56 2.95-1.39z" />
+                  </svg>
+                  Download OunjeFood on Play Store
                 </motion.a>
               </>
             ) : (
@@ -308,11 +306,10 @@ const Header = () => {
                       navigate("/");
                     }
                   }}
-                  className={`font-bold px-4 py-2 rounded-xl text-xs transition-all cursor-pointer ${
-                    location.pathname === "/"
-                      ? "premium-cta-btn text-white"
-                      : "bg-[#ECFFED] text-[#2C5E2E] hover:bg-[#2C5E2E] hover:text-white border border-[#2C5E2E]/20"
-                  }`}
+                  className={`font-bold px-4 py-2 rounded-xl text-xs transition-all cursor-pointer ${location.pathname === "/"
+                    ? "premium-cta-btn text-white"
+                    : "bg-[#ECFFED] text-[#2C5E2E] hover:bg-[#2C5E2E] hover:text-white border border-[#2C5E2E]/20"
+                    }`}
                 >
                   {location.pathname === "/" ? "Dashboard" : "Home"}
                 </button>
@@ -435,11 +432,10 @@ const Header = () => {
                           handleNavClick(e, item);
                           setIsMenuOpen(false);
                         }}
-                        className={`flex items-center justify-between w-full px-4 py-3.5 rounded-2xl text-base font-semibold transition ${
-                          isActive
-                            ? "bg-white/15 text-[#FFC727]"
-                            : "text-white/80 hover:bg-white/10 hover:text-white"
-                        }`}
+                        className={`flex items-center justify-between w-full px-4 py-3.5 rounded-2xl text-base font-semibold transition ${isActive
+                          ? "bg-white/15 text-[#FFC727]"
+                          : "text-white/80 hover:bg-white/10 hover:text-white"
+                          }`}
                       >
                         {item.label}
                         {isActive && (
@@ -453,7 +449,7 @@ const Header = () => {
                 <div className={isPortalPage ? "space-y-4" : "border-t border-white/10 my-6 pt-6 space-y-4"}>
                   {!isAuthenticated ? (
                     <>
-                      <button
+                      {/* <button
                         onClick={() => {
                           setIsMenuOpen(false);
                           handleLoginClick();
@@ -461,7 +457,7 @@ const Header = () => {
                         className="w-full flex items-center justify-center bg-white text-[#2C5E2E] font-bold py-3.5 rounded-2xl text-sm shadow-md transition cursor-pointer"
                       >
                         Log In
-                      </button>
+                      </button> */}
                       <a
                         href="https://apps.apple.com/ng/app/ounjefood/id6762204959"
                         target="_blank"
@@ -484,15 +480,14 @@ const Header = () => {
                             navigate("/");
                           }
                         }}
-                        className={`w-full font-bold py-3 rounded-2xl text-sm transition cursor-pointer border ${
-                          location.pathname === "/"
-                            ? "premium-cta-btn text-white text-center px-4"
-                            : "bg-white/10 text-white border-transparent hover:bg-white/20"
-                        }`}
+                        className={`w-full font-bold py-3 rounded-2xl text-sm transition cursor-pointer border ${location.pathname === "/"
+                          ? "premium-cta-btn text-white text-center px-4"
+                          : "bg-white/10 text-white border-transparent hover:bg-white/20"
+                          }`}
                       >
                         {location.pathname === "/" ? "Dashboard" : "Go to Home"}
                       </button>
-                      <button
+                      {/* <button
                         onClick={() => {
                           setIsMenuOpen(false);
                           logout();
@@ -501,7 +496,7 @@ const Header = () => {
                         className="w-full text-red-400 hover:text-red-500 font-bold py-2 text-sm transition cursor-pointer"
                       >
                         Logout
-                      </button>
+                      </button> */}
                     </div>
                   )}
                 </div>

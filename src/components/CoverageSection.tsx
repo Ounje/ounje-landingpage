@@ -78,24 +78,21 @@ const Pin = ({
   x,
   y,
   delay,
-  onClick,
 }: {
   name: string;
   Icon: React.ElementType;
   x: string;
   y: string;
   delay: number;
-  onClick: () => void;
 }) => (
-  <motion.button
+  <motion.div
     initial={{ opacity: 0, y: -20, scale: 0.6 }}
     animate={{ opacity: 1, y: 0, scale: 1 }}
     transition={{ delay, type: "spring", stiffness: 260, damping: 18 }}
-    onClick={onClick}
-    className="absolute flex flex-col items-center z-10 group cursor-pointer"
+    className="absolute flex flex-col items-center z-10 select-none pointer-events-none"
     style={{ left: x, top: y, transform: "translate(-50%, -100%)" }}
   >
-    <span className="text-white font-bold text-xs md:text-sm mb-1 drop-shadow-lg whitespace-nowrap group-hover:text-[#FCE900] transition-colors">
+    <span className="text-white font-bold text-xs md:text-sm mb-1 drop-shadow-lg whitespace-nowrap">
       {name}
     </span>
     <motion.div
@@ -103,14 +100,14 @@ const Pin = ({
       transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut", delay: delay * 0.5 }}
       className="relative"
     >
-      <div className="w-10 h-10 md:w-12 md:h-12 bg-[#FCE900] group-hover:bg-white transition-colors rounded-full flex items-center justify-center shadow-lg shadow-[#FCE900]/40 border-2 border-white/20">
+      <div className="w-10 h-10 md:w-12 md:h-12 bg-[#FCE900] rounded-full flex items-center justify-center shadow-lg shadow-[#FCE900]/40 border-2 border-white/20">
         <Icon className="w-5 h-5 md:w-6 md:h-6 text-[#152F18]" />
       </div>
       <div className="absolute left-1/2 -translate-x-1/2 -bottom-2.5 w-0 h-0"
         style={{ borderLeft: "6px solid transparent", borderRight: "6px solid transparent", borderTop: "12px solid #FCE900" }}
       />
     </motion.div>
-  </motion.button>
+  </motion.div>
 );
 
 const CoverageSection = () => {
@@ -157,7 +154,6 @@ const CoverageSection = () => {
                 key={z.name}
                 {...z}
                 delay={0.3 + i * 0.12}
-                onClick={() => setOrderLocation(z)}
               />
             ))}
           </div>

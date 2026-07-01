@@ -4,9 +4,36 @@ import { useNavigate } from "react-router-dom";
 import { Smartphone, Bike, TrendingUp, ArrowRight } from "lucide-react";
 
 const perks = [
-  { icon: Smartphone, title: "Orders to Your Phone", desc: "Customers find you and place orders directly, you just cook." },
-  { icon: Bike, title: "We Handle Delivery", desc: "Our riders pick up and deliver. You focus 100% on the food." },
-  { icon: TrendingUp, title: "Grow Your Income", desc: "Reach more customers without a big shop or expensive setup." },
+  {
+    icon: Smartphone,
+    title: "Orders to Your Phone",
+    desc: "Customers find you and place orders directly, you just cook.",
+    bg: "#2C5E2E",
+    iconBg: "rgba(255,255,255,0.15)",
+    iconColor: "#FFC727",
+    textColor: "text-white",
+    descColor: "text-white/70",
+  },
+  {
+    icon: Bike,
+    title: "We Handle Delivery",
+    desc: "Our riders pick up and deliver. You focus 100% on the food.",
+    bg: "#FFC727",
+    iconBg: "rgba(26,63,28,0.12)",
+    iconColor: "#1A3F1C",
+    textColor: "text-[#1A3F1C]",
+    descColor: "text-[#1A3F1C]/65",
+  },
+  {
+    icon: TrendingUp,
+    title: "Grow Your Income",
+    desc: "Reach more customers without a big shop or expensive setup.",
+    bg: "#1A3F1C",
+    iconBg: "rgba(255,255,255,0.12)",
+    iconColor: "#FFC727",
+    textColor: "text-white",
+    descColor: "text-white/70",
+  },
 ];
 
 const BASE = "/assets/vendor-scene/photo_";
@@ -76,14 +103,27 @@ const VendorSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.15 + i * 0.1 }}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className="bg-white rounded-3xl p-6 shadow-sm border border-[#2C5E2E]/10 hover:shadow-md transition-shadow"
+              whileHover={{ y: -6, transition: { duration: 0.22 } }}
+              className="flex flex-col gap-4 cursor-default rounded-3xl p-7"
+              style={{ background: perk.bg }}
             >
-              <div className="w-12 h-12 bg-[#ECFFED] rounded-2xl flex items-center justify-center mb-4 shadow-sm">
-                <perk.icon className="w-5 h-5 text-[#2C5E2E]" />
+              {/* Icon */}
+              <div
+                className="flex items-center justify-center w-12 h-12 rounded-2xl shrink-0 shadow-sm"
+                style={{ background: perk.iconBg }}
+              >
+                <perk.icon className="w-6 h-6" style={{ color: perk.iconColor }} />
               </div>
-              <h3 className="font-extrabold text-[#1A3F1C] text-base mb-2 leading-tight">{perk.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{perk.desc}</p>
+
+              {/* Text */}
+              <div>
+                <h3 className={`font-extrabold text-lg mb-2 leading-tight ${perk.textColor}`}>
+                  {perk.title}
+                </h3>
+                <p className={`text-sm leading-relaxed ${perk.descColor}`}>
+                  {perk.desc}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>

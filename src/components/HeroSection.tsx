@@ -5,11 +5,7 @@ import {
   useInView,
   AnimatePresence,
 } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../hooks/useAuthStore";
-
-import { Search, MapPin, Locate } from "lucide-react";
-import { loadGoogleMapsScript } from "../utils/googleMapsLoader";
+import ComingSoonModal from "../modals/ComingSoonDialog";
 
 const phrases = [
   { text: "Come chop.", lang: "Pidgin" },
@@ -49,124 +45,12 @@ const ALL_LOCATIONS = [
 ];
 
 const HeroSection = () => {
-  const navigate = useNavigate();
-  const { isAuthenticated, role } = useAuthStore();
-
-  const getDashboardLink = () => {
-    if (role === "vendor") return "/vendor/dashboard";
-    if (role === "rider") return "/rider/dashboard";
-    return "/customer/browse";
-  };
-
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const controls = useAnimation();
 
   const [phraseIndex, setPhraseIndex] = useState(0);
-  const [locationQuery, setLocationQuery] = useState("");
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [googleReady, setGoogleReady] = useState(false);
-  const [autocompleteService, setAutocompleteService] = useState<any>(null);
-  const [isLocating, setIsLocating] = useState(false);
-
-  useEffect(() => {
-    loadGoogleMapsScript()
-      .then(() => setGoogleReady(true))
-      .catch(() => setGoogleReady(false));
-  }, []);
-
-  useEffect(() => {
-    if (googleReady && window.google?.maps?.places) {
-      setAutocompleteService(new window.google.maps.places.AutocompleteService());
-    }
-  }, [googleReady]);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setLocationQuery(value);
-
-    if (value.trim().length > 0) {
-      if (autocompleteService) {
-        autocompleteService.getPlacePredictions(
-          {
-            input: value,
-            componentRestrictions: { country: "ng" }, // Restrict to Nigeria
-            types: ["geocode", "establishment"],
-          },
-          (predictions: any, status: any) => {
-            if (status === "OK" && predictions) {
-              setSuggestions(predictions.map((p: any) => p.description));
-              setShowDropdown(true);
-            } else {
-              setSuggestions([]);
-              setShowDropdown(false);
-            }
-          }
-        );
-      } else {
-        const filtered = ALL_LOCATIONS.filter((loc) =>
-          loc.toLowerCase().includes(value.toLowerCase())
-        );
-        setSuggestions(filtered);
-        setShowDropdown(true);
-      }
-    } else {
-      setSuggestions([]);
-      setShowDropdown(false);
-    }
-  };
-
-  const handleLocateMe = () => {
-    if (!navigator.geolocation) {
-      alert("Geolocation is not supported by your browser.");
-      return;
-    }
-
-    setIsLocating(true);
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-
-        if (window.google?.maps?.Geocoder) {
-          const geocoder = new window.google.maps.Geocoder();
-          geocoder.geocode(
-            { location: { lat: latitude, lng: longitude } },
-            (results: any, status: any) => {
-              setIsLocating(false);
-              if (status === "OK" && results && results[0]) {
-                setLocationQuery(results[0].formatted_address);
-              } else {
-                setLocationQuery(`${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
-              }
-            }
-          );
-        } else {
-          setIsLocating(false);
-          setLocationQuery(`${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
-        }
-      },
-      (error) => {
-        console.error("GPS Geolocation error:", error);
-        setIsLocating(false);
-        alert("Could not detect location. Please search manually.");
-      },
-      { enableHighAccuracy: true, timeout: 8000 }
-    );
-  };
-
-
-
-
-  const selectSuggestion = (val: string) => {
-    setLocationQuery(val);
-    setShowDropdown(false);
-  };
-
-  const handleOrderNow = () => {
-    const targetLocation = locationQuery.trim() || "Lagos, Nigeria";
-    navigate(`/customer/browse?location=${encodeURIComponent(targetLocation)}`);
-  };
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
 
   useEffect(() => {
     if (isInView) controls.start("show");
@@ -351,173 +235,53 @@ const HeroSection = () => {
             ))}
           </motion.div>
         </motion.div>
-        {/* Search & CTAs */}
-        {/* Search & CTAs */}
+
+        {/* iOS & Android Download Buttons */}
         <motion.div
           variants={fadeUp}
-          className="w-full max-w-xl mx-auto flex flex-col gap-4 relative z-20 px-4"
+          className="flex flex-col items-center gap-3 relative z-20 px-4 w-full max-w-xl mx-auto"
         >
-          {isAuthenticated ? (
-            <>
-              {/* Mobile Dashboard Button: visible only on mobile screens */}
-              <button
-                onClick={() => navigate(getDashboardLink())}
-                className="md:hidden w-full flex items-center justify-center gap-2 bg-[#2C5E2E] hover:bg-[#1A3F1C] text-white font-extrabold py-4 px-6 rounded-3xl transition-all text-base shadow-lg dashboard-pulsing-btn cursor-pointer"
-              >
-                <span>Go to Dashboard</span>
-              </button>
-
-              {/* Desktop Search Bar: hidden on mobile, visible on desktop */}
-              <div className="hidden md:flex flex-col sm:flex-row items-stretch gap-2.5 bg-white/75 backdrop-blur-md border border-[#2C5E2E]/15 rounded-3xl p-2.5 shadow-xl w-full">
-                {/* Input Wrapper */}
-                <div className="relative flex-1 flex items-center min-h-[50px]">
-                  <MapPin className="absolute left-4 w-5 h-5 text-[#2C5E2E]" />
-                  <input
-                    type="text"
-                    placeholder="Enter delivery area (e.g. Yaba, Ikeja...)"
-                    value={locationQuery}
-                    onChange={handleInputChange}
-                    onFocus={() => {
-                      if (locationQuery.trim().length > 0) setShowDropdown(true);
-                    }}
-                    className="w-full pl-11 pr-24 bg-transparent border-0 text-[#1A3F1C] font-semibold text-base placeholder-gray-400 focus:outline-none"
-                  />
-                  <div className="absolute right-3 flex items-center gap-1.5">
-                    <button
-                      type="button"
-                      onClick={handleLocateMe}
-                      disabled={isLocating}
-                      title="Locate me using GPS"
-                      className="p-1.5 rounded-lg text-[#2C5E2E] hover:bg-[#ECFFED] hover:text-[#1A3F1C] transition-colors disabled:opacity-55 cursor-pointer"
-                    >
-                      <Locate className={`w-4 h-4 ${isLocating ? "animate-spin" : ""}`} />
-                    </button>
-                    {locationQuery && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setLocationQuery("");
-                          setSuggestions([]);
-                          setShowDropdown(false);
-                        }}
-                        className="p-1 rounded-md text-xs font-bold text-gray-400 hover:text-gray-600 bg-gray-100 hover:bg-gray-200 cursor-pointer"
-                      >
-                        Clear
-                      </button>
-                    )}
-                  </div>
-                </div>
-
-                {/* Order Now Button */}
-                <button
-                  onClick={handleOrderNow}
-                  className="flex items-center justify-center gap-2 bg-[#2C5E2E] hover:bg-[#1A3F1C] text-white font-extrabold px-8 py-3.5 sm:py-0 rounded-2xl transition-colors text-base shadow-md shrink-0"
-                >
-                  <Search className="w-5 h-5" />
-                  Order Now
-                </button>
-
-                {/* Place suggestions Autocomplete Dropdown */}
-                {showDropdown && suggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-100 text-left">
-                    <div className="px-4 py-2 border-b border-gray-50 text-[10px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
-                      Suggested Locations
-                    </div>
-                    {suggestions.map((loc) => (
-                      <button
-                        key={loc}
-                        onClick={() => selectSuggestion(loc)}
-                        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-[#ECFFED] text-gray-700 text-sm font-semibold transition-colors border-b border-gray-50 last:border-0"
-                      >
-                        <MapPin className="w-4 h-4 text-[#FFC727] shrink-0" />
-                        <span>{loc}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
+          <span className="text-[#1A3F1C]/50 text-[10px] md:text-xs font-bold uppercase tracking-[0.16em] mb-1 text-center">
+            Download the OunjeFood App
+          </span>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+            {/* iOS Download Button */}
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => setIsWaitlistOpen(true)}
+              className="w-[200px] flex items-center gap-3 bg-[#2C5E2E] hover:bg-[#1A3F1C] text-white py-2 px-4 rounded-xl shadow-lg border border-transparent transition-all cursor-pointer"
+            >
+              <svg className="w-7 h-7 fill-current text-white shrink-0" viewBox="0 0 24 24">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.56 2.95-1.39z" />
+              </svg>
+              <div className="flex flex-col items-start leading-none text-left">
+                <span className="text-[9px] font-medium text-white/80">Download on the</span>
+                <span className="text-base font-bold text-white mt-0.5">App Store</span>
               </div>
-            </>
-          ) : (
-            /* Guest (Not Logged In): Show search bar on both mobile and desktop */
-            <div className="relative flex flex-col sm:flex-row items-stretch gap-2.5 bg-white/75 backdrop-blur-md border border-[#2C5E2E]/15 rounded-3xl p-2.5 shadow-xl w-full">
-              {/* Input Wrapper */}
-              <div className="relative flex-1 flex items-center min-h-[50px]">
-                <MapPin className="absolute left-4 w-5 h-5 text-[#2C5E2E]" />
-                <input
-                  type="text"
-                  placeholder="Enter delivery area (e.g. Yaba, Ikeja...)"
-                  value={locationQuery}
-                  onChange={handleInputChange}
-                  onFocus={() => {
-                    if (locationQuery.trim().length > 0) setShowDropdown(true);
-                  }}
-                  className="w-full pl-11 pr-24 bg-transparent border-0 text-[#1A3F1C] font-semibold text-base placeholder-gray-400 focus:outline-none"
-                />
-                <div className="absolute right-3 flex items-center gap-1.5">
-                  <button
-                    type="button"
-                    onClick={handleLocateMe}
-                    disabled={isLocating}
-                    title="Locate me using GPS"
-                    className="p-1.5 rounded-lg text-[#2C5E2E] hover:bg-[#ECFFED] hover:text-[#1A3F1C] transition-colors disabled:opacity-55 cursor-pointer"
-                  >
-                    <Locate className={`w-4 h-4 ${isLocating ? "animate-spin" : ""}`} />
-                  </button>
-                  {locationQuery && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setLocationQuery("");
-                        setSuggestions([]);
-                        setShowDropdown(false);
-                      }}
-                      className="p-1 rounded-md text-xs font-bold text-gray-400 hover:text-gray-600 bg-gray-100 hover:bg-gray-200 cursor-pointer"
-                    >
-                      Clear
-                    </button>
-                  )}
-                </div>
+            </motion.button>
+
+            {/* Android Download Button */}
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => setIsWaitlistOpen(true)}
+              className="w-[200px] flex items-center gap-3 bg-black hover:bg-[#1A1A1A] text-white py-2 px-4 rounded-xl shadow-lg border border-white/10 transition-all cursor-pointer"
+            >
+              <svg className="w-7 h-7 shrink-0" viewBox="0 0 24 24" fill="none">
+                <path d="M3.609 1.814L13.792 12 3.609 22.186c-.198-.109-.329-.313-.329-.56V2.374c0-.247.131-.451.329-.56z" fill="#0DF8E6" />
+                <path d="M17.186 8.609l-3.394 3.391 3.394 3.391 3.754-2.115c1.042-.587 1.042-1.543 0-2.13l-3.754-2.137z" fill="#FFA000" />
+                <path d="M3.609 1.814l13.577 6.795-3.394 3.391L3.609 1.814z" fill="#FF3D00" />
+                <path d="M3.609 22.186l10.183-10.186 3.394 3.391L3.609 22.186z" fill="#4CAF50" />
+              </svg>
+              <div className="flex flex-col items-start leading-none text-left">
+                <span className="text-[9px] font-medium text-white/80">GET IT ON</span>
+                <span className="text-base font-bold text-white mt-0.5">Google Play</span>
               </div>
-
-              {/* Order Now Button */}
-              <button
-                onClick={handleOrderNow}
-                className="flex items-center justify-center gap-2 bg-[#2C5E2E] hover:bg-[#1A3F1C] text-white font-extrabold px-8 py-3.5 sm:py-0 rounded-2xl transition-colors text-base shadow-md shrink-0"
-              >
-                <Search className="w-5 h-5" />
-                Order Now
-              </button>
-
-              {/* Place suggestions Autocomplete Dropdown */}
-              {showDropdown && suggestions.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-100 text-left">
-                  <div className="px-4 py-2 border-b border-gray-50 text-[10px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
-                    Suggested Locations
-                  </div>
-                  {suggestions.map((loc) => (
-                    <button
-                      key={loc}
-                      onClick={() => selectSuggestion(loc)}
-                      className="w-full flex items-center gap-3 px-4 py-3 hover:bg-[#ECFFED] text-gray-700 text-sm font-semibold transition-colors border-b border-gray-50 last:border-0"
-                    >
-                      <MapPin className="w-4 h-4 text-[#FFC727] shrink-0" />
-                      <span>{loc}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
+            </motion.button>
+          </div>
         </motion.div>
 
-        {/* Live coverage + pulse */}
-        <motion.div
-          variants={fadeUp}
-          className="mt-5 flex items-center gap-2 text-xs text-[#4a4a4a]/60 font-medium sm:hidden md:hidden"
-        >
-          <span className="w-1.5 h-1.5 bg-[#25D366] rounded-full animate-pulse" />
-          Now delivering in Lagos · Yaba · UniLag · Yabatech · Surulere
-        </motion.div>
       </motion.div>
 
       {/* Ground strip */}
@@ -567,7 +331,7 @@ const HeroSection = () => {
         />
       </motion.div>
 
-
+      <ComingSoonModal isOpen={isWaitlistOpen} onClose={() => setIsWaitlistOpen(false)} />
 
     </section>
   );

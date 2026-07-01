@@ -1,9 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ComingSoonModal from "../modals/ComingSoonDialog";
-import WhatsAppOrderModal from "../modals/WhatsAppOrderModal";
 import {
-
   MapPin,
   UtensilsCrossed,
   Navigation,
@@ -11,8 +8,6 @@ import {
   Clock,
   ChevronLeft,
   ChevronRight,
-  Smartphone,
-  Download,
 } from "lucide-react";
 
 /* ─── Feature data ─────────────────────────────────────────────── */
@@ -72,7 +67,7 @@ const AUTO_PLAY_MS = 4000;
 
 /* ─── Card bottom visuals ───────────────────────────────────────── */
 const VendorsBottom = () => (
-  <div className="flex flex-wrap gap-2.5 mt-auto pt-7">
+  <div className="flex flex-wrap gap-2 mt-auto pt-3 md:pt-7">
     {[
       { name: "Mama Buka", dist: "0.4 km" },
       { name: "Chef Emeka's", dist: "0.8 km" },
@@ -80,30 +75,30 @@ const VendorsBottom = () => (
     ].map((v) => (
       <div
         key={v.name}
-        className="flex items-center gap-2 bg-white/15 border border-white/20 rounded-full px-4 py-2"
+        className="flex items-center gap-1.5 md:gap-2 bg-white/15 border border-white/20 rounded-full px-2.5 py-1 md:px-4 md:py-2 text-xs md:text-sm text-white font-semibold"
       >
-        <MapPin className="w-3.5 h-3.5 text-[#FFC727] shrink-0" />
-        <span className="text-white text-sm font-semibold">{v.name}</span>
-        <span className="text-white/45 text-sm">{v.dist}</span>
+        <MapPin className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#FFC727] shrink-0" />
+        <span>{v.name}</span>
+        <span className="text-white/45">{v.dist}</span>
       </div>
     ))}
   </div>
 );
 
 const PlateBottom = () => (
-  <div className="mt-auto pt-7 space-y-3">
-    <p className="text-[#1A3F1C]/50 text-xs font-bold uppercase tracking-widest">
+  <div className="mt-auto pt-3 md:pt-7 space-y-2 md:space-y-3">
+    <p className="text-[#1A3F1C]/50 text-[10px] md:text-xs font-bold uppercase tracking-widest">
       Your plate
     </p>
-    <div className="flex flex-wrap items-center gap-2.5">
+    <div className="flex flex-wrap items-center gap-1.5 md:gap-2.5">
       {["Jollof Rice", "Grilled Chicken", "Fried Plantain", "Extra Sauce"].map(
         (item, i, arr) => (
-          <div key={item} className="flex items-center gap-2.5">
-            <span className="bg-[#2C5E2E] text-white text-sm font-bold px-4 py-2 rounded-full">
+          <div key={item} className="flex items-center gap-1.5 md:gap-2.5">
+            <span className="bg-[#2C5E2E] text-white text-xs md:text-sm font-bold px-3 py-1.5 md:px-4 md:py-2 rounded-full">
               {item}
             </span>
             {i < arr.length - 1 && (
-              <span className="text-[#2C5E2E] font-extrabold text-base leading-none">+</span>
+              <span className="text-[#2C5E2E] font-extrabold text-sm md:text-base leading-none">+</span>
             )}
           </div>
         )
@@ -119,25 +114,25 @@ const TrackingBottom = () => {
     { label: "On the way", Icon: Navigation, done: false, active: false },
   ];
   return (
-    <div className="mt-auto pt-7 space-y-3.5">
+    <div className="mt-auto pt-3 md:pt-7 space-y-2 md:space-y-3.5">
       {steps.map((step) => (
-        <div key={step.label} className="flex items-center gap-3.5">
+        <div key={step.label} className="flex items-center gap-2.5 md:gap-3.5">
           <div
-            className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-colors ${step.done ? "bg-[#FFC727]" : "bg-white/10 border border-white/20"
+            className={`w-7 h-7 md:w-9 md:h-9 rounded-full flex items-center justify-center shrink-0 transition-colors ${step.done ? "bg-[#FFC727]" : "bg-white/10 border border-white/20"
               }`}
           >
             <step.Icon
-              className={`w-4.5 h-4.5 ${step.done ? "text-[#1A3F1C]" : "text-white/35"}`}
+              className={`w-3.5 h-3.5 md:w-4.5 md:h-4.5 ${step.done ? "text-[#1A3F1C]" : "text-white/35"}`}
             />
           </div>
           <span
-            className={`text-sm font-semibold flex-1 ${step.done ? "text-white" : "text-white/35"
+            className={`text-xs md:text-sm font-semibold flex-1 ${step.done ? "text-white" : "text-white/35"
               }`}
           >
             {step.label}
           </span>
           {step.active && (
-            <span className="text-xs font-bold text-[#FFC727] bg-[#FFC727]/15 border border-[#FFC727]/30 rounded-full px-3 py-1">
+            <span className="text-[10px] md:text-xs font-bold text-[#FFC727] bg-[#FFC727]/15 border border-[#FFC727]/30 rounded-full px-2 py-0.5 md:px-3 md:py-1">
               Now
             </span>
           )}
@@ -149,8 +144,6 @@ const TrackingBottom = () => {
 
 /* ─── Main component ────────────────────────────────────────────── */
 const CustomerSection = () => {
-  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
-  const [isOrderOpen, setIsOrderOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1); // 1 = forward (right→left), -1 = backward
   const [isPaused, setIsPaused] = useState(false);
@@ -244,12 +237,24 @@ const CustomerSection = () => {
             </span>
           </div>
 
-          {/* ── Content grid ── */}
-          <div className="h-full flex flex-col">
-            <div className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 max-w-7xl mx-auto w-full px-4 md:px-16 pt-8 md:pt-14 pb-4 items-center">
+          {/* ── Content container ── */}
+          <div className="h-full flex flex-col pt-16 md:pt-20 pb-4">
 
-              {/* Left — Phone image (hidden on mobile) */}
-              <div className="relative hidden md:flex items-center justify-center h-full">
+            {/* Tag phrase header */}
+            <div className="text-center px-4 mb-2 md:mb-5 shrink-0">
+              <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-[#2C5E2E] bg-[#ECFFED] px-3.5 py-1.5 rounded-full">
+                INCREDIBLY SIMPLE
+              </span>
+              <h2 className="text-xl md:text-3xl font-extrabold text-[#1A3F1C] mt-2.5 leading-tight">
+                Ordering Naija Food Has Never Been This Easy
+              </h2>
+            </div>
+
+            {/* ── Grid/Flex Body ── */}
+            <div className="flex-1 min-h-0 flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-10 max-w-7xl mx-auto w-full px-4 md:px-16 pb-4 items-center justify-center">
+
+              {/* Left — Phone image (visible on mobile and desktop) */}
+              <div className="relative flex items-center justify-center h-[26vh] md:h-full shrink-0">
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.img
                     key={activeIndex}
@@ -265,13 +270,13 @@ const CustomerSection = () => {
                     animate="center"
                     exit="exit"
                     transition={{ duration: 0.45, ease: "easeOut" }}
-                    className="h-[54vh] md:h-[70vh] max-h-[640px] w-auto object-contain drop-shadow-2xl"
+                    className="h-full max-h-[190px] md:max-h-[640px] md:h-[70vh] w-auto object-contain drop-shadow-2xl"
                     loading="eager"
                     decoding="async"
                   />
                 </AnimatePresence>
 
-                {/* Thought bubble */}
+                {/* Thought bubble (hidden on mobile, visible on desktop) */}
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`bubble-${activeIndex}`}
@@ -279,7 +284,7 @@ const CustomerSection = () => {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.85, y: -4 }}
                     transition={{ delay: 0.38, duration: 0.28, ease: "easeOut" }}
-                    className="absolute top-[8%] right-2 md:right-0 bg-white rounded-2xl px-5 py-3.5 shadow-xl border border-gray-100/80 max-w-[210px] z-10"
+                    className="absolute top-[8%] right-2 md:right-0 bg-white rounded-2xl px-5 py-3.5 shadow-xl border border-gray-100/80 max-w-[210px] z-10 hidden md:block"
                   >
                     <p className="text-sm font-semibold text-[#1A3F1C] leading-snug">
                       {f.bubble}
@@ -290,7 +295,7 @@ const CustomerSection = () => {
               </div>
 
               {/* Right — Feature card */}
-              <div className="relative h-full flex items-center col-span-1">
+              <div className="relative w-full flex items-center flex-1 md:h-full max-h-[38vh] md:max-h-none">
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
                     key={activeIndex}
@@ -304,32 +309,31 @@ const CustomerSection = () => {
                     animate="center"
                     exit="exit"
                     transition={{ duration: 0.42, ease: "easeOut" }}
-                    className="w-full rounded-3xl p-6 md:p-12 flex flex-col"
+                    className="w-full rounded-3xl p-5 md:p-12 flex flex-col justify-between h-full shadow-lg"
                     style={{
                       background: f.bg,
-                      minHeight: "min(62vh, 500px)",
                     }}
                   >
                     {/* Icon + counter */}
-                    <div className="flex items-center gap-3 mb-7">
-                      <div className="w-14 h-14 bg-white/15 rounded-2xl flex items-center justify-center shrink-0">
-                        <f.Icon className={`w-7 h-7 ${f.iconColor}`} />
+                    <div className="flex items-center gap-3 mb-2 md:mb-7">
+                      <div className="w-10 h-10 md:w-14 md:h-14 bg-white/15 rounded-2xl flex items-center justify-center shrink-0">
+                        <f.Icon className="w-5.5 h-5.5 md:w-7 md:h-7 text-white" />
                       </div>
-                      <span className={`text-sm font-bold uppercase tracking-[0.16em] ${f.copyColor}`}>
+                      <span className={`text-xs md:text-sm font-bold uppercase tracking-[0.16em] ${f.copyColor}`}>
                         {String(activeIndex + 1).padStart(2, "0")} / {String(SLIDE_COUNT).padStart(2, "0")}
                       </span>
                     </div>
 
                     {/* Title */}
                     <h3
-                      className={`font-extrabold leading-tight mb-5 ${f.titleColor}`}
-                      style={{ fontSize: "clamp(32px, 4.5vw, 56px)" }}
+                      className={`font-extrabold leading-tight mb-2 md:mb-5 ${f.titleColor}`}
+                      style={{ fontSize: "clamp(20px, 3.5vw, 48px)" }}
                     >
                       {f.title}
                     </h3>
 
                     {/* Copy */}
-                    <p className={`text-lg md:text-xl leading-relaxed ${f.copyColor}`}>
+                    <p className={`text-xs md:text-lg leading-relaxed ${f.copyColor} line-clamp-2 md:line-clamp-none`}>
                       {f.copy}
                     </p>
 
@@ -342,8 +346,8 @@ const CustomerSection = () => {
               </div>
             </div>
 
-            {/* ── Bottom bar: dot indicators + CTAs ── */}
-            <div className="py-5 md:py-8 flex flex-col items-center gap-3 md:gap-4 px-4">
+            {/* ── Bottom bar: dot indicators ── */}
+            <div className="py-4 md:py-8 flex flex-col items-center gap-3 md:gap-4 px-4 shrink-0">
 
               {/* Dot indicators */}
               <div className="flex items-center gap-2.5">
@@ -359,45 +363,11 @@ const CustomerSection = () => {
                   />
                 ))}
               </div>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center gap-3">
-                <motion.a
-                  href="https://apps.apple.com/ng/app/ounjefood/id6762204959"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.96 }}
-                  className="flex items-center gap-2.5 bg-[#2C5E2E] text-white font-bold px-8 py-3.5 rounded-2xl shadow-lg hover:bg-[#1a3f1c] transition-colors text-base cursor-pointer"
-                >
-                  <svg className="w-5 h-5 fill-current text-[#FFC727] shrink-0" viewBox="0 0 24 24">
-                    <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C3.79 16.32 3.06 10.11 6.5 7.64c1.68-1.07 3.32-.82 4.41-.33.84.38 1.56.39 2.4 0 1.04-.49 2.76-.79 4.1.47-3.13 1.9-2.52 7.15.54 8.52a8.55 8.55 0 0 1-2.9 3.98M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.22 2.5-2.04 4.42-3.74 4.25" />
-                  </svg>
-                  Download Customer App
-                </motion.a>
-
-                <motion.a
-                  href="https://apps.apple.com/ng/app/ounjemarket/id6762347962"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.96 }}
-                  className="group flex items-center gap-2 text-[#1A3F1C] font-bold bg-[#FFC727]/10 hover:bg-[#FFC727]/25 border border-[#FFC727]/30 px-6 py-3.5 rounded-2xl transition-colors text-sm cursor-pointer"
-                >
-                  <svg className="w-4 h-4 fill-current text-[#2C5E2E] shrink-0" viewBox="0 0 24 24">
-                    <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C3.79 16.32 3.06 10.11 6.5 7.64c1.68-1.07 3.32-.82 4.41-.33.84.38 1.56.39 2.4 0 1.04-.49 2.76-.79 4.1.47-3.13 1.9-2.52 7.15.54 8.52a8.55 8.55 0 0 1-2.9 3.98M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.22 2.5-2.04 4.42-3.74 4.25" />
-                  </svg>
-                  Download Vendor & Rider App
-                </motion.a>
-              </div>
             </div>
           </div>
 
         </div>
       </div>
-
-      <ComingSoonModal isOpen={isWaitlistOpen} onClose={() => setIsWaitlistOpen(false)} />
-      <WhatsAppOrderModal isOpen={isOrderOpen} onClose={() => setIsOrderOpen(false)} />
     </>
   );
 };

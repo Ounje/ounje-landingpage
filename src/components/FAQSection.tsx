@@ -4,7 +4,7 @@ import { Plus, HelpCircle } from "lucide-react";
 
 const faqs = [
   { q: "What is OunjeFood?", a: "OunjeFood is a Nigerian food delivery platform connecting hungry customers to local vendors, fast, affordable, and fresh." },
-  { q: "How do I place an order?", a: "You can order right now via WhatsApp using the green 'Order Now' button! Once our app launches, you can also browse vendors, select your meal, and place orders in seconds." },
+  { q: "How do I place an order?", a: "You can order right now via WhatsApp using the green 'Order Online' button! Once our app launches, you can also browse vendors, select your meal, and place orders in seconds." },
   { q: "Can I pay on delivery?", a: "We don't support payment on delivery for now but we offer bank transfer and wallet payment (In app wallet)" },
   { q: "Do I need to pay to join OunjeFood?", a: "No, joining OunjeFood is completely free for customers, whiles vendors and riders are to join OunjeMarket where vendors take customers orders and riders deliver such orders to the customer." },
   { q: "How fast is delivery?", a: "Our riders are dispatched immediately after your order is confirmed. Delivery times depend on your location and vendor distance, but we aim for the fastest possible service." },

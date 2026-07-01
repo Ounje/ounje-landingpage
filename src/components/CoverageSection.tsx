@@ -2,6 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MapPin, Plane, Building2, ShoppingBag, BookOpen, X, ChefHat, Bike } from "lucide-react";
+import SearchCTA from "./SearchCTA";
 
 const zones = [
   {
@@ -169,27 +170,19 @@ const CoverageSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, delay: 0.7 }}
-          className="relative z-10 px-4 pb-8 flex flex-col items-center gap-4"
+          className="relative z-10 px-4 pb-12 flex flex-col items-center gap-6 max-w-xl mx-auto"
         >
-          <div className="flex flex-wrap justify-center gap-3">
-            {zones.map((z) => (
-              <button
-                key={z.name}
-                onClick={() => setOrderLocation(z)}
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/18 border border-white/15 rounded-full px-5 py-2.5 transition-colors group"
-              >
-                <MapPin className="w-3.5 h-3.5 text-[#FFC727] shrink-0" />
-                <span className="text-white text-xs md:text-sm font-medium">{z.name}</span>
-                <span className="text-[#FFC727] text-xs font-bold uppercase tracking-wider group-hover:underline">
-                  Order here
-                </span>
-              </button>
-            ))}
+          {/* Search CTA Box */}
+          <div className="w-full text-center space-y-3 mt-2">
+            <p className="text-white/65 text-xs md:text-sm font-semibold tracking-wide uppercase">
+              Don't see your area? Check if we deliver near you:
+            </p>
+            <SearchCTA className="px-0" />
           </div>
 
           <div className="inline-flex items-center gap-2 bg-white/8 border border-white/15 rounded-full px-5 py-2 text-white/60 text-xs font-semibold">
             <span className="w-1.5 h-1.5 bg-[#FFC727] rounded-full animate-pulse shrink-0" />
-            More areas coming Q2 2026
+            More areas coming soon
           </div>
         </motion.div>
       </section>

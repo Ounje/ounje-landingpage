@@ -43,7 +43,7 @@ const Footer = () => {
         className="fixed bottom-6 right-5 lg:hidden z-50 bg-[#25D366] text-white font-bold px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2 text-sm"
       >
         <MessageCircle className="w-5 h-5" />
-        Order Now
+        Order Online
       </motion.button>
 
       <footer className="bg-black text-white py-14 px-5 md:px-10 lg:px-16 relative overflow-visible">

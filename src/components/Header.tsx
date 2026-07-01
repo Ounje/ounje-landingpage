@@ -289,7 +289,7 @@ const Header = () => {
                   className="flex items-center gap-2 bg-[#2C5E2E] text-white font-bold px-5 py-2.5 rounded-xl text-sm shadow-md hover:bg-[#1a3f1c] transition cursor-pointer"
                 >
                   <ShoppingBag className="w-4 h-4" />
-                  Order Now
+                  Order Online
                 </motion.button>
               </>
             ) : (

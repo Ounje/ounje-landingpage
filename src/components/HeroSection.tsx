@@ -246,10 +246,12 @@ const HeroSection = () => {
           </span>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
             {/* iOS Download Button */}
-            <motion.button
+            <motion.a
+              href="https://apps.apple.com/ng/app/ounjefood/id6762204959"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
-              onClick={() => setIsWaitlistOpen(true)}
               className="w-[200px] flex items-center gap-3 bg-[#2C5E2E] hover:bg-[#1A3F1C] text-white py-2 px-4 rounded-xl shadow-lg border border-transparent transition-all cursor-pointer"
             >
               <svg className="w-7 h-7 fill-current text-white shrink-0" viewBox="0 0 24 24">
@@ -259,7 +261,7 @@ const HeroSection = () => {
                 <span className="text-[9px] font-medium text-white/80">Download on the</span>
                 <span className="text-base font-bold text-white mt-0.5">App Store</span>
               </div>
-            </motion.button>
+            </motion.a>
 
             {/* Android Download Button */}
             <motion.button

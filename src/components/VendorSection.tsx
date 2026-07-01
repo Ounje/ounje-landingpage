@@ -36,40 +36,6 @@ const perks = [
   },
 ];
 
-const BASE = "/assets/vendor-scene/photo_";
-const EXT  = "_2026-05-07_11-42-18.jpg";
-
-// Narrative order: customer places order → vendor notified → vendor accepts →
-// preparing → order ready → rider requested → rider to store → rider at store →
-// order enroute → order arrived → delivered → rider paid → vendor paid
-const scenes = [1, 4, 5, 2, 7, 12, 9, 10, 3, 6, 8, 13, 14, 11].map(
-  (n) => `${BASE}${n}${EXT}`
-);
-// Duplicate for seamless infinite loop
-const ticker = [...scenes, ...scenes];
-
-// Alternating heights for visual rhythm
-const HEIGHTS = [
-  "380px","280px","380px","280px","380px","280px","380px",
-  "280px","380px","280px","380px","280px","380px","280px",
-];
-
-const BrowserFrame = ({ src, alt, height }: { src: string; alt: string; height: string }) => (
-  <div
-    className="rounded-2xl overflow-hidden shadow-lg w-[260px] md:w-[320px] shrink-0 self-center"
-    style={{ height }}
-  >
-    <img
-      src={src}
-      alt={alt}
-      className="w-full h-full object-cover"
-      loading="lazy"
-      decoding="async"
-      draggable={false}
-    />
-  </div>
-);
-
 const VendorSection = () => {
   const navigate = useNavigate();
   const ref = useRef(null);
@@ -133,7 +99,7 @@ const VendorSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.55 }}
-          className="flex flex-col items-center gap-3 mb-16"
+          className="flex flex-col items-center gap-3"
         >
           <motion.button
             whileHover={{ scale: 1.04 }}
@@ -145,25 +111,6 @@ const VendorSection = () => {
             <ArrowRight className="w-4 h-4" />
           </motion.button>
           <p className="text-xs text-gray-400 font-semibold">Already registered? Log in to your kitchen dashboard.</p>
-        </motion.div>
-      </div>
-
-      {/* ── Full-width scrolling carousel ── */}
-      <div className="relative w-full overflow-hidden">
-
-        <motion.div
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          className="flex items-center gap-6 w-max will-change-transform"
-        >
-          {ticker.map((src, i) => (
-            <BrowserFrame
-              key={i}
-              src={src}
-              alt={`Vendor scene ${(i % scenes.length) + 1}`}
-              height={HEIGHTS[i % HEIGHTS.length]}
-            />
-          ))}
         </motion.div>
       </div>
     </section>

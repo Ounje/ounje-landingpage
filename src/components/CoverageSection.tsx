@@ -127,7 +127,7 @@ const CoverageSection = () => {
     <>
       <section
         ref={ref}
-        className="relative overflow-hidden"
+        className="relative z-30"
         style={{ background: "linear-gradient(180deg, #1A3F1C 0%, #0f2e12 100%)" }}
       >
         <MapSVG />

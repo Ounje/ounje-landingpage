@@ -171,7 +171,7 @@ export default function SearchCTA({ className = "" }: SearchCTAProps) {
             onClick={handleLocateMe}
             disabled={isLocating}
             title="Locate me using GPS"
-            className="p-1.5 rounded-lg text-[#2C5E2E] hover:bg-[#ECFFED] hover:text-[#1A3F1C] transition-colors disabled:opacity-55 cursor-pointer"
+            className="p-2 rounded-full text-[#2C5E2E] hover:bg-[#ECFFED] hover:text-[#1A3F1C] transition-colors disabled:opacity-55 cursor-pointer"
           >
             <Locate className={`w-4 h-4 ${isLocating ? "animate-spin" : ""}`} />
           </button>
@@ -183,7 +183,7 @@ export default function SearchCTA({ className = "" }: SearchCTAProps) {
                 setSuggestions([]);
                 setShowDropdown(false);
               }}
-              className="p-1 rounded-md text-xs font-bold text-gray-400 hover:text-gray-600 bg-gray-100 hover:bg-gray-200 cursor-pointer"
+              className="px-3 py-1.5 rounded-2xl text-xs font-extrabold text-gray-400 hover:text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
             >
               Clear
             </button>
@@ -202,7 +202,7 @@ export default function SearchCTA({ className = "" }: SearchCTAProps) {
 
       {/* Place suggestions Autocomplete Dropdown */}
       {showDropdown && suggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-100 text-left">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50 text-left">
           <div className="px-4 py-2 border-b border-gray-50 text-[10px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
             Suggested Locations
           </div>

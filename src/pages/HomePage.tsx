@@ -16,7 +16,7 @@ export default function HomePage() {
   const location = useLocation();
 
   useEffect(() => {
-    document.title = "Ounjé | Order Fast. Eat Fresh. Spend Less.";
+    document.title = "OunjeFood | Order Fast. Eat Fresh. Spend Less";
   }, []);
 
   useEffect(() => {
